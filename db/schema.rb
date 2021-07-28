@@ -61,7 +61,8 @@ ActiveRecord::Schema.define(version: 2021_07_26_225210) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "credit_card_number"
-    t.string "credit_card_expiration_date"
+    t.string "credit_card_expiration_date" #don't worry about validating bc some data is missing
+    #script to backfill missing data; fake cc exp date; stripe api 
     t.integer "result"
     t.bigint "invoice_id"
     t.datetime "created_at", null: false
