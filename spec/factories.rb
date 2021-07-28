@@ -2,11 +2,15 @@ FactoryBot.define do
   factory :customer do
     first_name { Faker::Movies::HarryPotter.unique.spell }
     last_name  { Faker::Movies::HarryPotter.unique.house }
-    # admin { false }
   end
 
   factory :invoice do
     customer
+  end
+
+  # Merchants
+  factory :merchant do
+    name { Faker::Company.name  }
   end
 end
 
