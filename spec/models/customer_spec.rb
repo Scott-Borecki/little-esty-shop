@@ -10,6 +10,9 @@ RSpec.describe Customer, type: :model do
     it { should validate_presence_of(:last_name) }
   end
 
+  it 'can build a customer' do
+    binding.pry
+  end
   # before :each do
   #
   # end

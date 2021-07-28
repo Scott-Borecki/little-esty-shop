@@ -1,4 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require './spec/support/factory_bot'
+
 require 'simplecov'
 SimpleCov.start
 SimpleCov.add_filter ['spec']
