@@ -9,6 +9,9 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'validations' do
+    statuses = { "in progress": 0, cancelled: 1, completed: 2 }
+    it { should define_enum_for(:status).with(statuses) }
+
     it { should validate_presence_of(:status) }
   end
 

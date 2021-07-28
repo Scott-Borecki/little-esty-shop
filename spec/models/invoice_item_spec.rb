@@ -7,6 +7,9 @@ RSpec.describe InvoiceItem, type: :model do
   end
 
   describe 'validations' do
+    statuses = { pending: 0, packaged: 1, shipped: 2 }
+    it { should define_enum_for(:status).with(statuses) }
+
     it { should validate_presence_of(:quantity) }
     it { should validate_numericality_of(:quantity) }
     it { should validate_presence_of(:unit_price) }
