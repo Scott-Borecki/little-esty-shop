@@ -15,6 +15,12 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status) }
   end
 
+  it 'can build an invoice with a customer association' do
+    customer_with_in_progress_invoices(invoice_count: 2)
+    expect(Invoice.first.status).to eq("in progress")
+    expect(Invoice.all.length).to eq(2)
+  end
+
   # before :each do
   #
   # end
