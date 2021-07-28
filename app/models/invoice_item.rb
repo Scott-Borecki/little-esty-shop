@@ -1,7 +1,5 @@
 class InvoiceItem < ApplicationRecord
-  validates_presence_of :quantity
-  validates_presence_of :unit_price
-  validates_presence_of :status
+  validates :quantity, :unit_price, :status, presence: true
 
   belongs_to :invoice
   belongs_to :item

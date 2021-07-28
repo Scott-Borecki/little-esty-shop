@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-  validates_presence_of :status
+  validates :status, presence: true
 
   belongs_to :customer
   has_many :invoice_items
