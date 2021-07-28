@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
-  validates :name, :description, presence: true
+  validates :name, presence: true
+  validates :description, presence: true
   validates :unit_price, presence: true, numericality: true
   validates :enabled, presence: true, inclusion: { in: [true, false] }
 
