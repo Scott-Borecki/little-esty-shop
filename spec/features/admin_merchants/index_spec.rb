@@ -17,6 +17,14 @@ RSpec.describe '/admin/merchants/' do
           expect(page).to have_content(merchant.name)
         end
       end
+
+      describe 'when I click on the name of a merchant' do
+        it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
+          click_link merchant1.name
+
+          expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+        end
+      end
     end
   end
 end
