@@ -43,6 +43,8 @@ RSpec.describe 'merchant invoices index page' do
 
     visit "/merchants/#{@merchant1.id}/invoices"
 
+    expect(page).to have_content("Little Esty Shop")
+    expect(page).to have_content(@merchant1.name)
     expect(page).to have_content("My Invoices")
     expect(page).to have_content("Invoice ##{@invoice1.id}")
     expect(page).to have_content("Invoice ##{@invoice1.id}")
@@ -56,7 +58,7 @@ RSpec.describe 'merchant invoices index page' do
     expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
 
-  it '' do
+  it 'displays the merchant invoice show page and its attributes' do
     # Merchant Invoice Show Page
     #
     # As a merchant
@@ -66,7 +68,16 @@ RSpec.describe 'merchant invoices index page' do
     # - Invoice status
     # - Invoice created_at date in the format "Monday, July 18, 2019"
     # - Customer first and last name
+    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+    save_and_open_page
 
+    expect(page).to have_content("Little Esty Shop")
+    expect(page).to have_content(@merchant1.name)
+    expect(page).to have_content("Invoice ##{@invoice1.id}")
+    #do we need to change lower case 'in progress' to 'In Progress' here?
+    expect(page).to have_content("Status: #{@invoice1.status}")
+    #need to test created_at
+    expect(page).to have_content("Customer:")
   end
 
 end
