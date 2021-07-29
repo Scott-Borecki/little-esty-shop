@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :customer do
-    first_name { Faker::Movies::HarryPotter.unique.spell }
-    last_name  { Faker::Movies::HarryPotter.unique.house }
+    first_name { Faker::Movies::HarryPotter.spell }
+    last_name  { Faker::Movies::HarryPotter.house }
   end
 
   factory :merchant do
-    name { Faker::Games::SuperMario.unique.character }
+    name { Faker::Games::SuperMario.character }
   end
 
   factory :invoice do
@@ -25,8 +25,8 @@ FactoryBot.define do
   end
 
   factory :item do
-    name { Faker::Movies::Lebowski.unique.character }
-    description { Faker::Movies::Lebowski.unique.quote }
+    name { Faker::Movies::Lebowski.character }
+    description { Faker::Movies::Lebowski.quote }
     unit_price { rand(100000) }
     merchant
   end
