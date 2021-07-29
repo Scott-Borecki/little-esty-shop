@@ -9,6 +9,11 @@ RSpec.describe Merchant, type: :model do
     it { should validate_presence_of(:name) }
   end
 
+  it 'can build a merchant' do
+    merchant_1 = create(:merchant)
+    expect(merchant.name).to be_a(String)
+  end
+
   # before :each do
   #
   # end
