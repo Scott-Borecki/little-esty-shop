@@ -69,9 +69,12 @@ RSpec.describe '/admin/merchants/' do
 
       describe 'when I click on the name of a merchant' do
         it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
-          click_link merchant1.name
+          Merchant.all.each do |merchant|
+            visit admin_merchants_path
+            click_link merchant.name
 
-          expect(current_path).to eq(admin_merchant_path(merchant1))
+            expect(current_path).to eq(admin_merchant_path(merchant))
+          end
         end
       end
 

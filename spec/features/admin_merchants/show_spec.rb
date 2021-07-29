@@ -23,9 +23,9 @@ RSpec.describe '/admin/merchants/merchant_id' do
       end
 
       describe 'when I click the update link' do
-        it 'takes me to a page to edit the merchant' do
-          click_link('Update Merchant')
+        before { click_link 'Update Merchant' }
 
+        it 'takes me to a page to edit the merchant' do
           expect(current_path).to eq(edit_admin_merchant_path(merchant1))
         end
       end
