@@ -20,7 +20,7 @@ class Admin::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:name)
+    params.permit(:name, :enabled)
   end
 
   def fetch_current_merchant
