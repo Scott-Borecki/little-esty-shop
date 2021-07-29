@@ -8,15 +8,26 @@ RSpec.describe Merchant, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
   end
-
+  #
   # before :each do
   #
   # end
   #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
+  describe 'class methods' do
+    let!(:merchant1) { create(:merchant) }
+    let!(:merchant2) { create(:merchant) }
+    let!(:merchant3) { create(:merchant) }
+    let!(:merchant4) { create(:merchant, enabled: false) }
+    let!(:merchant5) { create(:merchant, enabled: false) }
+    let!(:merchant6) { create(:merchant, enabled: false) }
+
+    describe '.enabled_merchants' do
+      it 'returns all the enabled merchants' do
+        enabled_merchants = [merchant1, merchant2, merchant3]
+        expect(Merchant.enabled_merchants).to eq(enabled_merchants)
+      end
+    end
+  end
 
   describe 'instance methods' do
     describe '#enabled?' do
