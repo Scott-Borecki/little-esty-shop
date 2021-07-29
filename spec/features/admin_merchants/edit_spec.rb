@@ -8,9 +8,9 @@ RSpec.describe '/admin/merchants/merchant_id/edit' do
       let!(:merchant3) { create(:merchant) }
       let!(:merchants) { [merchant1, merchant2, merchant3] }
 
-      before { visit "/admin/merchants/#{merchant1.id}/edit" }
+      before { visit edit_admin_merchant_path(merchant1) }
 
-      specify { expect(current_path).to eq("/admin/merchants/#{merchant1.id}/edit") }
+      specify { expect(current_path).to eq(edit_admin_merchant_path(merchant1)) }
       specify { expect(page).to have_no_content('Update successful!') }
 
       it 'displays a form filled in with the existing merchant attribute information' do
@@ -27,7 +27,7 @@ RSpec.describe '/admin/merchants/merchant_id/edit' do
         end
 
         it 'redirects me to the merchants admin show page' do
-          expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
+          expect(current_path).to eq(admin_merchant_path(merchant1))
         end
 
         it 'displays the updated information' do
