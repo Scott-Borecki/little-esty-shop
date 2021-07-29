@@ -2,34 +2,75 @@ FactoryBot.define do
   factory :customer do
     first_name { Faker::Movies::HarryPotter.unique.spell }
     last_name  { Faker::Movies::HarryPotter.unique.house }
-    # admin { false }
+  end
+
+  factory :merchant do
+    name { Faker::Games::SuperMario.unique.character }
   end
 
   factory :invoice do
     customer
+
+    trait :"in progress" do
+      status { :"in progress" }
+    end
+
+    trait :cancelled do
+      status { :cancelled }
+    end
+
+    trait :completed do
+      status { :completed }
+    end
+  end
+
+  factory :item do
+    name { Faker::Movies::Lebowski.unique.character }
+    description { Faker::Movies::Lebowski.unique.quote }
+    unit_price { rand(100000) }
+    merchant
+  end
+
+  factory :invoice_item do
+    quantity { rand(500) }
+    unit_price { rand(100000) }
+    invoice
+    item
+
+    trait :pending do
+      status { :pending }
+    end
+
+    trait :packaged do
+      status { :packaged }
+    end
+
+    trait :shipped do
+      status { :shipped }
+    end
   end
 end
 
-def customer_with_in_progress_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :"in progress", customer: customer
-      })
-  end
-end
-
-def customer_with_cancelled_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :cancelled, customer: customer
-      })
-  end
-end
-
-def customer_with_completed_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :completed, customer: customer
-      })
-  end
-end
+# def customer_with_in_progress_invoices(invoice_count: 5)
+#   FactoryBot.create(:customer) do |customer|
+#     FactoryBot.create_list(:invoice, invoice_count, {
+#       status: :"in progress", customer: customer
+#       })
+#   end
+# end
+#
+# def customer_with_cancelled_invoices(invoice_count: 5)
+#   FactoryBot.create(:customer) do |customer|
+#     FactoryBot.create_list(:invoice, invoice_count, {
+#       status: :cancelled, customer: customer
+#       })
+#   end
+# end
+#
+# def customer_with_completed_invoices(invoice_count: 5)
+#   FactoryBot.create(:customer) do |customer|
+#     FactoryBot.create_list(:invoice, invoice_count, {
+#       status: :completed, customer: customer
+#       })
+#   end
+# end
