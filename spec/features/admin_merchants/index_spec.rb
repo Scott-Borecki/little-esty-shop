@@ -104,6 +104,16 @@ RSpec.describe '/admin/merchants/' do
           expect(merchant1.enabled?).to eq(false)
         end
       end
+
+      describe 'when I click on Create New Merchant' do
+        before do
+          click_link 'Create New Merchant'
+        end
+
+        it 'takes me to the new admin merchant page' do
+          expect(current_path).to eq(new_admin_merchant_path)
+        end
+      end
     end
   end
 end

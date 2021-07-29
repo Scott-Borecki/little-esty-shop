@@ -8,6 +8,14 @@ class Admin::MerchantsController < ApplicationController
   def show
   end
 
+  def new
+  end
+
+  def create
+    Merchant.create(merchant_params)
+    redirect_to admin_merchants_path
+  end
+
   def edit
   end
 
