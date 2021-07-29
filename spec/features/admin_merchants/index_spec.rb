@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe '/admin/merchants/' do
-  let!(:merchant1) { create(:merchant, enabled: true) }
-  let!(:merchant2) { create(:merchant, enabled: true) }
-  let!(:merchant3) { create(:merchant, enabled: true) }
-  let!(:merchant4) { create(:merchant) }
-  let!(:merchant5) { create(:merchant) }
+  let!(:merchant1) { create(:enabled_merchant) }
+  let!(:merchant2) { create(:enabled_merchant) }
+  let!(:merchant3) { create(:enabled_merchant) }
+  let!(:merchant4) { create(:disabled_merchant) }
+  let!(:merchant5) { create(:disabled_merchant) }
 
   describe 'as an admin' do
     describe 'when I visit the admin merchants index (/admin/merchants)' do

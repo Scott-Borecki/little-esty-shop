@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe '/admin/merchants/merchant_id/edit' do
-  let!(:merchant1) { create(:merchant, enabled: true) }
-  let!(:merchant2) { create(:merchant, enabled: true) }
-  let!(:merchant3) { create(:merchant, enabled: true) }
+  let!(:merchant1) { create(:enabled_merchant) }
+  let!(:merchant2) { create(:enabled_merchant) }
+  let!(:merchant3) { create(:enabled_merchant) }
   let!(:merchants) { [merchant1, merchant2, merchant3] }
 
   describe 'as an admin' do

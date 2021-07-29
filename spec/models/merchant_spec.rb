@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  let!(:merchant1) { create(:merchant, enabled: true) }
-  let!(:merchant2) { create(:merchant, enabled: true) }
-  let!(:merchant3) { create(:merchant, enabled: true) }
-  let!(:merchant4) { create(:merchant) }
-  let!(:merchant5) { create(:merchant) }
-  let!(:merchant6) { create(:merchant) }
+  let!(:merchant1) { create(:enabled_merchant) }
+  let!(:merchant2) { create(:enabled_merchant) }
+  let!(:merchant3) { create(:enabled_merchant) }
+  let!(:merchant4) { create(:disabled_merchant) }
+  let!(:merchant5) { create(:disabled_merchant) }
+  let!(:merchant6) { create(:disabled_merchant) }
 
   specify { expect(Merchant.all.count).to be_positive }
 

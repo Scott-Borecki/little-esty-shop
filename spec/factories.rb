@@ -11,6 +11,15 @@ FactoryBot.define do
   # Merchants
   factory :merchant do
     name { Faker::Company.name }
+
+    factory :enabled_merchant do
+      enabled { true }
+    end
+
+    factory :disabled_merchant do
+      enabled { false }
+    end
+  end
   end
 end
 
