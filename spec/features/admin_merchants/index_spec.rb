@@ -20,7 +20,7 @@ RSpec.describe '/admin/merchants/' do
         end
       end
 
-      it 'displays a button next to each merachnt name to disable or enable that merchant' do
+      it 'displays a button next to each merchant name to disable or enable that merchant' do
         enabled_merchants  = [merchant1, merchant2, merchant3]
         disabled_merchants = [merchant4, merchant5]
 
