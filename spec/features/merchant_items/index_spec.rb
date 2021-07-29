@@ -11,7 +11,8 @@ RSpec.describe 'Merchant Items Index Page' do
     @item_4 = create(:item, enabled: true, merchant: @merchant_2)
     @item_5 = create(:item, enabled: true, merchant: @merchant_2)
 
-    visit "/merchants/#{@merchant_1.id}/items"
+    # visit "/merchants/#{@merchant_1.id}/items"
+    visit merchant_items_path(@merchant_1)
   end
 
   it 'can list all of the items for a merchant' do
