@@ -17,9 +17,18 @@ RSpec.describe Merchant, type: :model do
   #   describe '.' do
   #   end
   # end
-  #
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
+
+  describe 'instance methods' do
+    describe '#enabled?' do
+      let!(:merchant1) { create(:merchant) }
+      let!(:merchant2) { create(:merchant, enabled: false) }
+      context 'when merchant is enabled' do
+        specify { expect(merchant1).to be_enabled }
+      end
+
+      context 'when merchant is disabled' do
+        specify { expect(merchant2).to_not be_enabled }
+      end
+    end
+  end
 end
