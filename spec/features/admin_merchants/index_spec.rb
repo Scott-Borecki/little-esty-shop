@@ -60,6 +60,10 @@ RSpec.describe '/admin/merchants/' do
         end
       end
 
+      it 'displays a link to create a new merchant' do
+        expect(page).to have_link('Create New Merchant')
+      end
+
       describe 'when I click on the name of a merchant' do
         it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
           click_link merchant1.name
