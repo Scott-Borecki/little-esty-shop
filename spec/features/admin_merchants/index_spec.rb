@@ -36,6 +36,30 @@ RSpec.describe '/admin/merchants/' do
         end
       end
 
+      it 'displays an Enabled Merchants section with all the enabled merchants' do
+        within('#enabled-merchants') do
+          expect(page).to have_content('Enabled Merchants')
+          expect(page).to have_no_content('Disabled Merchants')
+          expect(page).to have_content(merchant1.name)
+          expect(page).to have_content(merchant2.name)
+          expect(page).to have_content(merchant3.name)
+          expect(page).to have_no_content(merchant4.name)
+          expect(page).to have_no_content(merchant5.name)
+        end
+      end
+
+      it 'displays an Disabled Merchants section with all the disabled merchants' do
+        within('#disabled-merchants') do
+          expect(page).to have_content('Disabled Merchants')
+          expect(page).to have_no_content('Enabled Merchants')
+          expect(page).to have_no_content(merchant1.name)
+          expect(page).to have_no_content(merchant2.name)
+          expect(page).to have_no_content(merchant3.name)
+          expect(page).to have_content(merchant4.name)
+          expect(page).to have_content(merchant5.name)
+        end
+      end
+
       describe 'when I click on the name of a merchant' do
         it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
           click_link merchant1.name
