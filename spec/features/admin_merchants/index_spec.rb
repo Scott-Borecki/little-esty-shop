@@ -81,7 +81,7 @@ RSpec.describe '/admin/merchants/' do
         end
 
         it 'redirects me back to the admin merchants index' do
-          expect(current_path).to eq(admin_merchant_path(merchant4))
+          expect(current_path).to eq(admin_merchants_path)
         end
 
         it 'changes the merchants status' do
@@ -99,7 +99,7 @@ RSpec.describe '/admin/merchants/' do
         end
 
         it 'redirects me back to the admin merchants index' do
-          expect(current_path).to eq(admin_merchant_path(merchant1))
+          expect(current_path).to eq(admin_merchants_path)
         end
 
         it 'changes the merchants status' do

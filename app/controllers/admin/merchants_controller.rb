@@ -23,8 +23,12 @@ class Admin::MerchantsController < ApplicationController
   def update
     # TODO (Scott Borecki): Add sad path if update fails
     @merchant.update!(merchant_params)
-    redirect_to admin_merchant_path(@merchant)
-    flash[:notice] = "Update successful!"
+    if params[:enabled]
+      redirect_to admin_merchants_path
+    else
+      redirect_to admin_merchant_path(@merchant)
+      flash[:notice] = "Update successful!"
+    end
   end
 
   private
