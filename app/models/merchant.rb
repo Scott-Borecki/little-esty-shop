@@ -1,7 +1,8 @@
 class Merchant < ApplicationRecord
-  validates :name, presence: true
-
   has_many :items
+
+  validates :name, presence: true
+  validates :enabled, inclusion: { in: [true, false] }
 
   def self.enabled_merchants
     where(enabled: true)
