@@ -52,32 +52,13 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to have_content("Invoice ##{@invoice3.id}")
     expect(page).to have_content("Invoice ##{@invoice4.id}")
     expect(page).to_not have_content(@invoice5.id)
+  end
+
+  it 'links to the merchant invoice show page' do
+    visit "/merchants/#{@merchant1.id}/invoices"
 
     click_link("##{@invoice1.id}")
 
     expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
-
-  it 'displays the merchant invoice show page and its attributes' do
-    # Merchant Invoice Show Page
-    #
-    # As a merchant
-    # When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-    # Then I see information related to that invoice including:
-    # - Invoice id
-    # - Invoice status
-    # - Invoice created_at date in the format "Monday, July 18, 2019"
-    # - Customer first and last name
-    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
-    save_and_open_page
-
-    expect(page).to have_content("Little Esty Shop")
-    expect(page).to have_content(@merchant1.name)
-    expect(page).to have_content("Invoice ##{@invoice1.id}")
-    #do we need to change lower case 'in progress' to 'In Progress' here?
-    expect(page).to have_content("Status: #{@invoice1.status}")
-    #need to test created_at
-    expect(page).to have_content("Customer:")
-  end
-
 end
