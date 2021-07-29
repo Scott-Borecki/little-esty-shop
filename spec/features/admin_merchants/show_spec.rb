@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe '/admin/merchants/merchant_id' do
+  let!(:merchant1) { create(:merchant, enabled: true) }
+  let!(:merchant2) { create(:merchant, enabled: true) }
+  let!(:merchant3) { create(:merchant, enabled: true) }
+  let!(:merchants) { [merchant1, merchant2, merchant3] }
+
   describe 'as an admin' do
     describe 'when I visit the admin merchants show page (/admin/merchants/merchant_id)' do
-      let!(:merchant1) { create(:merchant, enabled: true) }
-      let!(:merchant2) { create(:merchant, enabled: true) }
-      let!(:merchant3) { create(:merchant, enabled: true) }
-      let!(:merchants) { [merchant1, merchant2, merchant3] }
-
       before { visit admin_merchant_path(merchant1) }
 
       specify { expect(current_path).to eq(admin_merchant_path(merchant1)) }

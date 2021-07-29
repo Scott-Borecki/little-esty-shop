@@ -1,17 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe '/admin/merchants/' do
+  let!(:merchant1) { create(:merchant, enabled: true) }
+  let!(:merchant2) { create(:merchant, enabled: true) }
+  let!(:merchant3) { create(:merchant, enabled: true) }
+  let!(:merchant4) { create(:merchant) }
+  let!(:merchant5) { create(:merchant) }
+
   describe 'as an admin' do
     describe 'when I visit the admin merchants index (/admin/merchants)' do
-      let!(:merchant1) { create(:merchant, enabled: true) }
-      let!(:merchant2) { create(:merchant, enabled: true) }
-      let!(:merchant3) { create(:merchant, enabled: true) }
-      let!(:merchant4) { create(:merchant, enabled: false) }
-      let!(:merchant5) { create(:merchant, enabled: false) }
-
       before { visit admin_merchants_path }
 
       specify { expect(current_path).to eq(admin_merchants_path) }
+      specify { expect(Merchant.all.count).to be_positive }
 
       it 'displays the name of each merchant in the system' do
         Merchant.all.each do |merchant|
@@ -26,12 +27,14 @@ RSpec.describe '/admin/merchants/' do
         enabled_merchants.each do |merchant|
           within("#merchant-#{merchant.id}") do
             expect(page).to have_button('Disable')
+            expect(page).to have_no_button('Enable')
           end
         end
 
         disabled_merchants.each do |merchant|
           within("#merchant-#{merchant.id}") do
             expect(page).to have_button('Enable')
+            expect(page).to have_no_button('Disable')
           end
         end
       end
@@ -74,10 +77,7 @@ RSpec.describe '/admin/merchants/' do
 
       describe 'when I click on the enable button' do
         before do
-          within("#merchant-#{merchant4.id}") do
-            click_button 'Enable'
-          end
-          merchant4.reload
+          within("#merchant-#{merchant4.id}") { click_button 'Enable' }
         end
 
         it 'redirects me back to the admin merchants index' do
@@ -85,30 +85,34 @@ RSpec.describe '/admin/merchants/' do
         end
 
         it 'changes the merchants status' do
-          expect(merchant4.enabled?).to eq(true)
+          expect(merchant4.enabled?).to be false
+
+          merchant4.reload
+
+          expect(merchant4.enabled?).to be true
         end
       end
 
       describe 'when I click on the disable button' do
         before do
-          within("#merchant-#{merchant1.id}") do
-            click_button 'Disable'
-          end
-          merchant1.reload
+          within("#merchant-#{merchant1.id}") { click_button 'Disable' }
         end
+
         it 'redirects me back to the admin merchants index' do
           expect(current_path).to eq(admin_merchant_path(merchant1))
         end
 
         it 'changes the merchants status' do
-          expect(merchant1.enabled?).to eq(false)
+          expect(merchant1.enabled?).to be true
+
+          merchant1.reload
+
+          expect(merchant1.enabled?).to be false
         end
       end
 
       describe 'when I click on Create New Merchant' do
-        before do
-          click_link 'Create New Merchant'
-        end
+        before { click_link 'Create New Merchant'}
 
         it 'takes me to the new admin merchant page' do
           expect(current_path).to eq(new_admin_merchant_path)
