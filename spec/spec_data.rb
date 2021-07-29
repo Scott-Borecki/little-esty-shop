@@ -6,12 +6,12 @@ module TestData
   # which will call their parents, creating all needed data
 
   def self.merchants
-    ["Mr. Jone Runolfsdottir",
-    "Weldon Barton DO",
-    "Ewa Pollich",
-    "Hermelinda Marvin",
-    "Roberto Wolf"].each do |name|
-      Merchant.create(name: name)
+    [["Mr. Jone Runolfsdottir", 1],
+    ["Weldon Barton DO", 1],
+    ["Ewa Pollich", 1],
+    ["Hermelinda Marvin", 1],
+    ["Roberto Wolf",1]].each do |name|
+      Merchant.create(name: name[0])
     end
     return "Merchants created"
   end
