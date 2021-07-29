@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe '/admin/merchants/merchant_id/edit' do
   describe 'as an admin' do
     describe 'when I visit the admin merchants edit page (/admin/merchants/merchant_id/edit)' do
-      let!(:merchant1) { create(:merchant) }
-      let!(:merchant2) { create(:merchant) }
-      let!(:merchant3) { create(:merchant) }
+      let!(:merchant1) { create(:merchant, enabled: true) }
+      let!(:merchant2) { create(:merchant, enabled: true) }
+      let!(:merchant3) { create(:merchant, enabled: true) }
       let!(:merchants) { [merchant1, merchant2, merchant3] }
 
       before { visit edit_admin_merchant_path(merchant1) }

@@ -14,9 +14,9 @@ RSpec.describe Merchant, type: :model do
   # end
   #
   describe 'class methods' do
-    let!(:merchant1) { create(:merchant) }
-    let!(:merchant2) { create(:merchant) }
-    let!(:merchant3) { create(:merchant) }
+    let!(:merchant1) { create(:merchant, enabled: true) }
+    let!(:merchant2) { create(:merchant, enabled: true) }
+    let!(:merchant3) { create(:merchant, enabled: true) }
     let!(:merchant4) { create(:merchant, enabled: false) }
     let!(:merchant5) { create(:merchant, enabled: false) }
     let!(:merchant6) { create(:merchant, enabled: false) }
@@ -38,7 +38,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'instance methods' do
     describe '#enabled?' do
-      let!(:merchant1) { create(:merchant) }
+      let!(:merchant1) { create(:merchant, enabled: true ) }
       let!(:merchant2) { create(:merchant, enabled: false) }
       context 'when merchant is enabled' do
         specify { expect(merchant1).to be_enabled }
