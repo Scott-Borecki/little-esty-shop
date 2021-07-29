@@ -7,6 +7,10 @@ class Merchant < ApplicationRecord
     where(enabled: true)
   end
 
+  def self.disabled_merchants
+    where(enabled: false)
+  end
+
   def enabled?
     enabled
   end

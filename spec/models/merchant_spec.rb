@@ -27,6 +27,13 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.enabled_merchants).to eq(enabled_merchants)
       end
     end
+
+    describe '.disabled_merchants' do
+      it 'returns all the disabled merchants' do
+        disabled_merchants = [merchant4, merchant5, merchant6]
+        expect(Merchant.disabled_merchants).to eq(disabled_merchants)
+      end
+    end
   end
 
   describe 'instance methods' do
