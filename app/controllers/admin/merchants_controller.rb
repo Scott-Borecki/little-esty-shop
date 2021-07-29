@@ -13,7 +13,7 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant.update(merchant_params)
-    redirect_to "/admin/merchants/#{@merchant.id}"
+    redirect_to admin_merchant_path(@merchant)
     flash[:notice] = "Update successful!"
   end
 
