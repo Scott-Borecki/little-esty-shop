@@ -10,7 +10,7 @@ FactoryBot.define do
 
   # Merchants
   factory :merchant do
-    name { Faker::Company.name  }
+    name { Faker::Company.name }
   end
 end
 
