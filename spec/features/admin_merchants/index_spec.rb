@@ -8,14 +8,13 @@ RSpec.describe '/admin/merchants/' do
       let!(:merchant3) { create(:merchant) }
       let!(:merchant4) { create(:merchant, enabled: false) }
       let!(:merchant5) { create(:merchant, enabled: false) }
-      let!(:merchants) { [merchant1, merchant2, merchant3, merchant4, merchant5] }
 
       before { visit admin_merchants_path }
 
       specify { expect(current_path).to eq(admin_merchants_path) }
 
       it 'displays the name of each merchant in the system' do
-        merchants.each do |merchant|
+        Merchant.all.each do |merchant|
           expect(page).to have_content(merchant.name)
         end
       end
