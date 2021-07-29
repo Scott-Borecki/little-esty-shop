@@ -8,13 +8,13 @@ RSpec.describe '/admin/merchants/new' do
       specify { expect(current_path).to eq(new_admin_merchant_path) }
 
       it 'displays a form that allows me to add merchant information' do
-        expect(page).to have_field(:name)
+        expect(page).to have_field(:merchant_name)
         expect(page).to have_button('Submit')
       end
 
       describe 'when I fill out the form and click Submit' do
         before do
-          fill_in :name, with: 'Foo Bar'
+          fill_in :merchant_name, with: 'Foo Bar'
           click_button 'Submit'
         end
 

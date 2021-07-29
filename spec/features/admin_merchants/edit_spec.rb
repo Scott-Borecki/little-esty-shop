@@ -13,16 +13,17 @@ RSpec.describe '/admin/merchants/merchant_id/edit' do
       specify { expect(current_path).to eq(edit_admin_merchant_path(merchant1)) }
       specify { expect(page).to have_no_content('Update successful!') }
 
+
       it 'displays a form filled in with the existing merchant attribute information' do
-        expect(page).to have_field(:name, with: merchant1.name)
-        expect(page).to have_no_field(:name, with: merchant2.name)
-        expect(page).to have_no_field(:name, with: merchant3.name)
+        expect(page).to have_field(:merchant_name, with: merchant1.name)
+        expect(page).to have_no_field(:merchant_name, with: merchant2.name)
+        expect(page).to have_no_field(:merchant_name, with: merchant3.name)
         expect(page).to have_button('Submit')
       end
 
       describe 'when I update the information in the form and click submit' do
         before do
-          fill_in :name, with: 'Stompy Feet'
+          fill_in :merchant_name, with: 'Stompy Feet'
           click_button 'Submit'
         end
 
