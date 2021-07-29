@@ -7,4 +7,8 @@ class InvoicesController < ApplicationController
       .where('items.merchant_id = ?', params[:merchant_id])
   end
 
+  def show
+    
+  end
+
 end

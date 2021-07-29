@@ -41,7 +41,6 @@ RSpec.describe 'merchant invoices index page' do
     # And for each invoice I see its id
     # And each id links to the merchant invoice show page
 
-
     visit "/merchants/#{@merchant1.id}/invoices"
 
     expect(page).to have_content("My Invoices")
@@ -51,5 +50,23 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to have_content("Invoice ##{@invoice3.id}")
     expect(page).to have_content("Invoice ##{@invoice4.id}")
     expect(page).to_not have_content(@invoice5.id)
+
+    click_link("##{@invoice1.id}")
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
+
+  it '' do
+    # Merchant Invoice Show Page
+    #
+    # As a merchant
+    # When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
+    # Then I see information related to that invoice including:
+    # - Invoice id
+    # - Invoice status
+    # - Invoice created_at date in the format "Monday, July 18, 2019"
+    # - Customer first and last name
+
+  end
+
 end
