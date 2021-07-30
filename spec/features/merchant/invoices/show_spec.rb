@@ -11,7 +11,7 @@ RSpec.describe 'merchant invoices index page' do
     @item2 = create(:item, enabled: true, merchant: @merchant1)
     @item3 = create(:item, enabled: true, merchant: @merchant1)
     @item4 = create(:item, enabled: true, merchant: @merchant2)
-    @item5 = create(:item, enabled: true, merchant: @merchant2)
+    @item5 = create(:item, enabled: false, merchant: @merchant2)
 
     #customers
     @customer1 = create(:customer)
@@ -28,7 +28,7 @@ RSpec.describe 'merchant invoices index page' do
     @invoice_item1 = create(:invoice_item, :pending, invoice: @invoice1, item: @item1)
     @invoice_item2 = create(:invoice_item, :pending, invoice: @invoice2, item: @item2)
     @invoice_item3 = create(:invoice_item, :packaged, invoice: @invoice3, item: @item3)
-    @invoice_item4 = create(:invoice_item, :pending, invoice: @invoice4, item: @item1)
+    @invoice_item4 = create(:invoice_item, :pending, invoice: @invoice4, item: @item4)
     @invoice_item5 = create(:invoice_item, :shipped, invoice: @invoice5, item: @item5)
   end
 
@@ -52,5 +52,19 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
     expect(page).to have_content("Customer:")
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
+  end
+
+  it 'displays all invoice items and their attributes' do
+    # Merchant Invoice Show Page: Invoice Item Information
+    #
+    # As a merchant
+    # When I visit my merchant invoice show page
+    # Then I see all of my items on the invoice including:
+    # - Item name
+    # - The quantity of the item ordered
+    # - The price the Item sold for
+    # - The Invoice Item status
+    # And I do not see any information related to Items for other merchants
+    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
 end
