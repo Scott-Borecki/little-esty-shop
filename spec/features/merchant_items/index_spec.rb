@@ -29,6 +29,16 @@ RSpec.describe 'Merchant Items Index Page' do
     within "#item-#{@item_1.id}" do
       expect(page).to have_button('Enable')
       expect(page).to have_button('Disable')
+
+      click_on "Disable"
+
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+      expect(@item_1.reload.enabled).to eq(false)
+
+      click_on "Enable"
+
+      expect(current_path).to eq(merchant_items_path(@merchant_1))
+      expect(@item_1.reload.enabled).to eq(true)
     end
 
     within "#item-#{@item_2.id}" do
@@ -41,6 +51,7 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(page).to have_button('Disable')
     end
 save_and_open_page
+
     # When I click this button
     # Then I am redirected back to the items index
     # And I see that the items status has changed

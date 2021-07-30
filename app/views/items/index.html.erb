@@ -3,8 +3,8 @@
 <% @items.each do |item| %>
   <div id="item-<%= item.id%>">
     <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
-    <%= button_to "Enable", edit_merchant_item_path(@merchant.id, item.id) %>
-    <%= button_to "Disable", edit_merchant_item_path(@merchant.id, item.id) %>
+    <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
+    <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
     <br>
   </div>
 <% end %>
