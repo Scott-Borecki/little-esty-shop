@@ -21,7 +21,6 @@ RSpec.describe 'Merchant Items Show Page' do
     it "can update a merchant's item" do
       # /merchants/:merchant_id/items/:id/edit(.:format)
       visit edit_merchant_item_path(@merchant_1, @item_1)
-      save_and_open_page
 
       expect(page).to have_field('Name', with: "#{@item_1.name}")
       expect(page).to have_field('Description', with: "#{@item_1.description}")
@@ -38,8 +37,9 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(page).to have_content('Rubeus Hagrid')
       expect(page).to have_content("Mad and hairy? You wouldn't be taking about me, now, would you?")
       expect(page).to have_content("$947.53")
-
-      # And I see a flash message stating that the information has been successfully updated.
+save_and_open_page
+# And I see a flash message stating that the information has been successfully updated.
+      expect(page).to have_content("Item information has been successfully updated!")
     end
   end
 end

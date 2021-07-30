@@ -15,10 +15,16 @@ class ItemsController < ApplicationController
   end
 
   def update
-    # binding.pry
     item = Item.find(params[:id])
     item.update(item_params)
-    redirect_to merchant_item_path
+
+    if item.save
+      redirect_to merchant_item_path
+      flash[:notice] = "Item information has been successfully updated!"
+    # else
+    #   flash[:alert] = "Item was not updated"
+    #   redirect_to edit_merchant_item_path
+    end
   end
 
   private
