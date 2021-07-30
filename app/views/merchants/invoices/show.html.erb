@@ -6,16 +6,18 @@
 
 <p>Status: <%= @invoice.status %></p>
 <p>Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
+<p>Total Revenue: <%= @total_revenue %></p>
 
 <h3>Customer:</h3>
 <p><%= @customer.first_name + ' ' + @customer.last_name %></p><br>
 
 <p>Items on this Invoice:</p>
-<% @items.each do |item| %>
+<% @invoice_items.each do |item| %>
+
 <div id="item_<%=item.id%>">
-  <p>Name: <%= item.name %></p>
+  <p>Name: <%= Item.where('id = ?', item.item_id).first.name %></p>
   <p>Quantity: <%= item.quantity %></p>
-  <p>Price: <%= item.price_sold %></p>
+  <p>Price: $<%= (item.unit_price / 100.00) %></p>
   <p>Status: <%= item.status %></p>
 <% end %>
 </div>

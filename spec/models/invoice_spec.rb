@@ -20,18 +20,16 @@ RSpec.describe Invoice, type: :model do
     expect(Invoice.first.status).to eq("in progress")
     expect(Invoice.all.length).to eq(2)
   end
+end
 
-  # before :each do
-  #
-  # end
-  #
   # describe 'class methods' do
   #   describe '.' do
-  #   end
-  # end
   #
-  # describe 'instance methods' do
-  #   describe '#' do
   #   end
   # end
-end
+
+  #  describe 'instance methods' do
+  #    describe '#' do
+  #
+  #     end
+  #  end

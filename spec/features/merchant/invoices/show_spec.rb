@@ -1,32 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe 'merchant invoices index page' do
+RSpec.describe 'merchant invoices show page' do
   before :each do
     #merchants
-    @merchant1 = create(:merchant)
-    @merchant2 = create(:merchant)
+    @merchant1 = Merchant.create!(name: 'Joe Schmo')
+    @merchant2 = Merchant.create!(name: 'Gertie')
 
     #items
-    @item1 = create(:item, enabled: true, merchant: @merchant1)
-    @item2 = create(:item, enabled: true, merchant: @merchant1)
-    @item3 = create(:item, enabled: true, merchant: @merchant1)
-    @item4 = create(:item, enabled: true, merchant: @merchant2)
+    @item1 = @merchant1.items.create!(name: 'Pogo stick', description: 'Jumpin Stick', unit_price: 100, enabled: true)
+    @item2 = @merchant1.items.create!(name: 'Yo - Yo', description: 'Goes and yos', unit_price: 100, enabled: true)
+    @item3 = @merchant1.items.create!(name: 'Rollerskates', description: 'Lets roll', unit_price: 100, enabled: true)
+    @item4 = @merchant2.items.create!(name: 'Fun Dip', description: 'Dip the fun', unit_price: 100, enabled: true)
 
     #customers
-    @customer1 = create(:customer)
-    @customer2 = create(:customer)
+    @customer1 = Customer.create!(first_name: 'Sinead', last_name: 'Maguire')
+    @customer2 = Customer.create!(first_name: 'Amy', last_name: 'Russel')
 
     #invoices
-    @invoice1 = create(:invoice, :"in progress", customer: @customer1)
-    @invoice2 = create(:invoice, :"in progress", customer: @customer1)
-    @invoice3 = create(:invoice, :"in progress", customer: @customer1)
-    @invoice4 = create(:invoice, :cancelled, customer: @customer2)
+    @invoice1 = @customer1.invoices.create!(status: 0)
+    @invoice2 = @customer2.invoices.create!(status: 0)
 
     #invoice_items
-    @invoice_item1 = create(:invoice_item, :pending, invoice: @invoice1, item: @item1)
-    @invoice_item2 = create(:invoice_item, :pending, invoice: @invoice1, item: @item2)
-    @invoice_item3 = create(:invoice_item, :packaged, invoice: @invoice3, item: @item3)
-    @invoice_item4 = create(:invoice_item, :pending, invoice: @invoice4, item: @item4)
+    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1000, status: 0)
+    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 2000, status: 1)
+    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 100, status: 1)
+
+    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
 
   it 'displays the merchant invoice show page and its attributes' do
@@ -39,7 +38,6 @@ RSpec.describe 'merchant invoices index page' do
     # - Invoice status
     # - Invoice created_at date in the format "Monday, July 18, 2019"
     # - Customer first and last name
-    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
 
     expect(page).to have_content("Little Esty Shop")
     expect(page).to have_content(@merchant1.name)
@@ -51,7 +49,7 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
   end
 
-  xit 'displays all invoice items and their attributes' do
+  it 'displays all invoice items and their attributes' do
     # Merchant Invoice Show Page: Invoice Item Information
     #
     # As a merchant
@@ -62,23 +60,30 @@ RSpec.describe 'merchant invoices index page' do
     # - The price the Item sold for
     # - The Invoice Item status
     # And I do not see any information related to Items for other merchants
-    visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
 
     save_and_open_page
-    within("#item_#{@item1.id}") do
+    within("#item_#{@invoice_item1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@invoice_item1.quantity)
-      expect(page).to have_content(@invoice_item1.unit_price)
+      expect(page).to have_content(@invoice_item1.unit_price / 100.00)
       expect(page).to have_content(@invoice_item1.status)
     end
 
-    within("#item_#{@item2.id}") do
+    within("#item_#{@invoice_item2.id}") do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@invoice_item2.quantity)
-      expect(page).to have_content(@invoice_item2.unit_price)
+      expect(page).to have_content(@invoice_item2.unit_price / 100.00)
       expect(page).to have_content(@invoice_item2.status)
     end
 
     expect(page).to_not have_content(@item3.name)
+  end
+
+  it 'displays the total revenue that will be generated from all my items on the invoice' do
+    # Merchant Invoice Show Page: Total Revenue
+    #
+    # As a merchant
+    # When I visit my merchant invoice show page
+    # Then I see the total revenue that will be generated from all of my items on the invoice
   end
 end
