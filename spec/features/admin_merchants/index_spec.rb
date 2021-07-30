@@ -112,36 +112,42 @@ RSpec.describe '/admin/merchants/' do
         expect(page).to have_link('Create New Merchant')
       end
 
-      it 'displays the names of the top 5 merchants by total revenue generated' do
-        top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
+      describe 'when I look in the top 5 merchants section' do
+        it 'displays the names of the top 5 merchants by total revenue generated' do
+          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
 
-        within('#top-five-merchants') do
-          top_five_merchants.each do |merchant|
-            expect(page).to have_content(merchant.name)
+          within('#top-five-merchants') do
+            top_five_merchants.each do |merchant|
+              expect(page).to have_content(merchant.name)
+            end
+
+            expect(merchant6.name).to appear_before(merchant5.name)
+            expect(merchant5.name).to appear_before(merchant2.name)
+            expect(merchant2.name).to appear_before(merchant4.name)
+            expect(merchant4.name).to appear_before(merchant3.name)
+            expect(page).to have_no_content(merchant1.name)
           end
-
-          expect(page).to have_no_content(merchant1.name)
         end
-      end
 
-      it 'links the names of the top 5 merchants to their admin merchant show page' do
-        top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
+        it 'links the names of the top 5 merchants to their admin merchant show page' do
+          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
 
-        within('#top-five-merchants') do
-          top_five_merchants.each do |merchant|
-            expect(page).to have_link(merchant.name)
+          within('#top-five-merchants') do
+            top_five_merchants.each do |merchant|
+              expect(page).to have_link(merchant.name)
+            end
+
+            expect(page).to have_no_link(merchant1.name)
           end
-
-          expect(page).to have_no_link(merchant1.name)
         end
-      end
 
-      it 'displays the total revenue generated next to each top 5 merchants' do
-        top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
+        it 'displays the total revenue generated next to each top 5 merchants' do
+          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
 
-        top_five_merchants.each do |merchant|
-          within("#top-merchant-#{merchant.id}") do
-            expect(page).to have_content(merchant.total_revenue)
+          top_five_merchants.each do |merchant|
+            within("#top-merchant-#{merchant.id}") do
+              expect(page).to have_content(merchant.total_revenue)
+            end
           end
         end
       end
