@@ -21,7 +21,7 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_five_merchants_by_revenue
-    select('merchants.id', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    select('merchants.*', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
       .joins(:transactions)
       .where(transactions: { result: :success })
       .group('merchants.id')
@@ -34,7 +34,7 @@ class Merchant < ApplicationRecord
          .where(transactions: { result: :success }, merchants: { id: merchant.id })
          .count
          .positive?
-      select('merchants.id', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      select('merchants.*', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
         .joins(:transactions)
         .where(transactions: { result: :success }, merchants: { id: merchant.id })
         .group('merchants.id')
@@ -43,5 +43,10 @@ class Merchant < ApplicationRecord
     else
       0
     end
+  end
+
+  # HACK (Scott Borecki): Figure out another way to do this
+  def total_revenue
+    Merchant.total_revenue_generated_by_merchant(self)
   end
 end

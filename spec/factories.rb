@@ -1,8 +1,8 @@
 FactoryBot.define do
   # Customer
   factory :customer do
-    first_name { Faker::Movies::HarryPotter.unique.spell }
-    last_name  { Faker::Movies::HarryPotter.unique.house }
+    first_name { Faker::Movies::HarryPotter.spell }
+    last_name  { Faker::Movies::HarryPotter.house }
     #
     # factory :customer_with_invoices do
     #   after(:create) do |customer, evaluator|

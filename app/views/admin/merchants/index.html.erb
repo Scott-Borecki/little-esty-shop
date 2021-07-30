@@ -27,3 +27,14 @@
     </section>
   <% end %>
 </section>
+
+<section id='top-five-merchants'>
+  <h1>Top Five Merchants by Revenue</h1>
+  <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
+    <section id='top-merchant-<%= merchant.id %>'>
+      <p>
+        <%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.total_revenue) %>
+      </p>
+    </section>
+  <% end %>
+</section>
