@@ -13,10 +13,10 @@ class Merchants::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:invoice_id])
     @customer = Customer.joins(:invoices)
       .where('invoices.id = ?', params[:invoice_id]).first
-    @items = Item.select('merchants.id, items.*')
+    @items = Item.select('merchants.id, items.*, invoice_items.quantity, invoice_items.status, invoice_items.unit_price as price_sold')
       .joins(invoice_items: :invoice)
       .joins(:merchant)
       .where('merchants.id = ?', params[:merchant_id])
-    binding.pry
+    # binding.pry
   end
 end

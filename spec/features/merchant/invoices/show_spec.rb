@@ -11,7 +11,6 @@ RSpec.describe 'merchant invoices index page' do
     @item2 = create(:item, enabled: true, merchant: @merchant1)
     @item3 = create(:item, enabled: true, merchant: @merchant1)
     @item4 = create(:item, enabled: true, merchant: @merchant2)
-    @item5 = create(:item, enabled: false, merchant: @merchant2)
 
     #customers
     @customer1 = create(:customer)
@@ -22,14 +21,12 @@ RSpec.describe 'merchant invoices index page' do
     @invoice2 = create(:invoice, :"in progress", customer: @customer1)
     @invoice3 = create(:invoice, :"in progress", customer: @customer1)
     @invoice4 = create(:invoice, :cancelled, customer: @customer2)
-    @invoice5 = create(:invoice, :completed, customer: @customer2)
 
     #invoice_items
     @invoice_item1 = create(:invoice_item, :pending, invoice: @invoice1, item: @item1)
-    @invoice_item2 = create(:invoice_item, :pending, invoice: @invoice2, item: @item2)
+    @invoice_item2 = create(:invoice_item, :pending, invoice: @invoice1, item: @item2)
     @invoice_item3 = create(:invoice_item, :packaged, invoice: @invoice3, item: @item3)
     @invoice_item4 = create(:invoice_item, :pending, invoice: @invoice4, item: @item4)
-    @invoice_item5 = create(:invoice_item, :shipped, invoice: @invoice5, item: @item5)
   end
 
   it 'displays the merchant invoice show page and its attributes' do
@@ -54,7 +51,7 @@ RSpec.describe 'merchant invoices index page' do
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
   end
 
-  it 'displays all invoice items and their attributes' do
+  xit 'displays all invoice items and their attributes' do
     # Merchant Invoice Show Page: Invoice Item Information
     #
     # As a merchant
@@ -66,5 +63,22 @@ RSpec.describe 'merchant invoices index page' do
     # - The Invoice Item status
     # And I do not see any information related to Items for other merchants
     visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+
+    save_and_open_page
+    within("#item_#{@item1.id}") do
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@invoice_item1.quantity)
+      expect(page).to have_content(@invoice_item1.unit_price)
+      expect(page).to have_content(@invoice_item1.status)
+    end
+
+    within("#item_#{@item2.id}") do
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content(@invoice_item2.quantity)
+      expect(page).to have_content(@invoice_item2.unit_price)
+      expect(page).to have_content(@invoice_item2.status)
+    end
+
+    expect(page).to_not have_content(@item3.name)
   end
 end
