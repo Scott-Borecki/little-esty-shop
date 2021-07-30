@@ -28,4 +28,20 @@ class Merchant < ApplicationRecord
       .order('revenue desc')
       .limit(5)
   end
+
+  def self.total_revenue_generated_by_merchant(merchant)
+    if joins(:transactions)
+         .where(transactions: { result: :success }, merchants: { id: merchant.id })
+         .count
+         .positive?
+      select('merchants.id', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+        .joins(:transactions)
+        .where(transactions: { result: :success }, merchants: { id: merchant.id })
+        .group('merchants.id')
+        .first
+        .revenue
+    else
+      0
+    end
+  end
 end
