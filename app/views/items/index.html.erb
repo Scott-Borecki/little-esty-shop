@@ -1,5 +1,10 @@
 <h1><%= @merchant.name %>'s Items</h1>
 
 <% @items.each do |item| %>
-  <p>- <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %></p>
+  <div id="item-<%= item.id%>">
+    <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+    <%= button_to "Enable", edit_merchant_item_path(@merchant.id, item.id) %>
+    <%= button_to "Disable", edit_merchant_item_path(@merchant.id, item.id) %>
+    <br>
+  </div>
 <% end %>
