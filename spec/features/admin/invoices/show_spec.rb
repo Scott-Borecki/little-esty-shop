@@ -3,8 +3,9 @@ require_relative '../../../spec_data.rb'
 
 RSpec.describe 'Admin invoice Show page' do
   before(:each) do  
-    TestData.invoices
-    visit "/admin/invoices/#{Invoice.first.id}"
+    TestData.invoice_items
+    @invoice = Invoice.first
+    visit "/admin/invoices/#{@invoice.id}"
   end
   # As an admin,
   # When I visit an admin invoice show page
@@ -14,11 +15,11 @@ RSpec.describe 'Admin invoice Show page' do
   # - Invoice created_at date in the format "Monday, July 18, 2019"
   # - Customer first and last name
   it 'has the invoices attributes' do
-    expect(page).to have_content(Invoice.first.id)
-    expect(page).to have_content(Invoice.first.status)
-    expect(page).to have_content(Invoice.first.created_at)
-    expect(page).to have_content(Invoice.first.customer.first_name)
-    expect(page).to have_content(Invoice.first.customer.last_name)
+    expect(page).to have_content(@invoice.id)
+    expect(page).to have_content(@invoice.status)
+    expect(page).to have_content(@invoice.formatted_time)
+    expect(page).to have_content(@invoice.customer.first_name)
+    expect(page).to have_content(@invoice.customer.last_name)
   end
 
   # Admin Invoice Show Page: Invoice Item Information
@@ -30,7 +31,29 @@ RSpec.describe 'Admin invoice Show page' do
   # - The quantity of the item ordered
   # - The price the Item sold for
   # - The Invoice Item status
+  it 'has the attrs for all of the items on the invoice and the invocie items status' do
+    within("table#items") do
+      within("tr##{@invoice.items_belonging_to[0].id}") do
+        expect(page).to have_content(@invoice.items_belonging_to[0].name) 
+        expect(page).to have_content(@invoice.items_belonging_to[0].quantity)
+        expect(page).to have_content(@invoice.items_belonging_to[0].unit_price)
+        expect(page).to have_content(@invoice.items_belonging_to[0].status)
+      end
+      within("tr##{@invoice.items_belonging_to[1].id}") do 
+        expect(page).to have_content(@invoice.items_belonging_to[1].name) 
+        expect(page).to have_content(@invoice.items_belonging_to[1].quantity)
+        expect(page).to have_content(@invoice.items_belonging_to[1].unit_price)
+        expect(page).to have_content(@invoice.items_belonging_to[1].status)
+      end
+      within("tr##{@invoice.items_belonging_to[2].id}") do 
+        expect(page).to have_content(@invoice.items_belonging_to[2].name) 
+        expect(page).to have_content(@invoice.items_belonging_to[2].quantity)
+        expect(page).to have_content(@invoice.items_belonging_to[2].unit_price)
+        expect(page).to have_content(@invoice.items_belonging_to[2].status)
+      end
+    end
 
+  end
   # Admin Invoice Show Page: Total Revenue
 
   # As an admin

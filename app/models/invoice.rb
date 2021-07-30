@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   validates :status, presence: true
+
+  def items_belonging_to
+    invoice_items.select('invoice_items.status, items.*').joins(:item)
+  end
 end
