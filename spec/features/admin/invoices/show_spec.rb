@@ -59,7 +59,12 @@ RSpec.describe 'Admin invoice Show page' do
   # As an admin
   # When I visit an admin invoice show page
   # Then I see the total revenue that will be generated from this invoice
-
+  it 'shows the total revenue for the invoice' do
+    within("h4#total_revenue") do
+      revenue = (8363*11 + 1177*9 + 4960*15).to_f / 100
+      expect(page).to have_content("Total Revenue: $#{revenue}")
+    end
+  end
   # Admin Invoice Show Page: Update Invoice Status
 
   # As an admin     

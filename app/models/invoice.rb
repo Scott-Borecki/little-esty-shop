@@ -12,4 +12,8 @@ class Invoice < ApplicationRecord
   def items_belonging_to
     invoice_items.joins(:item).select('invoice_items.status, invoice_items.quantity, items.*')
   end
+
+  def total_revenue
+    invoice_items.sum('unit_price * quantity').to_f / 100
+  end
 end

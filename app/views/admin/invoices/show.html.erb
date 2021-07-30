@@ -14,7 +14,7 @@
       <h4>Ordered: <%= @invoice.formatted_time %></h4>
       <!-- <h4 style="padding-top: 8px; color: rgb(191, 202, 209);" class="card-title"><%= @invoice.id %> Status: <%= @invoice.status%></h4> -->
       <h4>Customer: <%= @invoice.customer.first_name + ' ' + @invoice.customer.last_name %></h4>
-
+      <h4 id="total_revenue">Total Revenue: $<%= @invoice.total_revenue %></h4>
       <br>
     </div>
     <div class="card-body" style="background-color: rgb(217, 221, 222)">
@@ -38,12 +38,12 @@
                 <span class="caret"></span></button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <% @invoice.invoice_items.statuses.keys().each do |status| %>
-                    <%= link_to status, "/invoice_items/#{item.id}", method: :patch, params: {status: status}, :class=>"dropdown-item btn"%>
+                    <%= link_to status, "/admin/invoice_items/#{item.id}", method: :patch, params: {status: status}, :class=>"dropdown-item btn"%>
                   <% end %>
                 </div>
               </div>
           </td>
-            <td>$<%= item.unit_price %></td>
+            <td>$<%= item.unit_price.to_f / 100 %></td>
           </tr>
         <% end %>
       </table>
