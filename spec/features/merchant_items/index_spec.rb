@@ -27,20 +27,20 @@ RSpec.describe 'Merchant Items Index Page' do
 
   it 'has a button next to each item name to disable or enable that item' do
     within "#item-#{@item_1.id}" do
-      expect(page).to have_selector(:link_or_button, 'Enable')
-      expect(page).to have_selector(:link_or_button, 'Disable')
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
     end
 
     within "#item-#{@item_2.id}" do
-      expect(page).to have_selector(:link_or_button, 'Enable')
-      expect(page).to have_selector(:link_or_button, 'Disable')
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
     end
 
     within "#item-#{@item_3.id}" do
-      expect(page).to have_selector(:link_or_button, 'Enable')
-      expect(page).to have_selector(:link_or_button, 'Disable')
+      expect(page).to have_button('Enable')
+      expect(page).to have_button('Disable')
     end
-save_and_open_page  
+save_and_open_page
     # When I click this button
     # Then I am redirected back to the items index
     # And I see that the items status has changed
