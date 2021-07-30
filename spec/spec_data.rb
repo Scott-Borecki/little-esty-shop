@@ -86,9 +86,11 @@ module TestData
     i = 0 
     j = 0 
     Invoice.all.each do |invoice|
+      k = 0 
       3.times do 
-        invoice.invoice_items.create!(quantity: inv_item_attrs[j][0], unit_price: inv_item_attrs[j][1], status: inv_item_attrs[j][2], item_id: items[i].id)
+        invoice.invoice_items.create!(quantity: inv_item_attrs[j][0], unit_price: inv_item_attrs[j][1], status: inv_item_attrs[j][2], item_id:( i + k >= 19) ? items[i - k].id : items[i + k].id)
         j += 1
+        k += 1
       end
       i += 1
     end
