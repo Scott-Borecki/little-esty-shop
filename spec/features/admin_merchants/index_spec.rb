@@ -112,7 +112,7 @@ RSpec.describe '/admin/merchants/' do
         expect(page).to have_link('Create New Merchant')
       end
 
-      describe 'when I look in the top 5 merchants section' do
+      context 'within the top 5 merchants section' do
         it 'displays the names of the top 5 merchants by total revenue generated' do
           top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
 
@@ -153,29 +153,33 @@ RSpec.describe '/admin/merchants/' do
       end
 
       describe 'when I click on the name of a merchant' do
-        it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
-          Merchant.all.each do |merchant|
-            visit admin_merchants_path
+        context 'within the enabled/disabled section' do
+          it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
+            Merchant.all.each do |merchant|
+              visit admin_merchants_path
 
-            within("#merchant-#{merchant.id}") do
-              click_link merchant.name
+              within("#merchant-#{merchant.id}") do
+                click_link merchant.name
+              end
+
+              expect(current_path).to eq(admin_merchant_path(merchant))
             end
-
-            expect(current_path).to eq(admin_merchant_path(merchant))
           end
         end
 
-        it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
-          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
+        context 'within the top 5 merchants section' do
+          it 'takes me to the merchants admin show page (/admin/merchants/merchant_id)' do
+            top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
 
-          top_five_merchants.each do |merchant|
-            visit admin_merchants_path
+            top_five_merchants.each do |merchant|
+              visit admin_merchants_path
 
-            within("#top-five-merchants") do
-              click_link merchant.name
+              within("#top-five-merchants") do
+                click_link merchant.name
+              end
+
+              expect(current_path).to eq(admin_merchant_path(merchant))
             end
-
-            expect(current_path).to eq(admin_merchant_path(merchant))
           end
         end
       end
