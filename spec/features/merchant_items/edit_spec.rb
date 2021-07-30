@@ -37,8 +37,6 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(page).to have_content('Rubeus Hagrid')
       expect(page).to have_content("Mad and hairy? You wouldn't be taking about me, now, would you?")
       expect(page).to have_content("$947.53")
-save_and_open_page
-# And I see a flash message stating that the information has been successfully updated.
       expect(page).to have_content("Item information has been successfully updated!")
     end
   end
