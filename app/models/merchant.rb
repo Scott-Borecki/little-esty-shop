@@ -19,4 +19,13 @@ class Merchant < ApplicationRecord
   def enabled?
     enabled
   end
+
+  def self.top_five_merchants_by_revenue
+    select('merchants.id', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      .joins(:transactions)
+      .where(transactions: { result: :success })
+      .group('merchants.id')
+      .order('revenue desc')
+      .limit(5)
+  end
 end
