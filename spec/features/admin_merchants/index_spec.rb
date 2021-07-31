@@ -111,6 +111,8 @@ RSpec.describe '/admin/merchants/' do
             end
           end
         end
+
+        it 'displays the merchants best day'
       end
 
       describe 'when I click on the name of a merchant' do
