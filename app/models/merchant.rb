@@ -51,7 +51,8 @@ class Merchant < ApplicationRecord
     Merchant.total_revenue_generated_by_merchant(self)
   end
 
-  def best_day
+  # TODO (Scott Borecki): Method not complete.
+  def top_day
     invoice_items.select('invoice.created_at', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
       .joins(:transactions)
       .where(transactions: { result: :success })

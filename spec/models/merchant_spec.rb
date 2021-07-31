@@ -87,8 +87,6 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe '#top_day' do
-    it 'returns the merchants top day' do
-
-    end
+    it 'returns the merchants top day'
   end
 end
