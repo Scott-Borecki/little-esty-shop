@@ -11,7 +11,6 @@ RSpec.describe 'Merchant Items Show Page' do
 
   describe "a merchant's item's show page" do
     it "can link to the merchant's item's show page" do
-      # "/merchants/#{@merchant_1.id}/items"
       visit merchant_items_path(@merchant_1)
 
       click_link("#{@item_1.name}")
@@ -20,7 +19,6 @@ RSpec.describe 'Merchant Items Show Page' do
     end
 
     it "show the item's name, description, and price" do
-      # "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
       visit merchant_item_path(@merchant_1, @item_1)
 
       expect(page).to have_content(@item_1.name)

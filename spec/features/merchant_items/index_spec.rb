@@ -9,9 +9,7 @@ RSpec.describe 'Merchant Items Index Page' do
     @item_2 = create(:item, enabled: true, merchant: @merchant_1)
     @item_3 = create(:item, enabled: true, merchant: @merchant_1)
     @item_4 = create(:item, enabled: true, merchant: @merchant_2)
-    @item_5 = create(:item, enabled: true, merchant: @merchant_2)
 
-    # visit "/merchants/#{@merchant_1.id}/items"
     visit merchant_items_path(@merchant_1)
   end
 
@@ -22,7 +20,6 @@ RSpec.describe 'Merchant Items Index Page' do
     expect(page).to have_content(@item_3.name)
     expect(page).to_not have_content(@merchant_2.name)
     expect(page).to_not have_content(@item_4.name)
-    expect(page).to_not have_content(@item_5.name)
   end
 
   it 'has a button next to each item name to disable or enable that item' do
@@ -46,18 +43,14 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(page).to have_button('Disable')
     end
 
-    # within "#item-#{@item_2.id}" do
-    #   expect(page).to have_button('Enable')
-    #   expect(page).to have_button('Disable')
-    # end
-    #
-    # within "#item-#{@item_3.id}" do
-    #   expect(page).to have_button('Enable')
-    #   expect(page).to have_button('Disable')
-    # end
+    within "#item-#{@item_2.id}" do
+      expect(page).to_not have_button('Enable')
+      expect(page).to have_button('Disable')
+    end
 
-    # When I click this button
-    # Then I am redirected back to the items index
-    # And I see that the items status has changed
+    within "#item-#{@item_3.id}" do
+      expect(page).to_not have_button('Enable')
+      expect(page).to have_button('Disable')
+    end
   end
 end

@@ -24,9 +24,9 @@ class ItemsController < ApplicationController
       else
         redirect_to merchant_item_path
       end
-      flash[:notice] = "Item information has been successfully updated!"
+      flash[:notice] = "#{item.name}'s information has been successfully updated!"
     else
-      flash[:alert] = "Item information was not successfully updated!"
+      flash[:alert] = "Item information was not successfully updated."
       # redirect_to edit_merchant_item_path
     end
   end
