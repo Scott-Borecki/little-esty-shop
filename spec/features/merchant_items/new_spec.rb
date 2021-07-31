@@ -20,14 +20,14 @@ RSpec.describe 'create merchant item page' do
 
     fill_in('Name', with: 'Diagon Alley')
     fill_in('Description', with: "The truth. It is a beautiful and terrible thing, and should therefore be treated with great caution.")
-    fill_in('Unit Price', with: 48730)
+    fill_in('Unit Price', with: 48_730)
 
     click_on('Submit')
 
     # Then I am taken back to the items index page ** This means the merch item page, right?
     expect(Item.last.name).to eq('Diagon Alley')
     expect(Item.last.description).to eq("The truth. It is a beautiful and terrible thing, and should therefore be treated with great caution.")
-    expect(Item.last.unit_price).to eq(48730)
+    expect(Item.last.unit_price).to eq(48_730)
     expect(Item.last.enabled).to eq(false)
 
     expect(current_path).to eq(merchant_items_path(@merchant_1))

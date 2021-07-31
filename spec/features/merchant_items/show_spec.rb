@@ -5,8 +5,8 @@ RSpec.describe 'Merchant Items Show Page' do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
 
-    @item_1 = create(:item, enabled: true, merchant: @merchant_1, unit_price: 59400)
-    @item_2 = create(:item, enabled: true, merchant: @merchant_1, unit_price: 95658)
+    @item_1 = create(:item, enabled: true, merchant: @merchant_1, unit_price: 59_400)
+    @item_2 = create(:item, enabled: true, merchant: @merchant_1, unit_price: 95_658)
   end
 
   describe "a merchant's item's show page" do

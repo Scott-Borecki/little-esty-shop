@@ -4,24 +4,20 @@
 
 <div id="all-enabled">
   <h3>Enabled Items</h3>
-    <% @items.each do |item| %>
-      <% if item.enabled == true %>
+    <% @items.all_enabled.each do |item| %>
         <div id="item-<%= item.id%>">
           <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
           <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
         </div>
-      <% end %>
     <% end %>
   </div>
 <br>
 <div id="all-disabled">
   <h3>Disabled Items</h3>
-    <% @items.each do |item| %>
-      <% if item.enabled == false %>
+    <% @items.all_disabled.each do |item| %>
         <div id="item-<%= item.id%>">
           <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
           <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
         </div>
-      <% end %>
     <% end %>
   </div>
