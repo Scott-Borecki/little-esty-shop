@@ -10,7 +10,7 @@ class Invoice < ApplicationRecord
   validates :status, presence: true
 
   def items_belonging_to
-    invoice_items.joins(:item).select('invoice_items.status, invoice_items.quantity, items.*')
+    invoice_items.joins(:item).select('invoice_items.status, invoice_items.quantity, invoice_items.id as invoice_item_id, items.*')
   end
 
   def total_revenue
