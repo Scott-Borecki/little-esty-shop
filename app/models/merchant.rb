@@ -8,16 +8,19 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   validates :enabled, inclusion: { in: [true, false] }
 
-  def self.enabled_merchants
-    where(enabled: true)
+  def self.any_successful_transactions?(merchant)
+    joins(:transactions)
+      .where(transactions: { result: :success }, merchants: { id: merchant.id })
+      .count
+      .positive?
   end
 
   def self.disabled_merchants
     where(enabled: false)
   end
 
-  def enabled?
-    enabled
+  def self.enabled_merchants
+    where(enabled: true)
   end
 
   def self.top_five_merchants_by_revenue
@@ -30,14 +33,16 @@ class Merchant < ApplicationRecord
   end
 
   def self.total_revenue_generated_by_merchant(merchant)
-    if joins(:transactions)
-      .where(transactions: { result: :success }, merchants: { id: merchant.id })
-      .count
-      .positive?
-
-      select('merchants.*', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    if any_successful_transactions?(merchant)
+      select(
+        'merchants.*',
+        'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue'
+      )
         .joins(:transactions)
-        .where(transactions: { result: :success }, merchants: { id: merchant.id })
+        .where(
+          transactions: { result: :success },
+          merchants: { id: merchant.id }
+        )
         .group('merchants.id')
         .first
         .revenue
@@ -46,12 +51,16 @@ class Merchant < ApplicationRecord
     end
   end
 
-  # HACK (Scott Borecki): Figure out another way to do this
+  def enabled?
+    enabled
+  end
+
+  # HACK: (Scott Borecki) Figure out another way to do this
   def total_revenue
     Merchant.total_revenue_generated_by_merchant(self)
   end
 
-  # TODO (Scott Borecki): Method not complete.
+  # TODO: (Scott Borecki) Method not complete.
   def top_day
     invoice_items.select('invoice.created_at', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
                  .joins(:transactions)

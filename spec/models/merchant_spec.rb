@@ -24,13 +24,13 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'class methods' do
-    describe '.enabled_merchants' do
-      it 'returns all the enabled merchants' do
-        enabled_merchants = [merchant1, merchant2, merchant3, merchant6]
-        disabled_merchants = [merchant4, merchant5]
+    describe '.any_successful_transactions?' do
+      context 'when there are successful transactions' do
+        specify { expect(Merchant.any_successful_transactions?(merchant2)).to be true }
+      end
 
-        expect(Merchant.enabled_merchants).to eq(enabled_merchants)
-        expect(Merchant.enabled_merchants).to_not include(disabled_merchants)
+      context 'when there are no successful transactions' do
+        specify { expect(Merchant.any_successful_transactions?(merchant1)).to be false }
       end
     end
 
@@ -41,6 +41,16 @@ RSpec.describe Merchant, type: :model do
 
         expect(Merchant.disabled_merchants).to eq(disabled_merchants)
         expect(Merchant.disabled_merchants).to_not include(enabled_merchants)
+      end
+    end
+
+    describe '.enabled_merchants' do
+      it 'returns all the enabled merchants' do
+        enabled_merchants = [merchant1, merchant2, merchant3, merchant6]
+        disabled_merchants = [merchant4, merchant5]
+
+        expect(Merchant.enabled_merchants).to eq(enabled_merchants)
+        expect(Merchant.enabled_merchants).to_not include(disabled_merchants)
       end
     end
 
