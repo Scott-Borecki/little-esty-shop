@@ -139,7 +139,7 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
             top_five_merchants.each do |merchant|
               visit admin_merchants_path
 
-              within("#top-five-merchants") do
+              within('#top-five-merchants') do
                 click_link merchant.name
               end
 
