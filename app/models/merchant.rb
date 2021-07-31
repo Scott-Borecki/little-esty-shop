@@ -10,6 +10,6 @@ class Merchant < ApplicationRecord
   end
 
   def invoice_items_for_invoice(invoice_id)
-    invoice_items.where('invoice_items.invoice_id = ?', invoice_id)
+    invoice_items.where(invoice_id: invoice_id)
   end
 end

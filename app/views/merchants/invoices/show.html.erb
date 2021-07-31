@@ -6,7 +6,7 @@
 
 <p>Status: <%= @invoice.status %></p>
 <p>Created on: <%= @invoice.formatted_time %></p>
-<p>Total Revenue: <%= number_to_currency(@invoice.invoice_total_revenue / 100) %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.invoice_total_revenue.to_f / 100) %></p>
 
 <h3>Customer:</h3>
 <p><%= @invoice.customer.first_name + ' ' + @invoice.customer.last_name %></p><br>
@@ -15,7 +15,7 @@
 <% @merchant.invoice_items_for_invoice(@invoice.id).each do |item| %>
 
 <div id="item_<%=item.id%>">
-  <p>Name: <%= Item.where('id = ?', item.item_id).first.name %></p>
+  <p>Name: <%= item.find_item_name %></p>
   <p>Quantity: <%= item.quantity %></p>
   <p>Price: <%= number_to_currency(item.unit_price / 100.00) %></p>
   <p>Status: <%= item.status %></p>

@@ -2,28 +2,28 @@ require 'rails_helper'
 
 RSpec.describe 'merchant invoices show page' do
   before :each do
-    #merchants
+    # merchants
     @merchant1 = Merchant.create!(name: 'Dandy')
     @merchant2 = Merchant.create!(name: 'Randy')
 
-    #items
+    # items
     @item1 = @merchant1.items.create!(name: 'Pogo stick', description: 'Jumpin Stick', unit_price: 100, enabled: true)
     @item2 = @merchant1.items.create!(name: 'Yo - Yo', description: 'Goes and yos', unit_price: 100, enabled: true)
     @item3 = @merchant1.items.create!(name: 'Rollerskates', description: 'Lets roll', unit_price: 100, enabled: true)
     @item4 = @merchant2.items.create!(name: 'Fun Dip', description: 'Dip the fun', unit_price: 100, enabled: true)
 
-    #customers
+    # customers
     @customer1 = Customer.create!(first_name: 'Super', last_name: 'Mario')
     @customer2 = Customer.create!(first_name: 'Donkey', last_name: 'Kong')
 
-    #invoices
+    # invoices
     @invoice1 = @customer1.invoices.create!(status: 0)
     @invoice2 = @customer2.invoices.create!(status: 0)
 
-    #invoice_items
-    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1000, status: 0)
-    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 2000, status: 1)
-    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 100, status: 1)
+    # invoice_items
+    @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1111, status: 0)
+    @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 2022, status: 1)
+    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 101, status: 1)
 
     visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
@@ -42,7 +42,7 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to have_content("Little Esty Shop")
     expect(page).to have_content(@merchant1.name)
     expect(page).to have_content("Invoice ##{@invoice1.id}")
-    #do we need to change lower case 'in progress' to 'In Progress' here?
+    # do we need to change lower case 'in progress' to 'In Progress' here?
     expect(page).to have_content("Status: #{@invoice1.status}")
     expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %-d, %Y")}")
     expect(page).to have_content("Customer:")
@@ -84,7 +84,7 @@ RSpec.describe 'merchant invoices show page' do
     # As a merchant
     # When I visit my merchant invoice show page
     # Then I see the total revenue that will be generated from all of my items on the invoice
-
-    expect(page).to have_content(@invoice1.invoice_total_revenue / 100)
+    save_and_open_page
+    expect(page).to have_content('$151.54')
   end
 end
