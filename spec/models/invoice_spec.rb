@@ -33,7 +33,7 @@ RSpec.describe Invoice, type: :model do
     expect(Invoice.all.size).to eq(6)
     customer_with_in_progress_invoices(invoice_count: 2)
 
-    expect(Invoice.last.status).to eq("in progress")
+    expect(Invoice.last.status).to eq('in progress')
     expect(Invoice.all.size).to eq(8)
   end
 
