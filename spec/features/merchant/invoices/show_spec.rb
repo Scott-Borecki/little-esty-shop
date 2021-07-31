@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'merchant invoices show page' do
   before :each do
     #merchants
-    @merchant1 = Merchant.create!(name: 'Joe Schmo')
-    @merchant2 = Merchant.create!(name: 'Gertie')
+    @merchant1 = Merchant.create!(name: 'Dandy')
+    @merchant2 = Merchant.create!(name: 'Randy')
 
     #items
     @item1 = @merchant1.items.create!(name: 'Pogo stick', description: 'Jumpin Stick', unit_price: 100, enabled: true)
@@ -13,8 +13,8 @@ RSpec.describe 'merchant invoices show page' do
     @item4 = @merchant2.items.create!(name: 'Fun Dip', description: 'Dip the fun', unit_price: 100, enabled: true)
 
     #customers
-    @customer1 = Customer.create!(first_name: 'Sinead', last_name: 'Maguire')
-    @customer2 = Customer.create!(first_name: 'Amy', last_name: 'Russel')
+    @customer1 = Customer.create!(first_name: 'Super', last_name: 'Mario')
+    @customer2 = Customer.create!(first_name: 'Donkey', last_name: 'Kong')
 
     #invoices
     @invoice1 = @customer1.invoices.create!(status: 0)
@@ -61,7 +61,6 @@ RSpec.describe 'merchant invoices show page' do
     # - The Invoice Item status
     # And I do not see any information related to Items for other merchants
 
-    save_and_open_page
     within("#item_#{@invoice_item1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@invoice_item1.quantity)
@@ -85,5 +84,7 @@ RSpec.describe 'merchant invoices show page' do
     # As a merchant
     # When I visit my merchant invoice show page
     # Then I see the total revenue that will be generated from all of my items on the invoice
+
+    expect(page).to have_content(@invoice1.invoice_total_revenue / 100)
   end
 end
