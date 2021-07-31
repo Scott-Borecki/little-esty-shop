@@ -1,14 +1,25 @@
 <h1><%= @merchant.name %>'s Items</h1>
-
-<% @items.each do |item| %>
-  <div id="item-<%= item.id%>">
-    <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
-
-    <% if item.enabled == false %>
-      <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
-    <% elsif item.enabled == true %>
-      <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
+<br>
+<div id="all-enabled">
+  <h3>Enabled Items</h3>
+    <% @items.each do |item| %>
+      <% if item.enabled == true %>
+        <div id="item-<%= item.id%>">
+          <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+          <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
+        </div>
+      <% end %>
     <% end %>
-    <br>
   </div>
-<% end %>
+<br>
+<div id="all-disabled">
+  <h3>Disabled Items</h3>
+    <% @items.each do |item| %>
+      <% if item.enabled == false %>
+        <div id="item-<%= item.id%>">
+          <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+          <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
