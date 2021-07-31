@@ -42,7 +42,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'instance methods' do
     describe '#find_item_name' do
       it 'can find the item name' do
-        expect(@invoice_item1.find_item_name).to eq('Pogo stick')
+        expect(@invoice_item1.find_item_name).to eq(@item1.name)
       end
     end
   end
