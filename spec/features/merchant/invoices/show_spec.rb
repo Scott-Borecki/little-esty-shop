@@ -84,7 +84,7 @@ RSpec.describe 'merchant invoices show page' do
     # As a merchant
     # When I visit my merchant invoice show page
     # Then I see the total revenue that will be generated from all of my items on the invoice
-    save_and_open_page
+    
     expect(page).to have_content('$151.54')
   end
 end
