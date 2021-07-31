@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
-  has_many :items
+  has_many :items, :dependent => :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -48,5 +48,13 @@ class Merchant < ApplicationRecord
   # HACK (Scott Borecki): Figure out another way to do this
   def total_revenue
     Merchant.total_revenue_generated_by_merchant(self)
+  end
+
+  def best_day
+    invoice_items.select('invoice.created_at', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      .joins(:transactions)
+      .where(transactions: { result: :success })
+      .group('invoice.created_at')
+      .order('DATE(invoice.created_at), revenue desc')
   end
 end
