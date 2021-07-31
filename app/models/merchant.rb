@@ -31,9 +31,10 @@ class Merchant < ApplicationRecord
 
   def self.total_revenue_generated_by_merchant(merchant)
     if joins(:transactions)
-         .where(transactions: { result: :success }, merchants: { id: merchant.id })
-         .count
-         .positive?
+      .where(transactions: { result: :success }, merchants: { id: merchant.id })
+      .count
+      .positive?
+
       select('merchants.*', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
         .joins(:transactions)
         .where(transactions: { result: :success }, merchants: { id: merchant.id })
