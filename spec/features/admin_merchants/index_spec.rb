@@ -107,7 +107,7 @@ RSpec.describe '/admin/merchants/' do
 
           top_five_merchants.each do |merchant|
             within("#top-merchant-#{merchant.id}") do
-              expect(page).to have_content(merchant.total_revenue)
+              expect(page).to have_content(merchant.total_revenue / 100.00)
             end
           end
         end

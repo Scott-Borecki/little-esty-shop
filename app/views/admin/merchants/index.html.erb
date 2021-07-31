@@ -33,7 +33,7 @@
   <% @merchants.top_five_merchants_by_revenue.each do |merchant| %>
     <section id='top-merchant-<%= merchant.id %>'>
       <p>
-        <%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.total_revenue) %>
+        <%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.total_revenue / 100.00) %>
       </p>
     </section>
   <% end %>
