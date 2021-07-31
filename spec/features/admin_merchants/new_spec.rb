@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe '/admin/merchants/new' do
+RSpec.describe 'admin merchants new (/admin/merchants/new)' do
   describe 'as an admin' do
     describe 'when I visit the admin merchants new (/admin/merchants/new)' do
       before { visit new_admin_merchant_path }

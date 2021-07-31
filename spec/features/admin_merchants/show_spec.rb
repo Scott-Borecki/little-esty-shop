@@ -1,11 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe '/admin/merchants/merchant_id' do
+RSpec.describe 'admin merchants show (/admin/merchants/merchant_id)' do
   let!(:merchant1) { create(:enabled_merchant) }
   let!(:merchant2) { create(:enabled_merchant) }
   let!(:merchant3) { create(:enabled_merchant) }
 
-  specify { expect(Merchant.all.count).to be_positive }
+  describe 'object creation for tests' do
+    specify { expect(Merchant.all.count).to be_positive }
+  end
 
   describe 'as an admin' do
     describe 'when I visit the admin merchants show page (/admin/merchants/merchant_id)' do
