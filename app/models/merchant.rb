@@ -54,9 +54,9 @@ class Merchant < ApplicationRecord
   # TODO (Scott Borecki): Method not complete.
   def top_day
     invoice_items.select('invoice.created_at', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-      .joins(:transactions)
-      .where(transactions: { result: :success })
-      .group('invoice.created_at')
-      .order('DATE(invoice.created_at), revenue desc')
+                 .joins(:transactions)
+                 .where(transactions: { result: :success })
+                 .group('invoice.created_at')
+                 .order('DATE(invoice.created_at), revenue desc')
   end
 end

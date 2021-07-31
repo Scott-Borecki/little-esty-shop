@@ -13,7 +13,7 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    # TODO (Scott Borecki): Add sad path if creation fails
+    # TODO: (Scott Borecki) Add sad path if creation fails
     Merchant.create!(merchant_params)
     redirect_to admin_merchants_path
   end
@@ -22,13 +22,13 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    # TODO (Scott Borecki): Add sad path if update fails
+    # TODO: (Scott Borecki) Add sad path if update fails
     @merchant.update!(merchant_params)
     if merchant_params[:enabled]
       redirect_to admin_merchants_path
     else
       redirect_to admin_merchant_path(@merchant)
-      flash[:notice] = "Update successful!"
+      flash[:notice] = 'Update successful!'
     end
   end
 
