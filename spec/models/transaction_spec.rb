@@ -24,12 +24,5 @@ RSpec.describe Transaction, type: :model do
     it { should validate_presence_of(:result) }
   end
 
-  describe 'class methods' do
-    describe '.successful_transactions' do
-      it 'returns all the successful transactions' do
-        successful_transactions = [transaction2, transaction3, transaction4, transaction5, transaction6]
-        expect(Transaction.successful_transactions).to eq(successful_transactions)
-      end
-    end
-  end
+  describe 'class methods'
 end

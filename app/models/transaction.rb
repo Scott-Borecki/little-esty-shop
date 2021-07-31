@@ -7,8 +7,4 @@ class Transaction < ApplicationRecord
                                  numericality: true,
                                  length: { in: 15..16 }
   validates :result, presence: true, numericality: true
-
-  def self.successful_transactions
-    where(result: :success)
-  end
 end
