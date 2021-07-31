@@ -4,7 +4,8 @@ RSpec.describe '/admin/merchants/merchant_id/edit' do
   let!(:merchant1) { create(:enabled_merchant) }
   let!(:merchant2) { create(:enabled_merchant) }
   let!(:merchant3) { create(:enabled_merchant) }
-  let!(:merchants) { [merchant1, merchant2, merchant3] }
+
+  specify { expect(Merchant.all.count).to be_positive }
 
   describe 'as an admin' do
     describe 'when I visit the admin merchants edit page (/admin/merchants/merchant_id/edit)' do
