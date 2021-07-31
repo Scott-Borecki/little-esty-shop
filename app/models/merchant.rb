@@ -1,5 +1,5 @@
 class Merchant < ApplicationRecord
-  has_many :items, :dependent => :destroy
+  has_many :items, dependent: :destroy
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -24,7 +24,8 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_five_merchants_by_revenue
-    select('merchants.*', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    select('merchants.*',
+           'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
       .joins(:transactions)
       .where(transactions: { result: :success })
       .group('merchants.id')
