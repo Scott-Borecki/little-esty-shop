@@ -3,8 +3,12 @@
 <% @items.each do |item| %>
   <div id="item-<%= item.id%>">
     <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
-    <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
-    <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
+
+    <% if item.enabled == false %>
+      <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
+    <% elsif item.enabled == true %>
+      <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
+    <% end %>
     <br>
   </div>
 <% end %>
