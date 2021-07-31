@@ -1,54 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe '/admin/merchants/' do
-  # CUSTOMER
-  let!(:customer) { create(:customer) }
+  # See /spec/factories.rb for more info on factories created
+  create_factories
 
-  # MERCHANTS
-  let!(:merchant1) { create(:enabled_merchant) }
-  let!(:merchant2) { create(:enabled_merchant) }
-  let!(:merchant3) { create(:enabled_merchant) }
-  let!(:merchant4) { create(:disabled_merchant) }
-  let!(:merchant5) { create(:disabled_merchant) }
-  let!(:merchant6) { create(:enabled_merchant) }
-
-  # ITEMS
-  let!(:item1) { create(:item, merchant: merchant1) }
-  let!(:item2) { create(:item, merchant: merchant2) }
-  let!(:item3) { create(:item, merchant: merchant3) }
-  let!(:item4) { create(:item, merchant: merchant4) }
-  let!(:item5) { create(:item, merchant: merchant5) }
-  let!(:item6) { create(:item, merchant: merchant6) }
-
-  # INVOICES
-  let!(:invoice1) { create(:invoice, :completed, customer: customer) }
-  let!(:invoice2) { create(:invoice, :completed, customer: customer) }
-  let!(:invoice3) { create(:invoice, :completed, customer: customer) }
-  let!(:invoice4) { create(:invoice, :completed, customer: customer) }
-  let!(:invoice5) { create(:invoice, :completed, customer: customer) }
-  let!(:invoice6) { create(:invoice, :completed, customer: customer) }
-
-  # TRANSACTIONS
-  let!(:transaction1) { create(:transaction, :failed, invoice: invoice1) }
-  let!(:transaction2) { create(:transaction, :success, invoice: invoice2) }
-  let!(:transaction3) { create(:transaction, :success, invoice: invoice3) }
-  let!(:transaction4) { create(:transaction, :success, invoice: invoice4) }
-  let!(:transaction5) { create(:transaction, :success, invoice: invoice5) }
-  let!(:transaction6) { create(:transaction, :success, invoice: invoice6) }
-
-  # INVOICE ITEMS
-  let!(:invoice_item1a) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 2, unit_price: 10) }
-  let!(:invoice_item1b) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 5, unit_price: 20) }
-  let!(:invoice_item2a) { create(:invoice_item, :shipped, item: item2, invoice: invoice2, quantity: 4, unit_price: 10) }
-  let!(:invoice_item2b) { create(:invoice_item, :shipped, item: item2, invoice: invoice2, quantity: 5, unit_price: 20) }
-  let!(:invoice_item3a) { create(:invoice_item, :shipped, item: item3, invoice: invoice3, quantity: 1, unit_price: 10) }
-  let!(:invoice_item3b) { create(:invoice_item, :shipped, item: item3, invoice: invoice3, quantity: 5, unit_price: 20) }
-  let!(:invoice_item4a) { create(:invoice_item, :shipped, item: item4, invoice: invoice4, quantity: 3, unit_price: 10) }
-  let!(:invoice_item4b) { create(:invoice_item, :shipped, item: item4, invoice: invoice4, quantity: 5, unit_price: 20) }
-  let!(:invoice_item5a) { create(:invoice_item, :shipped, item: item5, invoice: invoice5, quantity: 5, unit_price: 10) }
-  let!(:invoice_item5b) { create(:invoice_item, :shipped, item: item5, invoice: invoice5, quantity: 5, unit_price: 20) }
-  let!(:invoice_item6a) { create(:invoice_item, :shipped, item: item6, invoice: invoice6, quantity: 6, unit_price: 10) }
-  let!(:invoice_item6b) { create(:invoice_item, :shipped, item: item6, invoice: invoice6, quantity: 5, unit_price: 20) }
+  specify { expect(Customer.all.count).to be_positive }
+  specify { expect(Merchant.all.count).to be_positive }
+  specify { expect(Item.all.count).to be_positive }
+  specify { expect(Invoice.all.count).to be_positive }
+  specify { expect(Transaction.all.count).to be_positive }
+  specify { expect(InvoiceItem.all.count).to be_positive }
 
   describe 'as an admin' do
     describe 'when I visit the admin merchants index (/admin/merchants)' do
