@@ -144,8 +144,8 @@ def create_factories
   let!(:transaction6c) { create(:transaction, :success, invoice: invoice6c) }
 
   # INVOICE ITEMS
-  let!(:invoice_item1a) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 2, unit_price: 10) } # potential_revenue = 20
-  let!(:invoice_item1b) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 5, unit_price: 20) } # potential_revenue = 100
+  let!(:invoice_item1a) { create(:invoice_item, :pending, item: item1, invoice: invoice1, quantity: 2, unit_price: 10) } # potential_revenue = 20
+  let!(:invoice_item1b) { create(:invoice_item, :pending, item: item1, invoice: invoice1, quantity: 5, unit_price: 20) } # potential_revenue = 100
     #=> merchant1_potential_revenue = 120 (but actual = 0; failed transaction)
 
   let!(:invoice_item2a) { create(:invoice_item, :shipped, item: item2, invoice: invoice2a, quantity: 4, unit_price: 10) } # potential_revenue = 40
@@ -156,8 +156,8 @@ def create_factories
   let!(:invoice_item2f) { create(:invoice_item, :shipped, item: item2, invoice: invoice2e, quantity: 1, unit_price: 20) } # potential_revenue = 20
     #=> merchant2_potential_revenue = 140
 
-  let!(:invoice_item3a) { create(:invoice_item, :shipped, item: item3, invoice: invoice3, quantity: 1, unit_price: 10) } # potential_revenue = 10
-  let!(:invoice_item3b) { create(:invoice_item, :shipped, item: item3, invoice: invoice3, quantity: 5, unit_price: 20) } # potential_revenue = 100
+  let!(:invoice_item3a) { create(:invoice_item, :packaged, item: item3, invoice: invoice3, quantity: 1, unit_price: 10) } # potential_revenue = 10
+  let!(:invoice_item3b) { create(:invoice_item, :packaged, item: item3, invoice: invoice3, quantity: 5, unit_price: 20) } # potential_revenue = 100
     #=> merchant3_potential_revenue = 110
 
   let!(:invoice_item4a) { create(:invoice_item, :shipped, item: item4, invoice: invoice4a, quantity: 3, unit_price: 10) } # potential_revenue = 30
@@ -167,9 +167,9 @@ def create_factories
   let!(:invoice_item4e) { create(:invoice_item, :shipped, item: item4, invoice: invoice4d, quantity: 1, unit_price: 20) } # potential_revenue = 20
     #=> merchant4_potential_revenue = 130
 
-  let!(:invoice_item5a) { create(:invoice_item, :shipped, item: item5, invoice: invoice5a, quantity: 5, unit_price: 10) } # potential_revenue = 50
-  let!(:invoice_item5b) { create(:invoice_item, :shipped, item: item5, invoice: invoice5a, quantity: 3, unit_price: 20) } # potential_revenue = 60
-  let!(:invoice_item5c) { create(:invoice_item, :shipped, item: item5, invoice: invoice5b, quantity: 2, unit_price: 20) } # potential_revenue = 40
+  let!(:invoice_item5a) { create(:invoice_item, :packaged, item: item5, invoice: invoice5a, quantity: 5, unit_price: 10) } # potential_revenue = 50
+  let!(:invoice_item5b) { create(:invoice_item, :packaged, item: item5, invoice: invoice5a, quantity: 3, unit_price: 20) } # potential_revenue = 60
+  let!(:invoice_item5c) { create(:invoice_item, :packaged, item: item5, invoice: invoice5b, quantity: 2, unit_price: 20) } # potential_revenue = 40
     #=> merchant5_potential_revenue = 150
 
   let!(:invoice_item6a) { create(:invoice_item, :shipped, item: item6, invoice: invoice6a, quantity: 6, unit_price: 10) } # potential_revenue = 60
