@@ -1,0 +1,52 @@
+<div class="col-lg-4 rounded" style="border: 2px red; padding: 15px">
+  <div class="card " style="background-color: rgb(191, 202, 209);min-width: 480px">
+    <div class="card-header" style="background-color: rgb(134, 153, 165)">
+      <h3 class="card-title">Invoice # <%= @invoice.id %></h3>
+      <hr
+      class="float-left"
+      style="
+        color: rgb(105, 0, 0);
+        border: 2px solid rgb(112, 0, 0);
+        width: 50%;
+      "
+    />
+      <h4>Status: <%= @invoice.status %></h4>
+      <h4>Ordered: <%= @invoice.formatted_time %></h4>
+      <!-- <h4 style="padding-top: 8px; color: rgb(191, 202, 209);" class="card-title"><%= @invoice.id %> Status: <%= @invoice.status%></h4> -->
+      <h4>Customer: <%= @invoice.customer.first_name + ' ' + @invoice.customer.last_name %></h4>
+      <h4 id="total_revenue">Total Revenue: $<%= @invoice.total_revenue.to_f / 100 %></h4>
+      <br>
+    </div>
+    <div class="card-body" style="background-color: rgb(217, 221, 222)">
+      <table class="table table-bordered" id="items">
+        <tr>
+          <th scope="col" >#</th>
+          <th>Name</th>
+          <th>quantity</th>
+          <th>status</th>
+          <th></th>
+        </tr>
+        <% @invoice.items_belonging_to.each_with_index do |item, index| %>
+          <tr id="<%=item.id%>">
+            <th scope="row"><%=index + 1%></th>
+            <td><%= item.name %></td>
+            <td><%= item.quantity %></td>
+            <td class="status">       
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="f<%=item.id%>">
+                  <%= item.status %>
+                <span class="caret"></span></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <% @invoice.invoice_items.statuses.keys().each do |status| %>
+                    <%= link_to status, admin_invoice_item_path(item.invoice_item_id, invoice_item: {status: status}, invoice_id: @invoice.id), method: :patch, :class=>"dropdown-item"%>
+                  <% end %>
+                </div>
+              </div>
+            </td>
+            <td>$<%= item.unit_price.to_f / 100 %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
