@@ -7,4 +7,8 @@ class InvoiceItem < ApplicationRecord
   validates :quantity, presence: true, numericality: true
   validates :unit_price, presence: true, numericality: true
   validates :status, presence: true
+
+  def find_item_name
+    Item.where(id: item_id).first.name
+  end
 end
