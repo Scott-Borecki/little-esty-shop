@@ -35,6 +35,7 @@
       <section id='top-merchant-<%= merchant.id %>'>
         <li>
           <%= link_to merchant.name, admin_merchant_path(merchant) %> - <%= number_to_currency(merchant.revenue / 100.00) %> in sales<br>
+          Top selling date for <%= merchant.name %> was <%= merchant.top_revenue_day %>
         </li>
       </section>
     <% end %>

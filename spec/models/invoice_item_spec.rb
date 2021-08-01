@@ -28,13 +28,4 @@ RSpec.describe InvoiceItem, type: :model do
     it { should validate_numericality_of(:unit_price) }
     it { should validate_presence_of(:status) }
   end
-
-  describe 'class methods' do
-    describe '.top_day' do
-      it 'returns the top day by revenue generated' do
-        # require "pry"; binding.pry
-        expect(InvoiceItem.top_day).to eq()
-      end
-    end
-  end
 end
