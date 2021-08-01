@@ -14,7 +14,7 @@
       <h4>Ordered: <%= @invoice.formatted_time %></h4>
       <!-- <h4 style="padding-top: 8px; color: rgb(191, 202, 209);" class="card-title"><%= @invoice.id %> Status: <%= @invoice.status%></h4> -->
       <h4>Customer: <%= @invoice.customer.first_name + ' ' + @invoice.customer.last_name %></h4>
-      <h4 id="total_revenue">Total Revenue: $<%= @invoice.total_revenue %></h4>
+      <h4 id="total_revenue">Total Revenue: $<%= @invoice.total_revenue.to_f / 100 %></h4>
       <br>
     </div>
     <div class="card-body" style="background-color: rgb(217, 221, 222)">
@@ -43,7 +43,7 @@
                 </div>
               </div>
             </td>
-            <td>$<%= item.unit_price / 100.00 %></td>
+            <td>$<%= item.unit_price.to_f / 100 %></td>
           </tr>
         <% end %>
       </table>

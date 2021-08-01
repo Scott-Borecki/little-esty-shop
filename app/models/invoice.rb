@@ -14,6 +14,6 @@ class Invoice < ApplicationRecord
   end
 
   def total_revenue
-    invoice_items.sum('unit_price * quantity').to_f / 100
+    invoice_items.sum('unit_price * quantity')
   end
 end
