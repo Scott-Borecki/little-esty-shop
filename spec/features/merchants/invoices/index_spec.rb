@@ -37,7 +37,7 @@ RSpec.describe 'merchant invoices index page' do
     # Then I see all of the invoices that include at least one of my merchant's items
     # And for each invoice I see its id
     # And each id links to the merchant invoice show page
-
+    
     expect(page).to have_content('Little Esty Shop')
     expect(page).to have_content(@merchant1.name)
     expect(page).to have_content('My Invoices')
@@ -47,7 +47,7 @@ RSpec.describe 'merchant invoices index page' do
   end
 
   it 'links to the merchant invoice show page' do
-    click_link("##{@invoice1.id}")
+    click_link("#{@invoice1.id}")
 
     expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
