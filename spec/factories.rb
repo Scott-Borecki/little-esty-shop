@@ -11,9 +11,29 @@ FactoryBot.define do
     # end
   end
 
+  factory :merchant do
+    name { Faker::Games::SuperMario.character }
+  end
+
   # Invoice
   factory :invoice do
     customer
+    traits_for_enum(:status)
+  end
+
+  factory :item do
+    name { Faker::Movies::Lebowski.character }
+    description { Faker::Movies::Lebowski.quote }
+    unit_price { rand(10_000) }
+    merchant
+  end
+
+  factory :invoice_item do
+    quantity { rand(20) }
+    unit_price { rand(10_000) }
+    invoice
+    item
+    traits_for_enum(:status)
   end
 
   factory :invoice_item do

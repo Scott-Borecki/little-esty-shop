@@ -69,4 +69,12 @@ class Merchant < ApplicationRecord
                  .group('invoice.created_at')
                  .order('DATE(invoice.created_at), revenue desc')
   end
+
+  def unique_invoices
+    invoices.uniq
+  end
+
+  def invoice_items_for_invoice(invoice_id)
+    invoice_items.where(invoice_id: invoice_id)
+  end
 end
