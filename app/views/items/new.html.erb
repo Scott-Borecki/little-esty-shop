@@ -1,0 +1,13 @@
+<h1>Create a New Merchant Item</h1>
+
+<%= form_with url: merchant_items_path(@merchant), method: :post, local: true do |f| %>
+  <%= f.label 'item[name]', 'Name' %>
+  <%= f.text_field 'item[name]' %>
+  <%= f.label 'item[description]', 'Description' %>
+  <%= f.text_field 'item[description]' %>
+  <%= f.label 'item[unit_price]', 'Unit Price' %>
+  <%= f.text_field 'item[unit_price]' %>
+  <%= f.hidden_field 'item[enabled]', value: 'false' %>
+  <%= f.hidden_field 'item[merchant_id]', value: "#{@merchant.id}" %>
+  <%= f.submit 'Submit' %>
+<% end %>
