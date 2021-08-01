@@ -105,11 +105,9 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
         end
 
         it 'displays the total revenue generated next to each top 5 merchants' do
-          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
-
-          top_five_merchants.each do |merchant|
+          Merchant.top_five_merchants_by_revenue.each do |merchant|
             within("#top-merchant-#{merchant.id}") do
-              expect(page).to have_content(merchant.total_revenue / 100.00)
+              expect(page).to have_content(merchant.revenue / 100.00)
             end
           end
         end
