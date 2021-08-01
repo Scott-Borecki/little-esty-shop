@@ -2,7 +2,7 @@ module TestData
 
   # use to create consistent data
   # only need to call the method for the data wanted, as dependent tables call their parents
-  # ex: want invoice_items -> TestData.invoice_items will call items and invoices 
+  # ex: want invoice_items -> TestData.invoice_items will call items and invoices
   # which will call their parents, creating all needed data
 
   def self.merchants
@@ -81,13 +81,13 @@ module TestData
     [15, 9942, 0],[2, 8728, 1],[15, 4406, 1],[2, 5485, 2],[13, 7322, 0],[11, 7028, 2],[7, 849, 2],[9, 8722, 2],[5, 1155, 0],[9, 1042, 0],
     [11, 8182, 1],[10, 5436, 2],[1, 8788, 1],[11, 9770, 2],[14, 6158, 2],[12, 7598, 2],[13, 2860, 0],[4, 3735, 2],[1, 6548, 2],[14, 2126, 2],
     [8, 6073, 1],[3, 7771, 2],[12, 2425, 1],[4, 5002, 0],[3, 2414, 0],[7, 4143, 0],[13, 8595, 0],[12, 6128, 0],[9, 7925, 1],[11, 5749, 0],
-    [1, 7386, 0],[10, 8114, 0],[2, 6992, 1],[11, 6954, 0],[7, 3981, 0],[12, 6354, 2], [2, 8134, 1], [13, 3159, 1], [8, 2583, 2], [15, 608, 0], 
+    [1, 7386, 0],[10, 8114, 0],[2, 6992, 1],[11, 6954, 0],[7, 3981, 0],[12, 6354, 2], [2, 8134, 1], [13, 3159, 1], [8, 2583, 2], [15, 608, 0],
     [10, 3071, 2], [5, 8350, 1]]
-    i = 0 
-    j = 0 
+    i = 0
+    j = 0
     Invoice.all.each do |invoice|
-      k = 0 
-      3.times do 
+      k = 0
+      3.times do
         invoice.invoice_items.create!(quantity: inv_item_attrs[j][0], unit_price: ( i + k >= 19) ? items[i - k].unit_price : items[i + k].unit_price, status: inv_item_attrs[j][2], item_id:( i + k >= 19) ? items[i - k].id : items[i + k].id)
         j += 1
         k += 1
@@ -130,7 +130,6 @@ module TestData
     end
 
     Invoice.all.each do |invoice|
-
       invoice.transactions.create!(credit_card_number: attrs[i][0].delete('-')[0..15],result: attrs[i][1] )
       i += 1
     end
