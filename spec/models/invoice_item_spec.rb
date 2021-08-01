@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe InvoiceItem, type: :model do
   # See /spec/factories.rb for more info on factories created
   create_factories
-  
+
   describe 'object creation for tests' do
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
@@ -28,17 +28,4 @@ RSpec.describe InvoiceItem, type: :model do
     it { should validate_numericality_of(:unit_price) }
     it { should validate_presence_of(:status) }
   end
-  # before :each do
-  #
-  # end
-  #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
-  #
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
 end

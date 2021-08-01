@@ -63,7 +63,7 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.total_revenue_generated_by_merchant(merchant3)).to eq(110)
         expect(Merchant.total_revenue_generated_by_merchant(merchant4)).to eq(130)
         expect(Merchant.total_revenue_generated_by_merchant(merchant5)).to eq(150)
-        expect(Merchant.total_revenue_generated_by_merchant(merchant6)).to eq(160)
+        expect(Merchant.total_revenue_generated_by_merchant(merchant6)).to eq(680)
       end
     end
 
@@ -93,12 +93,8 @@ RSpec.describe Merchant, type: :model do
         expect(merchant3.total_revenue).to eq(110)
         expect(merchant4.total_revenue).to eq(130)
         expect(merchant5.total_revenue).to eq(150)
-        expect(merchant6.total_revenue).to eq(160)
+        expect(merchant6.total_revenue).to eq(680)
       end
-    end
-
-    describe '#top_day' do
-      it 'returns the merchants top day'
     end
   end
 end

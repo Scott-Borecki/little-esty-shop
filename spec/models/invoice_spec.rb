@@ -30,11 +30,11 @@ RSpec.describe Invoice, type: :model do
 
   # DELETE? (Scott Borecki): I think we can remove this test?
   it 'builds an invoice with a customer association' do
-    expect(Invoice.all.size).to eq(6)
+    expect(Invoice.all.size).to eq(8)
     customer_with_in_progress_invoices(invoice_count: 2)
 
     expect(Invoice.last.status).to eq('in progress')
-    expect(Invoice.all.size).to eq(8)
+    expect(Invoice.all.size).to eq(10)
   end
 
   # before :each do
