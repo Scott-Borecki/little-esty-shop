@@ -87,4 +87,20 @@ RSpec.describe 'merchant invoices show page' do
 
     expect(page).to have_content('$151.54')
   end
+
+  it 'can update item status' do
+    # Merchant Invoice Show Page: Update Item Status
+    # As a merchant
+    # When I visit my merchant invoice show page
+    # I see that each invoice item status is a select field
+    # And I see that the invoice item's current status is selected
+    # When I click this select field,
+    # Then I can select a new status for the Item,
+    # And next to the select field I see a button to "Update Item Status"
+    # When I click this button
+    # I am taken back to the merchant invoice show page
+    # And I see that my Item's status has now been updated
+
+
+  end
 end
