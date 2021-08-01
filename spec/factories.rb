@@ -14,7 +14,7 @@ FactoryBot.define do
 
   factory :item do
     name { Faker::Movies::HarryPotter.unique.location }
-    description { Faker::Movies::HarryPotter.unique.quote }
+    description { Faker::Movies::LordOfTheRings.unique.location }
     unit_price { Faker::Number.binary(digits:5) }
     enabled { Faker::Boolean.boolean }
     merchant
