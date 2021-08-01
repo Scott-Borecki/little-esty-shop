@@ -16,23 +16,12 @@ RSpec.describe Customer, type: :model do
     it { should have_many(:merchants).through(:items) }
   end
 
+  # TODO: Add validation to check customer is a Customer instance (See Line 25 below).
   it 'can build a customer' do
-    customer_1 = create(:customer)
+    customer1 = create(:customer)
     
-    expect(customer_1.first_name).to be_a(String)
-    expect(customer_1.last_name).to be_a(String)
+    expect(customer1.first_name).to be_a(String)
+    expect(customer1.last_name).to be_a(String)
+    # expect(customer1).to be_an_instance_of(Customer)
   end
-  # before :each do
-  #
-  # end
-  #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
-  #
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
 end

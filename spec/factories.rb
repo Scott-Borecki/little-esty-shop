@@ -1,5 +1,4 @@
 FactoryBot.define do
-  # Customer
   factory :customer do
     first_name { Faker::Movies::HarryPotter.spell }
     last_name  { Faker::Movies::HarryPotter.house }
@@ -11,20 +10,23 @@ FactoryBot.define do
     # end
   end
 
-  factory :merchant do
-    name { Faker::Games::SuperMario.character }
-  end
-
-  # Invoice
   factory :invoice do
     customer
     traits_for_enum(:status)
   end
 
+#   factory :item do
+#     name { Faker::Movies::Lebowski.character }
+#     description { Faker::Movies::Lebowski.quote }
+#     unit_price { rand(10_000) }
+#     merchant
+#   end
+  
   factory :item do
-    name { Faker::Movies::Lebowski.character }
-    description { Faker::Movies::Lebowski.quote }
-    unit_price { rand(10_000) }
+    name { Faker::Movies::HarryPotter.location }
+    description { Faker::Movies::LordOfTheRings.location }
+    unit_price { Faker::Number.binary(digits: 5) }
+    enabled { Faker::Boolean.boolean }
     merchant
   end
 
@@ -35,25 +37,16 @@ FactoryBot.define do
     item
     traits_for_enum(:status)
   end
+  
+#   factory :invoice_item do
+#     quantity { rand(1..10) }
+#     unit_price { rand(1_000..2_000) }
+#     item
+#     invoice
+#   end
 
-  factory :invoice_item do
-    quantity { rand(1..10) }
-    unit_price { rand(1_000..2_000) }
-    item
-    invoice
-  end
-
-  # Item
-  factory :item do
-    name { Faker::Book.title }
-    description { Faker::Company.buzzword }
-    unit_price { rand(1_000..2_000) }
-    merchant
-  end
-
-  # Merchants
   factory :merchant do
-    name { Faker::Company.name }
+    name { Faker::Movies::HarryPotter.character }
 
     factory :enabled_merchant do
       enabled { true }
@@ -75,7 +68,6 @@ FactoryBot.define do
     end
   end
 
-  # Transaction
   factory :transaction do
     credit_card_number { Faker::Business.credit_card_number.delete('-') }
     credit_card_expiration_date { Faker::Business.credit_card_expiry_date }
@@ -84,10 +76,8 @@ FactoryBot.define do
 end
 
 def create_factories
-  # CUSTOMER
   let!(:customer) { create(:customer) }
 
-  # MERCHANTS
   let!(:merchant1) { create(:enabled_merchant) }
   let!(:merchant2) { create(:enabled_merchant) }
   let!(:merchant3) { create(:enabled_merchant) }
@@ -95,7 +85,6 @@ def create_factories
   let!(:merchant5) { create(:disabled_merchant) }
   let!(:merchant6) { create(:enabled_merchant) }
 
-  # ITEMS
   let!(:item1) { create(:item, merchant: merchant1) }
   let!(:item2) { create(:item, merchant: merchant2) }
   let!(:item3) { create(:item, merchant: merchant3) }
@@ -103,7 +92,6 @@ def create_factories
   let!(:item5) { create(:item, merchant: merchant5) }
   let!(:item6) { create(:item, merchant: merchant6) }
 
-  # INVOICES
   let!(:invoice1) { create(:invoice, :completed, customer: customer) }
   let!(:invoice2) { create(:invoice, :completed, customer: customer) }
   let!(:invoice3) { create(:invoice, :completed, customer: customer) }
@@ -111,7 +99,6 @@ def create_factories
   let!(:invoice5) { create(:invoice, :completed, customer: customer) }
   let!(:invoice6) { create(:invoice, :completed, customer: customer) }
 
-  # TRANSACTIONS
   let!(:transaction1) { create(:transaction, :failed, invoice: invoice1) }
   let!(:transaction2) { create(:transaction, :success, invoice: invoice2) }
   let!(:transaction3) { create(:transaction, :success, invoice: invoice3) }
@@ -119,7 +106,6 @@ def create_factories
   let!(:transaction5) { create(:transaction, :success, invoice: invoice5) }
   let!(:transaction6) { create(:transaction, :success, invoice: invoice6) }
 
-  # INVOICE ITEMS
   let!(:invoice_item1a) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 2, unit_price: 10) }
   let!(:invoice_item1b) { create(:invoice_item, :shipped, item: item1, invoice: invoice1, quantity: 5, unit_price: 20) }
   let!(:invoice_item2a) { create(:invoice_item, :shipped, item: item2, invoice: invoice2, quantity: 4, unit_price: 10) }
@@ -134,6 +120,8 @@ def create_factories
   let!(:invoice_item6b) { create(:invoice_item, :shipped, item: item6, invoice: invoice6, quantity: 5, unit_price: 20) }
 end
 
+
+# TODO: Are we using these methods?  Can we delete?
 def customer_with_in_progress_invoices(invoice_count: 5)
   FactoryBot.create(:customer) do |customer|
     FactoryBot.create_list(:invoice, invoice_count, {

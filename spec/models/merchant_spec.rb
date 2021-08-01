@@ -11,6 +11,14 @@ RSpec.describe Merchant, type: :model do
     specify { expect(Invoice.all.count).to be_positive }
     specify { expect(Transaction.all.count).to be_positive }
     specify { expect(InvoiceItem.all.count).to be_positive }
+    
+    it 'can build a merchant' do
+      merchant1 = create(:merchant)
+      
+      expect(merchant1).to be_a(Merchant)
+      expect(merchant1.name).to be_a(String)
+      # TODO: Add test for default enabled status.
+    end
   end
 
   describe 'relationships' do
@@ -100,13 +108,9 @@ RSpec.describe Merchant, type: :model do
     describe '#top_day' do
       it 'returns the merchants top day'
     end
-  #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
-  #
-  describe 'instance methods' do
+
+  # TODO: Update tests to use all the same factories instead of the instance variables.  Combine with 'instance methods' describe block above.
+  describe 'instance methods PART 2' do
     before :each do
       # merchants
       @merchant1 = Merchant.create!(name: 'Joe Schmo')
