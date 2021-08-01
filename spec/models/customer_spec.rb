@@ -11,9 +11,9 @@ RSpec.describe Customer, type: :model do
   end
 
   it 'can build a customer' do
-    customer_1 = create(:customer)
-    expect(customer_1.first_name).to be_a(String)
-    expect(customer_1.last_name).to be_a(String)
+    customer1 = create(:customer)
+    expect(customer1.first_name).to be_a(String)
+    expect(customer1.last_name).to be_a(String)
   end
   # before :each do
   #
