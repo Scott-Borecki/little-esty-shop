@@ -11,7 +11,7 @@ RSpec.describe Merchant, type: :model do
 
   it 'can build a merchant' do
     merchant_1 = create(:merchant)
-    expect(merchant.name).to be_a(String)
+    expect(merchant_1.name).to be_a(String)
   end
 
   # before :each do
