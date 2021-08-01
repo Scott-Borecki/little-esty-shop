@@ -1,5 +1,11 @@
 <h1><%= @item.name %></h1>
 
+<% flash.each do |type, msg| %>
+  <div class='alert alert-success'>
+    <%= msg %>
+  </div>
+<% end %>
+
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= number_to_currency(@item.unit_price / 100.00) %></p>
 <br>

@@ -10,7 +10,7 @@ RSpec.describe 'Merchant Items Show Page' do
   end
 
   describe "edit a merchant's item" do
-    it "can link to the merchant's item edit page" do
+    it "links to the merchant's item edit page" do
       visit merchant_item_path(@merchant1, @item1)
 
       click_link('Update Item Information')
@@ -18,12 +18,12 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(current_path).to eq(edit_merchant_item_path(@merchant1, @item1))
     end
 
-    it "can update a merchant's item" do
+    it "updates a merchant's item" do
       visit edit_merchant_item_path(@merchant1, @item1)
 
-      expect(page).to have_field('Name', with: "#{@item1.name}")
-      expect(page).to have_field('Description', with: "#{@item1.description}")
-      expect(page).to have_field('Unit Price', with: "#{@item1.unit_price}")
+      expect(page).to have_field('Name', with: @item1.name)
+      expect(page).to have_field('Description', with: @item1.description)
+      expect(page).to have_field('Unit Price', with: @item1.unit_price)
 
       fill_in('Name', with: 'Rubeus Hagrid')
       fill_in('Description', with: "Mad and hairy? You wouldn't be taking about me, now, would you?")
@@ -36,7 +36,7 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(page).to have_content("Mad and hairy? You wouldn't be taking about me, now, would you?")
       expect(page).to have_content('$947.53')
       expect(page).to have_content("#{@item1.reload.name}'s information was successfully updated!")
-      expect(page).to_not have_content("#{@item1.reload.name}'s information was not successfully updated!")
+      expect(page).to have_no_content("#{@item1.reload.name}'s information was not successfully updated!")
     end
   end
 end

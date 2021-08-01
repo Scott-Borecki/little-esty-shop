@@ -25,14 +25,16 @@ RSpec.describe Item, type: :model do
 
   describe 'class methods' do
     describe '.all_enabled' do
-      it 'can return ONLY items where enabled is true' do
+      it 'returns ONLY items where enabled is true' do
         expect(Item.all_enabled).to eq([@item1, @item2])
+        expect(Item.all_enabled).to_not include([@item3])
       end
     end
 
     describe '.all_disabled' do
-      it 'can return ONLY items where enabled is false' do
+      it 'returns ONLY items where enabled is false' do
         expect(Item.all_disabled).to eq([@item3])
+        expect(Item.all_enabled).to_not include([@item1, @item2])
       end
     end
   end

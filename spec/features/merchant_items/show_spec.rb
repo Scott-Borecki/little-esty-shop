@@ -10,7 +10,7 @@ RSpec.describe 'Merchant Items Show Page' do
   end
 
   describe "a merchant's item's show page" do
-    it "can link to the merchant's item's show page" do
+    it "links to the merchant's item's show page" do
       visit merchant_items_path(@merchant1)
 
       click_link("#{@item1.name}")
@@ -18,16 +18,17 @@ RSpec.describe 'Merchant Items Show Page' do
       expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
     end
 
-    it "show the item's name, description, and price" do
+    it "shows the item's name, description, and price" do
       visit merchant_item_path(@merchant1, @item1)
 
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item1.description)
       expect(page).to have_content('$594.00')
+      expect(page).to have_content("$#{@item1.unit_price / 100.00}")
 
-      expect(page).to_not have_content(@item2.name)
-      expect(page).to_not have_content(@item2.description)
-      expect(page).to_not have_content('$956.58')
+      expect(page).to have_no_content(@item2.name)
+      expect(page).to have_no_content(@item2.description)
+      expect(page).to have_no_content("$#{@item2.unit_price / 100.00}")
     end
   end
 end

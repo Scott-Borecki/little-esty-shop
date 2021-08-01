@@ -10,10 +10,10 @@ class Item < ApplicationRecord
   validates :enabled, inclusion: { in: [true, false] }
 
   def self.all_enabled
-    where('enabled = true')
+    where(enabled: true)
   end
 
   def self.all_disabled
-    where('enabled = false')
+    where(enabled: false)
   end
 end
