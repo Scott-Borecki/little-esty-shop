@@ -54,13 +54,6 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe '.top_revenue_day_by_merchant' do
-      it 'returns the merchants top day' do
-        require "pry"; binding.pry
-        expect(Merchant.top_revenue_day_by_merchant(merchant6)).to eq("2021-07-27T17:30:05+0700")
-      end
-    end
-
     describe '.top_five_merchants_by_revenue' do
       it 'returns the top five merchants by total revenue generated' do
         top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
@@ -88,6 +81,9 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
+    describe '#top_revenue_day' do
+      it 'returns the top revenue day for the merchant' do
+        expect(merchant6.top_revenue_day).to eq("July 27, 2021")
       end
     end
   end

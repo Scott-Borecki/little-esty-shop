@@ -112,7 +112,13 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
           end
         end
 
-        it 'displays the merchants best day'
+        it 'displays the merchants best day' do
+          Merchant.top_five_merchants_by_revenue.each do |merchant|
+            within("#top-merchant-#{merchant.id}") do
+              expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.top_revenue_day}")
+            end
+          end
+        end
       end
 
       describe 'when I click on the name of a merchant' do
