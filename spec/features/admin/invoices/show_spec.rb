@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../../spec_data.rb'
 
 RSpec.describe 'Admin invoice Show page' do
-  before(:each) do  
+  before(:each) do
     TestData.invoice_items
     @invoice = Invoice.first
     visit "/admin/invoices/#{@invoice.id}"
@@ -30,32 +30,33 @@ RSpec.describe 'Admin invoice Show page' do
   it 'has the attrs for all of the items on the invoice and the invocie items status' do
     within("table#items") do
       within("tr##{@invoice.items_belonging_to[0].id}") do
-        expect(page).to have_content(@invoice.items_belonging_to[0].name) 
+        expect(page).to have_content(@invoice.items_belonging_to[0].name)
         expect(page).to have_content(@invoice.items_belonging_to[0].quantity)
         expect(page).to have_content(@invoice.items_belonging_to[0].unit_price.to_f / 100)
         expect(page).to have_content(@invoice.items_belonging_to[0].status)
       end
-      within("tr##{@invoice.items_belonging_to[1].id}") do 
-        expect(page).to have_content(@invoice.items_belonging_to[1].name) 
+
+      within("tr##{@invoice.items_belonging_to[1].id}") do
+        expect(page).to have_content(@invoice.items_belonging_to[1].name)
         expect(page).to have_content(@invoice.items_belonging_to[1].quantity)
         expect(page).to have_content(@invoice.items_belonging_to[1].unit_price.to_f / 100)
         expect(page).to have_content(@invoice.items_belonging_to[1].status)
       end
-      within("tr##{@invoice.items_belonging_to[2].id}") do 
-        expect(page).to have_content(@invoice.items_belonging_to[2].name) 
+
+      within("tr##{@invoice.items_belonging_to[2].id}") do
+        expect(page).to have_content(@invoice.items_belonging_to[2].name)
         expect(page).to have_content(@invoice.items_belonging_to[2].quantity)
         expect(page).to have_content(@invoice.items_belonging_to[2].unit_price.to_f / 100)
         expect(page).to have_content(@invoice.items_belonging_to[2].status)
       end
     end
-
   end
 
   # When I visit an admin invoice show page
   # Then I see the total revenue that will be generated from this invoice
   it 'shows the total revenue for the invoice' do
     within("h4#total_revenue") do
-      revenue = (8363*11 + 1177*9 + 4960*15).to_f / 100
+      revenue = (8363 * 11 + 1177 * 9 + 4960 * 15).to_f / 100
       expect(page).to have_content("Total Revenue: $#{revenue}")
     end
   end
@@ -70,8 +71,7 @@ RSpec.describe 'Admin invoice Show page' do
   # And I see that my Invoice's status has now been updated
 
   it 'has a select field to change the invoice status, which updates status and returns to invoice show page' do
-
-    Capybara.default_driver = :selenium_headless
+    Capybara.default_driver = :selenium_chrome_headless
     visit "/admin/invoices/#{@invoice.id}"
     expect(first('.status').text).to eq 'packaged'
     first('.status').click_button
