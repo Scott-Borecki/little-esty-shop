@@ -30,14 +30,14 @@ RSpec.describe 'Merchant Items Index Page' do
       expect(page).to_not have_button('Enable')
       expect(page).to have_button('Disable')
 
-      click_on "Disable"
+      click_on 'Disable'
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
       expect(@item1.reload.enabled).to eq(false)
       expect(page).to have_button('Enable')
       expect(page).to_not have_button('Disable')
 
-      click_on "Enable"
+      click_on 'Enable'
 
       expect(current_path).to eq(merchant_items_path(@merchant1))
       expect(@item1.reload.enabled).to eq(true)
@@ -57,15 +57,15 @@ RSpec.describe 'Merchant Items Index Page' do
   end
 
   it 'has two sections: one for enabled items and one for disabled items' do
-    within "#all-enabled" do
-      expect(page).to have_content("Enabled Items")
+    within '#all-enabled' do
+      expect(page).to have_content('Enabled Items')
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@item2.name)
       expect(page).to_not have_content(@item3.name)
     end
 
-    within "#all-disabled" do
-      expect(page).to have_content("Disabled Items")
+    within '#all-disabled' do
+      expect(page).to have_content('Disabled Items')
       expect(page).to_not have_content(@item1.name)
       expect(page).to_not have_content(@item2.name)
       expect(page).to have_content(@item3.name)
