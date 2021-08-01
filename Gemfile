@@ -48,6 +48,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do

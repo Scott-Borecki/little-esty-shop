@@ -43,4 +43,16 @@ class Merchant < ApplicationRecord
       .first
       .formatted_time
   end
+
+  def unique_invoices
+    invoices.uniq
+  end
+
+  # ASK CAROLINE ABOUT THE COMMENTS HERE:
+  # AR joins temp tables
+  # calulations: that you want to know, not to save
+  # relationship: want to save
+  def invoice_items_for_invoice(invoice_id)
+    invoice_items.where(invoice_id: invoice_id)
+  end
 end
