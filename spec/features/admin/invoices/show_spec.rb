@@ -70,8 +70,10 @@ RSpec.describe 'Admin invoice Show page' do
   # And I see that my Invoice's status has now been updated
 
   it 'has a select field to change the invoice status, which updates status and returns to invoice show page' do
+
     Capybara.default_driver = :selenium_headless
     visit "/admin/invoices/#{@invoice.id}"
+    expect(first('.status').text).to eq 'packaged'
     first('.status').click_button
     within('.dropdown-menu') do
       click_link('shipped')

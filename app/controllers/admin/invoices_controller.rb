@@ -10,6 +10,5 @@ class Admin::InvoicesController < ApplicationController
 
   def invoice_params
     params.permit(:id)
-
   end
 end
