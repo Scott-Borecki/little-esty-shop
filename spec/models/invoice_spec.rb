@@ -39,6 +39,15 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '#invoice_total_revenue' do
+      # DELETE? (Scott Borecki): I think we can remove this test?
+      it 'builds an invoice with a customer association' do
+        expect(Invoice.all.size).to eq(16)
+        customer_with_in_progress_invoices(invoice_count: 2)
+
+        expect(Invoice.last.status).to eq('in progress')
+        expect(Invoice.all.size).to eq(18)
+      end
+
       it 'can calculate total revenue for an invoice' do
         @merchant1 = Merchant.create!(name: 'Dandy')
         @merchant2 = Merchant.create!(name: 'Randy')
