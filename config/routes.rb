@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   resources :merchants, only: [:index] do
-    resources :items#, only: [:index, :show, :edit, :update]
+    resources :items #, only: [:index, :show, :edit, :update]
   end
 end

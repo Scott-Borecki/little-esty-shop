@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :customer do
     first_name { Faker::Movies::HarryPotter.unique.spell }
     last_name  { Faker::Movies::HarryPotter.unique.house }
-    end
+  end
 
   factory :invoice do
     customer
@@ -15,7 +15,7 @@ FactoryBot.define do
   factory :item do
     name { Faker::Movies::HarryPotter.unique.location }
     description { Faker::Movies::LordOfTheRings.unique.location }
-    unit_price { Faker::Number.binary(digits:5) }
+    unit_price { Faker::Number.binary(digits: 5) }
     enabled { Faker::Boolean.boolean }
     merchant
   end
