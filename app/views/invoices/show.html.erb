@@ -1,0 +1,27 @@
+<center><h1>Little Esty Shop</h1></center><br>
+
+<h3><%= @merchant.name %></h3><br>
+
+<center><p>Invoice #<%= @invoice.id %></p></center>
+
+<p>Status: <%= @invoice.status.humanize.capitalize %></p>
+<p>Created on: <%= @invoice.formatted_time %></p>
+<p>Total Revenue: <%= number_to_currency(@invoice.invoice_total_revenue.to_f / 100) %></p>
+
+<h3>Customer:</h3>
+<p><%= @invoice.customer.first_name + ' ' + @invoice.customer.last_name %></p>
+<br>
+
+<p>Items on this Invoice:</p>
+<% @merchant.invoice_items_for_invoice(@invoice.id).each do |invoice_item| %>
+  <div id="invoice_item_<%=invoice_item.id%>">
+    <p>Name: <%= invoice_item.find_item_name %></p>
+    <p>Quantity: <%= invoice_item.quantity %></p>
+    <p>Price: <%= number_to_currency(invoice_item.unit_price / 100.00) %></p>
+    <%= form_with model: [@merchant, invoice_item], method: :patch, local: true do |form| %>
+      <%= form.label :status, 'Status:' %>
+      <%= form.select :status, ['pending', 'packaged', 'shipped'] %>
+      <%= form.submit 'Update Item Status' %>
+    <% end %>
+  </div>
+<% end %>
