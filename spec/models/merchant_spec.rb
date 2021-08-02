@@ -83,7 +83,7 @@ RSpec.describe Merchant, type: :model do
 
     describe '#top_revenue_day' do
       it 'returns the top revenue day for the merchant' do
-        expect(merchant6.top_revenue_day).to eq("July 27, 2021")
+        expect(merchant6.top_revenue_day).to eq("Tuesday, July 27, 2021")
       end
     end
 
