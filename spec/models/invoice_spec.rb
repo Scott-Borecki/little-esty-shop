@@ -17,6 +17,35 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status) }
   end
 
+  describe 'class methods' do
+    describe '.incomplete_invoices' do
+      # See /spec/factories.rb for more info on factories created
+      create_factories
+
+      context 'when the items have been shipped' do
+        it 'returns the invoice id' do
+          shipped_items = [invoice1.id, invoice3.id, invoice5a.id, invoice5b.id]
+
+          shipped_items.each do |shipped_item_id|
+            expect(Invoice.incomplete_invoices).to include(shipped_item_id)
+          end
+        end
+      end
+
+      context 'when the items have not been shipped' do
+        it 'doest not return the invoice id' do
+          not_shipped_items = [invoice2a, invoice2b, invoice2c, invoice2d,
+                               invoice2e, invoice4a, invoice4b, invoice4c,
+                               invoice4d, invoice6a, invoice6b, invoice6c]
+
+          not_shipped_items.each do |not_shipped_item_id|
+            expect(Invoice.incomplete_invoices).to_not include(not_shipped_item_id)
+          end
+        end
+      end
+    end
+  end
+
   describe 'instance methods' do
     describe '#items_belonging_to' do
       xit 'returns the invoice item status as well as all item attributes for an invoice' do
