@@ -2,3 +2,16 @@
 
 <%= link_to 'Admin Merchants Index', admin_merchants_path %>
 <%= link_to 'Admin Invoices Index', admin_invoices_path %>
+
+<section id='top-five-customers'>
+  <h3>Top Customers</h3>
+  <ol>
+    <% @top_customers.each do |customer| %>
+      <li>
+        <section id='top-customer-<%= customer.id %>'>
+          <%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases
+        </section>
+      </li>
+    <% end %>
+  </ol>
+</section>

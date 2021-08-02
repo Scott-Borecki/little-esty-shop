@@ -38,6 +38,19 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
 
         expect(current_path).to eq(admin_invoices_path)
       end
+
+      describe 'when I look in the top 5 customers section' do
+        it 'displays the names and number of puchases of the top 5 customers' do
+          top_customers = Customer.top_five_by_successful_transactions
+
+          within '#top-five-customers' do
+            expect(page).to have_content('Top Customers')
+            top_customers.each do |customer|
+              expect(page).to have_content("#{customer.first_name} #{customer.last_name} - #{customer.count} purchases")
+            end
+          end
+        end
+      end
     end
   end
 end
