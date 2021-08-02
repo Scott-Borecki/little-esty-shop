@@ -18,12 +18,12 @@ RSpec.describe 'merchant invoices show page' do
 
     # invoices
     @invoice1 = @customer1.invoices.create!(status: 0)
-    @invoice2 = @customer2.invoices.create!(status: 0)
+    @invoice2 = @customer2.invoices.create!(status: 1)
 
     # invoice_items
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1111, status: 0)
     @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 2022, status: 1)
-    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 101, status: 1)
+    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 101, status: 2)
 
     visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
@@ -43,7 +43,7 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to have_content(@merchant1.name)
     expect(page).to have_content("Invoice ##{@invoice1.id}")
     # do we need to change lower case 'in progress' to 'In Progress' here?
-    expect(page).to have_content("Status: #{@invoice1.status}")
+    expect(page).to have_content("Status: #{@invoice1.status.humanize}")
     expect(page).to have_content("Created on: #{@invoice1.created_at.strftime('%A, %B %-d, %Y')}")
     expect(page).to have_content('Customer:')
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
@@ -61,14 +61,14 @@ RSpec.describe 'merchant invoices show page' do
     # - The Invoice Item status
     # And I do not see any information related to Items for other merchants
 
-    within("#item_#{@invoice_item1.id}") do
+    within("#invoice_item_#{@invoice_item1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@invoice_item1.quantity)
       expect(page).to have_content(@invoice_item1.unit_price / 100.00)
       expect(page).to have_content(@invoice_item1.status)
     end
 
-    within("#item_#{@invoice_item2.id}") do
+    within("#invoice_item_#{@invoice_item2.id}") do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@invoice_item2.quantity)
       expect(page).to have_content(@invoice_item2.unit_price / 100.00)
@@ -86,5 +86,37 @@ RSpec.describe 'merchant invoices show page' do
     # Then I see the total revenue that will be generated from all of my items on the invoice
 
     expect(page).to have_content('$151.54')
+  end
+
+  it 'can update item status' do
+    # Merchant Invoice Show Page: Update Item Status
+    # As a merchant
+    # When I visit my merchant invoice show page
+    # I see that each invoice item status is a select field
+    # And I see that the invoice item's current status is selected
+    # When I click this select field,
+    # Then I can select a new status for the Item,
+    # And next to the select field I see a button to "Update Item Status"
+    # When I click this button
+    # I am taken back to the merchant invoice show page
+    # And I see that my Item's status has now been updated
+
+    within("#invoice_item_#{@invoice_item1.id}") do
+      expect(page).to have_content(@invoice_item1.status)
+      expect(page).to have_selector('#invoice_item_status')
+      page.select('shipped', from: :invoice_item_status)
+      click_button('Update Item Status')
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      expect(page).to have_content(@invoice_item1.status)
+    end
+
+    within("#invoice_item_#{@invoice_item2.id}") do
+      expect(page).to have_content(@invoice_item2.status)
+      expect(page).to have_selector('#invoice_item_status')
+      page.select('shipped', from: :invoice_item_status)
+      click_button('Update Item Status')
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      expect(page).to have_content(@invoice_item2.status)
+    end
   end
 end
