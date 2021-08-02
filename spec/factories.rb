@@ -181,7 +181,6 @@ def create_factories
     #=> merchant6_potential_revenue = 680
 end
 
-
 # TODO: Are we using these methods?  Can we delete?
 def customer_with_in_progress_invoices(invoice_count: 5)
   FactoryBot.create(:customer) do |customer|
