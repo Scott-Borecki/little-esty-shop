@@ -18,12 +18,12 @@ RSpec.describe 'merchant invoices show page' do
 
     # invoices
     @invoice1 = @customer1.invoices.create!(status: 0)
-    @invoice2 = @customer2.invoices.create!(status: 0)
+    @invoice2 = @customer2.invoices.create!(status: 1)
 
     # invoice_items
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1111, status: 0)
     @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 2, unit_price: 2022, status: 1)
-    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 101, status: 1)
+    @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice2.id, quantity: 10, unit_price: 101, status: 2)
 
     visit("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
   end
@@ -43,7 +43,7 @@ RSpec.describe 'merchant invoices show page' do
     expect(page).to have_content(@merchant1.name)
     expect(page).to have_content("Invoice ##{@invoice1.id}")
     # do we need to change lower case 'in progress' to 'In Progress' here?
-    expect(page).to have_content("Status: #{@invoice1.status}")
+    expect(page).to have_content("Status: #{@invoice1.status.humanize}")
     expect(page).to have_content("Created on: #{@invoice1.created_at.strftime('%A, %B %-d, %Y')}")
     expect(page).to have_content('Customer:')
     expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name}")
@@ -100,7 +100,11 @@ RSpec.describe 'merchant invoices show page' do
     # When I click this button
     # I am taken back to the merchant invoice show page
     # And I see that my Item's status has now been updated
-
-
+    within("#item_#{@invoice_item1.id}") do
+      select('shipped', from: :status, match: :first)
+      click_button('Update Item Status', match: :first)
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      expect(page).to have_content('shipped')
+    end
   end
 end
