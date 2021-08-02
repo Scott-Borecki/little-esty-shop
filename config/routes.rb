@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index] do
     resources :items, exclude: [:destroy]
   end
+
   # FIX: (Scott B) Use exclude instead of only
   namespace :admin do
     resources :merchants, only: [:create, :edit, :index, :new, :show, :update]
