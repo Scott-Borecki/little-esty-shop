@@ -2,25 +2,12 @@ FactoryBot.define do
   factory :customer do
     first_name { Faker::Movies::HarryPotter.spell }
     last_name  { Faker::Movies::HarryPotter.house }
-    #
-    # factory :customer_with_invoices do
-    #   after(:create) do |customer, evaluator|
-    #     create_list(:invoice, evaluator.invoice_count, customer: customer)
-    #   end
-    # end
   end
 
   factory :invoice do
     customer
     traits_for_enum(:status)
   end
-
-#   factory :item do
-#     name { Faker::Movies::Lebowski.character }
-#     description { Faker::Movies::Lebowski.quote }
-#     unit_price { rand(10_000) }
-#     merchant
-#   end
 
   factory :item do
     name { Faker::Movies::HarryPotter.location }
@@ -38,29 +25,11 @@ FactoryBot.define do
     traits_for_enum(:status)
   end
 
-#   factory :invoice_item do
-#     quantity { rand(1..10) }
-#     unit_price { rand(1_000..2_000) }
-#     item
-#     invoice
-#   end
-
   factory :merchant do
     name { Faker::Movies::HarryPotter.character }
 
     factory :enabled_merchant do
       enabled { true }
-    #
-    #   factory :merchant_with_revenue_generated do
-    #     transient do
-    #       items_count { 5 }
-    #     end
-    #
-    #     after(:create) do |merchant, evaluator|
-    #       create_list(:item, evaluator.items_count, merchant: merchant)
-    #       # merchant.reload
-    #     end
-    #   end
     end
 
     factory :disabled_merchant do
@@ -76,7 +45,7 @@ FactoryBot.define do
 end
 
 def create_factories
-  # CUSTOMER
+  # CUSTOMERS
   let!(:customer1) { create(:customer) }
   let!(:customer2) { create(:customer) }
   let!(:customer3) { create(:customer) }
@@ -84,6 +53,7 @@ def create_factories
   let!(:customer5) { create(:customer) }
   let!(:customer6) { create(:customer) }
 
+  # MERCHANTS
   let!(:merchant1) { create(:enabled_merchant) }
   let!(:merchant2) { create(:enabled_merchant) }
   let!(:merchant3) { create(:enabled_merchant) }
@@ -91,6 +61,7 @@ def create_factories
   let!(:merchant5) { create(:disabled_merchant) }
   let!(:merchant6) { create(:enabled_merchant) }
 
+  # ITEMS
   let!(:item1) { create(:item, merchant: merchant1) }
   let!(:item2) { create(:item, merchant: merchant2) }
   let!(:item3) { create(:item, merchant: merchant3) }
@@ -121,6 +92,7 @@ def create_factories
   let!(:invoice6b) { create(:invoice, :completed, customer: customer6, created_at: "2021-07-27T17:30:05+0700") }
   let!(:invoice6c) { create(:invoice, :completed, customer: customer6, created_at: "2021-07-25T17:30:05+0700") }
 
+  # TRANSACTIONS
   let!(:transaction1) { create(:transaction, :failed, invoice: invoice1) }
 
   let!(:transaction2a) { create(:transaction, :success, invoice: invoice2a) }
