@@ -4,7 +4,7 @@
 
 <center><p>Invoice #<%= @invoice.id %></p></center>
 
-<p>Status: <%= @invoice.status %></p>
+<p>Status: <%= @invoice.status.humanize.capitalize %></p>
 <p>Created on: <%= @invoice.formatted_time %></p>
 <p>Total Revenue: <%= number_to_currency(@invoice.invoice_total_revenue.to_f / 100) %></p>
 
@@ -18,6 +18,10 @@
   <p>Name: <%= item.find_item_name %></p>
   <p>Quantity: <%= item.quantity %></p>
   <p>Price: <%= number_to_currency(item.unit_price / 100.00) %></p>
-  <p>Status: <%= item.status %></p>
+  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}?item_id=#{item.id}", method: :patch, local: true do |form| %>
+  <%= form.label :status, 'Status:' %>
+  <%= form.select :status, ['pending', 'packaged', 'shipped'], selected: item.status %>
+  <%= form.submit 'Update Item Status' %>
+  <% end %><br>
 <% end %>
 </div>
