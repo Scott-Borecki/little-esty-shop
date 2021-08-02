@@ -1,5 +1,5 @@
 class InvoiceItemsController < ApplicationController
-  before_action :get_merchant
+  before_action :get_merchant, only: [:update]
 
   def update
     invoice_item = InvoiceItem.find(params[:id])
@@ -7,6 +7,8 @@ class InvoiceItemsController < ApplicationController
     invoice = Invoice.find(invoice_item.invoice_id)
     redirect_to("/merchants/#{@merchant.id}/invoices/#{invoice.id}")
   end
+
+  private
 
   def get_merchant
     @merchant = Merchant.find(params[:merchant_id])

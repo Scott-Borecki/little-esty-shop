@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :get_merchant
+  before_action :get_merchant, only: [:index, :show]
 
   def index
   end
@@ -7,6 +7,8 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
   end
+
+  private
 
   def get_merchant
     @merchant = Merchant.find(params[:merchant_id])
