@@ -19,7 +19,7 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     describe '#items_belonging_to' do
-      it 'returns the invoice item status as well as all item attributes for an invoice' do
+      xit 'returns the invoice item status as well as all item attributes for an invoice' do
         TestData.invoice_items
         expect(Invoice.first.items_belonging_to[0].name).to eq("Madam Rosmerta")
         expect(Invoice.first.items_belonging_to[0].unit_price).to eq(8363)
