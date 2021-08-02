@@ -15,6 +15,7 @@ module TestData
     end
     return "Merchants created"
   end
+
   def self.customers
     [["Lumos", "Slytherin"],
     ["Obliviate", "Pukwudgie"],
@@ -25,6 +26,7 @@ module TestData
     end
     return "Customers created"
   end
+
   def self.items
     merchants
     # attributes = []
@@ -57,6 +59,7 @@ module TestData
     end
     return "Items created"
   end
+
   def self.invoices
     customers
     status = [0, 1, 0, 2, 2, 0, 0, 1, 2, 0, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1]
@@ -72,6 +75,7 @@ module TestData
     end
     return "Invoices created"
   end
+
   def self.invoice_items
     items
     items = Item.all

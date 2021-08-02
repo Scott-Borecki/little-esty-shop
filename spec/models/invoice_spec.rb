@@ -1,18 +1,7 @@
 require 'rails_helper'
 require_relative '../spec_data.rb'
+
 RSpec.describe Invoice, type: :model do
-  # See /spec/factories.rb for more info on factories created
-  create_factories
-
-  describe 'object creation for tests' do
-    specify { expect(Customer.all.count).to be_positive }
-    specify { expect(Merchant.all.count).to be_positive }
-    specify { expect(Item.all.count).to be_positive }
-    specify { expect(Invoice.all.count).to be_positive }
-    specify { expect(Transaction.all.count).to be_positive }
-    specify { expect(InvoiceItem.all.count).to be_positive }
-  end
-
   describe 'relationships' do
     it { should belong_to(:customer) }
     it { should have_many(:invoice_items) }
@@ -26,16 +15,6 @@ RSpec.describe Invoice, type: :model do
     it { should define_enum_for(:status).with(statuses) }
 
     it { should validate_presence_of(:status) }
-  end
-
-  # DELETE? (Scott Borecki): I think we can remove this test?
-  it 'builds an invoice with a customer association' do
-    expect(Invoice.all.size).to eq(6)
-    customer_with_in_progress_invoices(invoice_count: 2)
-    expect(Invoice.last.status).to eq('in progress')
-    expect(Invoice.all.size).to eq(8)
-    expect(Invoice.first.status).to eq("in progress")
-    expect(Invoice.all.length).to eq(4)
   end
 
   describe 'instance methods' do
@@ -58,7 +37,7 @@ RSpec.describe Invoice, type: :model do
         expect(Invoice.first.items_belonging_to[2].status).to eq("pending")
       end
     end
-    
+
     describe '#invoice_total_revenue' do
       it 'can calculate total revenue for an invoice' do
         @merchant1 = Merchant.create!(name: 'Dandy')
@@ -82,7 +61,7 @@ RSpec.describe Invoice, type: :model do
         @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id:  @invoice1.id, quantity: 10, unit_price: 100, status: 0)
         @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id:  @invoice1.id, quantity: 10, unit_price: 200, status: 1)
         @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id:  @invoice2.id, quantity: 10, unit_price: 100, status: 1)
-        
+
         expect(@invoice1.invoice_total_revenue).to eq(3000)
       end
     end

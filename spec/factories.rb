@@ -21,7 +21,7 @@ FactoryBot.define do
 #     unit_price { rand(10_000) }
 #     merchant
 #   end
-  
+
   factory :item do
     name { Faker::Movies::HarryPotter.location }
     description { Faker::Movies::LordOfTheRings.location }
@@ -37,7 +37,7 @@ FactoryBot.define do
     item
     traits_for_enum(:status)
   end
-  
+
 #   factory :invoice_item do
 #     quantity { rand(1..10) }
 #     unit_price { rand(1_000..2_000) }
@@ -118,30 +118,4 @@ def create_factories
   let!(:invoice_item5b) { create(:invoice_item, :shipped, item: item5, invoice: invoice5, quantity: 5, unit_price: 20) }
   let!(:invoice_item6a) { create(:invoice_item, :shipped, item: item6, invoice: invoice6, quantity: 6, unit_price: 10) }
   let!(:invoice_item6b) { create(:invoice_item, :shipped, item: item6, invoice: invoice6, quantity: 5, unit_price: 20) }
-end
-
-
-# TODO: Are we using these methods?  Can we delete?
-def customer_with_in_progress_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :"in progress", customer: customer
-      })
-  end
-end
-
-def customer_with_cancelled_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :cancelled, customer: customer
-      })
-  end
-end
-
-def customer_with_completed_invoices(invoice_count: 5)
-  FactoryBot.create(:customer) do |customer|
-    FactoryBot.create_list(:invoice, invoice_count, {
-      status: :completed, customer: customer
-      })
-  end
 end
