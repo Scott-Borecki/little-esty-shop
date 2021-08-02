@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :items, exclude: [:destroy]
   end
 
+  resources :admin, only: [:index]
+
   namespace :admin do
     resources :merchants, except: [:destroy]
     resources :invoices, only: [:index, :show]
