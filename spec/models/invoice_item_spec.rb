@@ -33,12 +33,7 @@ RSpec.describe InvoiceItem, type: :model do
     # invoice_items
     @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1111, status: 0)
   end
-  #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
-  #
+
   describe 'instance methods' do
     describe '#find_item_name' do
       it 'can find the item name' do
