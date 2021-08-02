@@ -40,9 +40,4 @@ RSpec.describe Item, type: :model do
       end
     end
   end
-  #
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
 end
