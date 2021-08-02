@@ -61,14 +61,14 @@ RSpec.describe 'merchant invoices show page' do
     # - The Invoice Item status
     # And I do not see any information related to Items for other merchants
 
-    within("#item_#{@invoice_item1.id}") do
+    within("#invoice_item_#{@invoice_item1.id}") do
       expect(page).to have_content(@item1.name)
       expect(page).to have_content(@invoice_item1.quantity)
       expect(page).to have_content(@invoice_item1.unit_price / 100.00)
       expect(page).to have_content(@invoice_item1.status)
     end
 
-    within("#item_#{@invoice_item2.id}") do
+    within("#invoice_item_#{@invoice_item2.id}") do
       expect(page).to have_content(@item2.name)
       expect(page).to have_content(@invoice_item2.quantity)
       expect(page).to have_content(@invoice_item2.unit_price / 100.00)
@@ -100,11 +100,23 @@ RSpec.describe 'merchant invoices show page' do
     # When I click this button
     # I am taken back to the merchant invoice show page
     # And I see that my Item's status has now been updated
-    within("#item_#{@invoice_item1.id}") do
-      select('shipped', from: :status, match: :first)
-      click_button('Update Item Status', match: :first)
+
+    within("#invoice_item_#{@invoice_item1.id}") do
+      expect(page).to have_content(@invoice_item1.status)
+      expect(page).to have_selector('#invoice_item_status')
+      page.select('shipped', from: :invoice_item_status)
+      click_button('Update Item Status')
       expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
-      expect(page).to have_content('shipped')
+      expect(page).to have_content(@invoice_item1.status)
+    end
+
+    within("#invoice_item_#{@invoice_item2.id}") do
+      expect(page).to have_content(@invoice_item2.status)
+      expect(page).to have_selector('#invoice_item_status')
+      page.select('shipped', from: :invoice_item_status)
+      click_button('Update Item Status')
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices/#{@invoice1.id}")
+      expect(page).to have_content(@invoice_item2.status)
     end
   end
 end
