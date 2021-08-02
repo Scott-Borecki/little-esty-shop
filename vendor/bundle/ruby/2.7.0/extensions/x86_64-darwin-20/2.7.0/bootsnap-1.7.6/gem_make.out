@@ -1,5 +1,5 @@
 current directory: /Users/alexmac/Documents/turing/mod_2/projects/etsy/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.6/ext/bootsnap
-/Users/alexmac/.rbenv/versions/2.7.2/bin/ruby -I /Users/alexmac/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210727-88176-14vfxk3.rb extconf.rb
+/Users/alexmac/.rbenv/versions/2.7.2/bin/ruby -I /Users/alexmac/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210728-59268-ag84bt.rb extconf.rb
 creating Makefile
 
 current directory: /Users/alexmac/Documents/turing/mod_2/projects/etsy/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.6/ext/bootsnap
@@ -12,4 +12,4 @@ linking shared-object bootsnap/bootsnap.bundle
 
 current directory: /Users/alexmac/Documents/turing/mod_2/projects/etsy/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.6/ext/bootsnap
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210727-88176-1a4cor0/bootsnap
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210728-59268-1hwnzt2/bootsnap

@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   get '/', to: 'application#welcome'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :merchants do
+    resources :invoices, only: [:index, :show]
+    resources :invoice_items, only: [:update]
+    resources :items, exclude: [:destroy]
+  end
+
+  # FIX: (Scott B) Use exclude instead of only
+  namespace :admin do
+    resources :merchants, only: [:create, :edit, :index, :new, :show, :update]
     resources :invoices, only: [:index, :show]
     resources :invoice_items, only: [:update]
   end
