@@ -11,4 +11,8 @@ class InvoiceItem < ApplicationRecord
   def find_item_name
     Item.where(id: item_id).first.name
   end
+
+  def find_item_id
+    Item.where(id: item_id).first.id
+  end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe InvoiceItem, type: :model do
   # See /spec/factories.rb for more info on factories created
   create_factories
-  
+
   describe 'object creation for tests' do
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
@@ -50,6 +50,12 @@ RSpec.describe InvoiceItem, type: :model do
     describe '#find_item_name' do
       it 'can find the item name' do
         expect(@invoice_item1.find_item_name).to eq(@item1.name)
+      end
+    end
+    
+    describe '#find_item_id' do
+      it 'can find the item id' do
+        expect(@invoice_item1.find_item_id).to eq(@item1.id)
       end
     end
   end

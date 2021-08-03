@@ -11,8 +11,12 @@
 
 <h3>Items Ready to Ship</h3>
 
-<div class="invoice-items-ready-to-ship">
+<div id="invoice-items-ready-to-ship">
   <% @merchant.invoice_items_to_ship.each do |invoice_item| %>
-    <%= invoice_item.find_item_name %><br>
+    <div id="ii-ready-to-ship-<%= invoice_item.id %>">
+      <%= invoice_item.find_item_name %><br>
+  
+      <%= invoice_item.find_item_id %><br>
+    </div>
   <% end %>
 </div>
