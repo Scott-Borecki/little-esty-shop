@@ -12,7 +12,7 @@ class InvoiceItem < ApplicationRecord
     Item.where(id: item_id).first.name
   end
 
-  def find_item_id
-    Item.where(id: item_id).first.id
+  def find_invoice_id
+    Invoice.where(id: invoice_id).first.id
   end
 end

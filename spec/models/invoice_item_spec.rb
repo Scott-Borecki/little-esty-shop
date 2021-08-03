@@ -52,10 +52,10 @@ RSpec.describe InvoiceItem, type: :model do
         expect(@invoice_item1.find_item_name).to eq(@item1.name)
       end
     end
-    
-    describe '#find_item_id' do
-      it 'can find the item id' do
-        expect(@invoice_item1.find_item_id).to eq(@item1.id)
+
+    describe '#find_invoice_id' do
+      it 'can find the invoice id' do
+        expect(@invoice_item1.find_invoice_id).to eq(@invoice1.id)
       end
     end
   end
