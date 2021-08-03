@@ -109,7 +109,11 @@ RSpec.describe Merchant, type: :model do
       it 'returns the merchants top day'
     end
   end
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 77eaedf61e0f47265f41748d493975093420e176
   # TODO: Update tests to use all the same factories instead of the instance variables.  Combine with 'instance methods' describe block above.
   describe 'instance methods PART 2' do
     before :each do

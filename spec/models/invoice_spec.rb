@@ -17,6 +17,17 @@ RSpec.describe Invoice, type: :model do
     it { should validate_presence_of(:status) }
   end
 
+<<<<<<< HEAD
+=======
+  # DELETE? (Scott Borecki): I think we can remove this test?
+  it 'builds an invoice with a customer association' do
+    expect(Invoice.all.size).to eq(6)
+    customer_with_in_progress_invoices(invoice_count: 2)
+    expect(Invoice.last.status).to eq('in progress')
+    expect(Invoice.all.size).to eq(8)
+  end
+
+>>>>>>> 77eaedf61e0f47265f41748d493975093420e176
   describe 'instance methods' do
     describe '#items_belonging_to' do
       xit 'returns the invoice item status as well as all item attributes for an invoice' do
