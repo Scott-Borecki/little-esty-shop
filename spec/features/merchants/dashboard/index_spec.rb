@@ -51,10 +51,8 @@ RSpec.describe 'merchant dashboard index page' do
     # who have conducted the largest number of successful transactions with my merchant
     # And next to each customer name I see the number of successful transactions they have
     # conducted with my merchant
-    
-    visit("/merchants/#{merchant1.id}/dashboard")
 
-    save_and_open_page
+    visit("/merchants/#{merchant1.id}/dashboard")
 
     expect(page).to have_content(customer2.first_name)
     expect(page).to have_content(customer3.first_name)
