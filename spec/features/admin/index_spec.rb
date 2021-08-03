@@ -86,6 +86,15 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
             end
           end
         end
+        # As an admin,
+        # When I visit the admin dashboard
+        # In the section for "Incomplete Invoices",
+        # Next to each invoice id I see the date that the invoice was created
+        # And I see the date formatted like "Monday, July 18, 2019"
+        # And I see that the list is ordered from oldest to newest
+        it 'has the date that each incomplete invoice was created, sorted oldest first' do
+          
+        end
       end
     end
   end

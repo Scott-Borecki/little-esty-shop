@@ -14,5 +14,6 @@ class Customer < ApplicationRecord
       .where(transactions: { result: :success})
       .group(:id)
       .order('count desc')
+      .limit(5)
   end
 end

@@ -1,26 +1,35 @@
-<h1>Admin Dashboard</h1>
-
-<%= link_to 'Admin Merchants Index', admin_merchants_path %>
-<%= link_to 'Admin Invoices Index', admin_invoices_path %>
-
-<section id='incomplete-invoices'>
-  <h3>Incomplete Invoices</h3>
-  <% @incomplete_invoices.each do |incomplete_invoice| %>
-    <p>
-      Invoice #<%= link_to incomplete_invoice, admin_invoice_path(incomplete_invoice) %>
-    </p>
-  <% end %>
-</section>
-
-<section id='top-five-customers'>
-  <h3>Top Customers</h3>
-  <ol>
-    <% @top_customers.each do |customer| %>
-      <li>
-        <section id='top-customer-<%= customer.id %>'>
-          <%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases
-        </section>
-      </li>
+<div class="col-10" style="background-color: rgb(188, 202, 209)">
+<div class="col-12 text-center">
+  <h3>Admin Dashboard</h3>
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <%= link_to 'Admin Merchants Index', admin_merchants_path, class: "nav-link"%>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Admin Invoices Index', admin_invoices_path, class: "nav-link" %>
+    </li>
+  </ul>
+</div>
+<div class="row justify-content-center">
+  <div id='incomplete-invoices' class="col-lg-4 col-sm-6">
+    <h3>Incomplete Invoices</h3>
+    <% @incomplete_invoices.each do |incomplete_invoice| %>
+      <p>
+        Invoice #<%= link_to incomplete_invoice, admin_invoice_path(incomplete_invoice) %>
+      </p>
     <% end %>
-  </ol>
-</section>
+  </div>
+  <div id='top-five-customers' class="col-lg-4 col-sm-6">
+    <h3>Top Customers</h3>
+    <ol>
+      <% @top_customers.each do |customer| %>
+        <li>
+          <section id='top-customer-<%= customer.id %>'>
+            <%= customer.first_name %> <%= customer.last_name %> - <%= customer.count %> purchases
+          </section>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+</div>
