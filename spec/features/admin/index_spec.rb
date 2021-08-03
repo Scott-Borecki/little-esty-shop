@@ -1,6 +1,7 @@
 require 'rails_helper'
+require_relative '../../create_test_objects.rb'
 
-RSpec.describe 'admin merchants index (/admin/merchants/)' do
+RSpec.describe 'admin dashboard (/admin)' do
   # See /spec/factories.rb for more info on factories created
   create_factories
 
@@ -93,7 +94,8 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
         # And I see the date formatted like "Monday, July 18, 2019"
         # And I see that the list is ordered from oldest to newest
         it 'has the date that each incomplete invoice was created, sorted oldest first' do
-          
+          binding.pry
+          TestData.create_all_data
         end
       end
     end

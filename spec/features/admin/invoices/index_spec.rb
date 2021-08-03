@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../../../spec_data.rb'
+require_relative '../../../create_test_objects.rb'
 
 RSpec.describe 'Admin invoice Index page' do
   # As an admin,

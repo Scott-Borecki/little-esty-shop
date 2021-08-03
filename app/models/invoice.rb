@@ -9,11 +9,12 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
+  scope :sort_oldest, -> {order('created_at asc')}
+
   def self.incomplete_invoices
     joins(:invoice_items)
       .where.not(invoice_items: { status: :shipped })
       .distinct
-      .ids
   end
 
   def items_belonging_to
