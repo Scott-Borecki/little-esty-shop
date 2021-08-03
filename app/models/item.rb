@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :merchant
-  
+
   has_many :invoice_items, dependent: :destroy
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
@@ -17,5 +17,16 @@ class Item < ApplicationRecord
 
   def self.all_disabled
     where(enabled: false)
+  end
+
+  def self.top_five_items_by_revenue
+    select("items.name, SUM(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .joins(:invoice_items)
+    .joins(:invoices)
+    .joins(:transactions)
+    .where(transactions: {result: 1})
+    .group(:name)
+    .order(revenue: :desc)
+    .limit(5)
   end
 end

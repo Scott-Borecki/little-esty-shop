@@ -9,8 +9,11 @@
 <% end %>
 
 <p>- - - - - - - - - -</p>
-<div id="top-5-items-by-total-revenue">
+<div id="top-5-items-by-revenue">
   <h3>Top 5 Most Popular Items</h3>
+  <% @merchant.items.top_five_items_by_revenue.each do |item| %>
+    <%= item.name %><br>
+  <% end %>
 </div>
 <p>- - - - - - - - - -</p>
 
