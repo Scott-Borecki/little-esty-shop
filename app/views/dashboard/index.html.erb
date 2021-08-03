@@ -4,7 +4,7 @@
 
 <%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
 
-<% @merchant.top_five_customers.each do |customer| %>
+<% Merchant.top_five_customers(@merchant).each do |customer| %>
   <%= customer.first_name + ' ' + customer.last_name %>
   <br>
 <% end %>
