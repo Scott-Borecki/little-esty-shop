@@ -52,6 +52,16 @@ class Merchant < ApplicationRecord
     end
   end
 
+  def top_five_customers
+    items.joins(invoices: [:transactions, :customer])
+         .select('customers.*, count(transactions.id) as total_transactions')
+         .group('customers.id, items.id')
+         .where('transactions.result = 1')
+         .order('total_transactions desc')
+         .limit(5)
+      # binding.pry
+  end
+
   def enabled?
     enabled
   end

@@ -16,15 +16,4 @@ class Customer < ApplicationRecord
       .order('count desc')
       .limit(5)
   end
-
-  # def self.top_five_customers(merchant_id)
-  #   joins(invoices: :transactions)
-  #     .joins(invoices: :items)
-  #     .select('count(transactions.id) as total_transactions, customers.*')
-  #     .where('transactions.result = 0')
-  #     .where('items.merchant_id = ?', merchant_id)
-  #     .group(:id)
-  #     .order('total_transactions desc')
-  #     .limit(5)
-  # end
 end

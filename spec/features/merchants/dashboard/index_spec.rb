@@ -54,8 +54,8 @@ RSpec.describe 'merchant dashboard index page' do
 
     visit("/merchants/#{merchant1.id}/dashboard")
 
-    expect(page).to have_content(customer2.first_name)
     expect(page).to have_content(customer3.first_name)
+    expect(page).to have_content(customer2.first_name)
     expect(page).to have_content(customer4.first_name)
     expect(page).to have_content(customer7.first_name)
     expect(page).to have_content(customer8.first_name)
