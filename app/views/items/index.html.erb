@@ -11,8 +11,12 @@
 <p>- - - - - - - - - -</p>
 <div id="top-5-items-by-revenue">
   <h3>Top 5 Most Popular Items</h3>
+  <% count = 1 %>
   <% @merchant.items.top_five_items_by_revenue.each do |item| %>
-    <%= item.name %><br>
+    <div id="item-<% item.id %>">
+      <%= count %>. <%= item.name %><br>
+      <% count +=1 %>
+    </div>
   <% end %>
 </div>
 <p>- - - - - - - - - -</p>
