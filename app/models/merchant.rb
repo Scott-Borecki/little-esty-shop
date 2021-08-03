@@ -71,6 +71,17 @@ class Merchant < ApplicationRecord
          .order('total_transactions desc')
          .limit(5)
   end
+###########################
+  def invoice_items_to_ship
+    invoice_items.where(invoice_items: {status: :shipped})
+
+
+    # invoice_items
+      # invoice_id
+      # status
+
+  end
+###########################
 
   def enabled?
     enabled

@@ -4,7 +4,15 @@
 
 <%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
 
-<% Merchant.top_five_customers(@merchant).each do |customer| %>
+<% @merchant.top_five_customers.each do |customer| %>
   <%= customer.first_name + ' ' + customer.last_name %>
   <br>
 <% end %>
+
+<h3>Items Ready to Ship</h3>
+
+<div class="invoice-items-ready-to-ship">
+  <% @merchant.invoice_items_to_ship.each do |invoice_item| %>
+    <%= invoice_item.find_item_name %><br>
+  <% end %>
+</div>
