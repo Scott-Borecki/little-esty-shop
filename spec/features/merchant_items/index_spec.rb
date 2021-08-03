@@ -96,7 +96,6 @@ RSpec.describe 'Merchant Items Index Page' do
   describe 'top 5 items by revenue for a merchant' do
     before :each do
       @merchant1 = create(:merchant, enabled: true)
-      @merchant2 = create(:merchant, enabled: true)
 
       @item1 = create(:item, name: 'orange', enabled: true, merchant: @merchant1)
       @item2 = create(:item, name: 'banana', enabled: true, merchant: @merchant1)
@@ -161,8 +160,11 @@ RSpec.describe 'Merchant Items Index Page' do
     it 'links to the merchant item show page for that item' do
       # And I see that each item name links to my merchant item show page for that item
       # And I see the total revenue generated next to each item name
-      within "#item-#{@item7.id}" do
+      within "#top-item-#{@item7.name}" do
 
+        click_on "#{@item7.name}"
+
+        expect(current_path).to eq(merchant_item_path(@merchant1.id, @item7.id))
       end
 
     end
