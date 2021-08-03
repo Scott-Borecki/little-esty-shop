@@ -84,8 +84,6 @@ RSpec.describe 'merchant dashboard index page' do
         expect(page).to have_content(item11.name)
       end
     end
-
-
       # ii4a - item4 - inv 4
       # ii4b - item4 - inv 4
       # ii5a - item5 - inv 5
@@ -103,6 +101,6 @@ RSpec.describe 'merchant dashboard index page' do
       # have been ordered and have not yet been shipped,
       # And next to each Item I see the id of the invoice that ordered my item
       # And each invoice id is a link to my merchant's invoice show page
-    end
+
   end
 end

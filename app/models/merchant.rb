@@ -52,36 +52,18 @@ class Merchant < ApplicationRecord
     end
   end
 
-  ###### works but is a class method; not great for the view :'-(
-
-  # def self.top_five_customers(merchant)
-  #   wip = select('customers.*, transactions.result, count(transactions.id) as total_transactions')
-  #        .joins(:items).joins(invoices: [:transactions, :customer])
-  #        .group('customers.id, transactions.result')
-  #        .where(transactions: { result: :success }, merchants: {id: merchant.id})
-  #        .order('total_transactions desc')
-  #        .limit(5)
-  #  end
-
   def top_five_customers
-    wip = items.joins(invoice_items: {invoice: [:customer, :transactions]})
-         .select('customers.*, transactions.result, count(transactions.id) as total_transactions')
-         .group('customers.id, items.id, transactions.result')
+    items.joins(invoices: [:transactions, :customer])
+         .select('customers.*, count(transactions.id) as total_transactions')
+         .group('customers.id')
          .where(transactions: { result: :success })
          .order('total_transactions desc')
          .limit(5)
   end
-###########################
+
   def invoice_items_to_ship
     invoice_items.where(invoice_items: {status: :shipped})
-
-
-    # invoice_items
-      # invoice_id
-      # status
-
   end
-###########################
 
   def enabled?
     enabled

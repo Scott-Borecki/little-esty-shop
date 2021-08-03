@@ -110,16 +110,9 @@ RSpec.describe Merchant, type: :model do
 
     describe '#top_five_customers' do
       create_factories_merchant_dashboard
-      xit 'returns the top five customers for a merchant' do
-        # binding.pry
-
-        ####class method test
-        # expect(Merchant.top_five_customers(merchant1).first.first_name).to eq(customer3.first_name)
-
-        ####instance method test
+      it 'returns the top five customers for a merchant' do
         expect(merchant1.top_five_customers.first.first_name).to eq(customer3.first_name)
-
-        # expect(merchant1.top_five_customers).to eq([customer3, customer2, customer4, customer7, customer8])
+        expect(merchant1.top_five_customers.last.first_name).to eq(customer8.first_name)
       end
     end
 
