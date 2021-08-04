@@ -45,7 +45,11 @@ RSpec.describe 'merchant dashboard index page' do
   end
 
   it 'displays the number of successful transactions next to each top customer' do
-    expect(page).to have_content()
+    visit("/merchants/#{merchant1.id}/dashboard")
+
+    within "#customer-#{customer3.id}" do
+      expect(page).to have_content(8)
+    end
   end
 
   describe 'Merchant Dashboard Items Ready to Ship' do

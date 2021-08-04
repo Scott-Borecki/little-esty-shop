@@ -7,9 +7,11 @@
 <div class="col-6">
   <h3>Top 5 Customers</h3>
   <% @merchant.top_five_customers.each do |customer| %>
-    <%= customer.first_name + ' ' + customer.last_name %>
-    <%= customer.total_transactions %><br>
-    <% end %>
+    <div id="customer-<%=customer.customer_id%>">
+      <%= customer.first_name + ' ' + customer.last_name %>
+      <%= customer.total_transactions %><br>
+    </div>
+  <% end %>
 </div>
 
 <div class="col-6">
