@@ -110,7 +110,6 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  # TODO: Update tests to use all the same factories instead of the instance variables.  Combine with 'instance methods' describe block above.
   describe 'instance methods PART 2' do
     before :each do
       # merchants
