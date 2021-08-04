@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe InvoiceItem, type: :model do
-  # See /spec/factories.rb for more info on factories created
-  create_factories
-
   describe 'object creation for tests' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+    
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
     specify { expect(Item.all.count).to be_positive }

@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  # See /spec/factories.rb for more info on factories created
-  Merchant.destroy_all
-  Customer.destroy_all
-  create_factories
-
   describe 'object creation for tests' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
     specify { expect(Item.all.count).to be_positive }
@@ -36,6 +34,9 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'class methods' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+    
     describe '.disabled_merchants' do
       it 'returns all the disabled merchants' do
         enabled_merchants = [merchant1, merchant2, merchant3, merchant6]
@@ -73,6 +74,9 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'instance methods' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
     describe '#enabled?' do
       context 'when merchant is enabled' do
         specify { expect(merchant1).to be_enabled }
