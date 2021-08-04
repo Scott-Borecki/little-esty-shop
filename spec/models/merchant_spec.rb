@@ -113,6 +113,7 @@ RSpec.describe Merchant, type: :model do
       it 'returns the top five customers for a merchant' do
         expect(merchant1.top_five_customers.first.first_name).to eq(customer3.first_name)
         expect(merchant1.top_five_customers.last.first_name).to eq(customer8.first_name)
+        expect(merchant1.top_five_customers.first.customer_id).to eq(customer3.id)
       end
     end
 
