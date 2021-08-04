@@ -9,7 +9,7 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
-  scope :sort_oldest, -> {order('created_at asc')}
+  scope :sort_oldest, -> { order('created_at asc') }
 
   def self.incomplete_invoices
     joins(:invoice_items)
