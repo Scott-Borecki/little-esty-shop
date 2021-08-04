@@ -66,7 +66,7 @@ RSpec.describe 'merchant dashboard index page' do
     expect(page).to have_no_content(customer10.first_name)
   end
 
-  xit 'displays the number of successful transactions next to each top customer' do
+  it 'displays the number of successful transactions next to each top customer' do
 
   end
 
@@ -84,23 +84,6 @@ RSpec.describe 'merchant dashboard index page' do
         expect(page).to have_content(item11.name)
       end
     end
-      # ii4a - item4 - inv 4
-      # ii4b - item4 - inv 4
-      # ii5a - item5 - inv 5
-      # ii5b - item5 - inv 5
-      # ii6a - item6 - inv 6
-      # ii6b - item6 - inv 6
-      # ii10a - item10 - inv 10
-      # ii10b - item10 - inv 10
-      # ii11a - item11 - inv 11
-
-      # As a merchant
-      # When I visit my merchant dashboard
-      # Then I see a section for "Items Ready to Ship"
-      # In that section I see a list of the names of all of my items that
-      # have been ordered and have not yet been shipped,
-      # And next to each Item I see the id of the invoice that ordered my item
-      # And each invoice id is a link to my merchant's invoice show page
 
     it 'displays the invoice id next to each item as a link' do
       visit("/merchants/#{merchant1.id}/dashboard")
@@ -126,18 +109,10 @@ RSpec.describe 'merchant dashboard index page' do
     it 'display the invoice items from oldest to newest' do
       visit("/merchants/#{merchant1.id}/dashboard")
 
-      within "#ii-ready-to-ship" do
+      within "#invoice-items-ready-to-ship" do
         expect(invoice_item11a.item.name).to appear_before(invoice_item10b.item.name)
+        expect(invoice_item10a.item.name).to appear_before(invoice_item5b.item.name)
       end
     end
-
-      # Merchant Dashboard Invoices sorted by least recent
-      #
-      # As a merchant
-      # When I visit my merchant dashboard
-      # In the section for "Items Ready to Ship",
-      # Next to each Item name I see the date that the invoice was created
-      # And I see the date formatted like "Monday, July 18, 2019"
-      # And I see that the list is ordered from oldest to newest
   end
 end
