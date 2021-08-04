@@ -6,12 +6,13 @@ class GithubData
   end
 
   def self.repo_contributors
-      contributors = GithubServices.get_contributors.map do |contributor|
+    contributors = GithubServices.get_contributors.map do |contributor|
       user_ids = [80797707, 81220681, 79381792, 60951642]
       if user_ids.include?(contributor['id'])
         contributor['login']
       end
     end
+    binding.pry
     contributors.compact()
   end
 
