@@ -17,7 +17,7 @@ module TestData
       Merchant.create(name: name[0])
     end
 
-    return "Merchants created"
+    return 'Merchants created'
   end
 
   def self.create_customers
@@ -25,7 +25,7 @@ module TestData
       Customer.create(first_name: name[0], last_name: name[1])
     end
 
-    return "Customers created"
+    return 'Customers created'
   end
 
   def self.create_items
@@ -44,7 +44,7 @@ module TestData
       )
     end
 
-    return "Items created"
+    return 'Items created'
   end
 
   def self.create_invoices
@@ -59,7 +59,7 @@ module TestData
       end
     end
 
-    return "Invoices created"
+    return 'Invoices created'
   end
 
   def self.create_invoice_items
@@ -71,9 +71,9 @@ module TestData
       3.times do
         invoice.invoice_items.create!(
           quantity: invoice_item_data[j][0],
-          unit_price: (i + k >= 19) ? items[i - k].unit_price : items[i + k].unit_price,
+          unit_price: i + k >= 19 ? items[i - k].unit_price : items[i + k].unit_price,
           status: invoice_item_data[j][2],
-          item_id:( i + k >= 19) ? items[i - k].id : items[i + k].id
+          item_id: i + k >= 1 ? items[i - k].id : items[i + k].id
         )
         j += 1
         k += 1
@@ -81,7 +81,7 @@ module TestData
       i += 1
     end
 
-    return "Invoice Items created"
+    return 'Invoice Items created'
   end
 
   def self.create_transactions
@@ -94,6 +94,6 @@ module TestData
       i += 1
     end
 
-    return "Transactions created"
+    return 'Transactions created'
   end
 end
