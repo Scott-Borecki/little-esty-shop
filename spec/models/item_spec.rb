@@ -17,6 +17,8 @@ RSpec.describe Item, type: :model do
   end
 
   before :each do
+    Merchant.destroy_all
+    Customer.destroy_all
     @merchant1 = create(:merchant)
     @merchant2 = create(:merchant)
 

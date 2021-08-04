@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index (/admin/merchants/)' do
   # See /spec/factories.rb for more info on factories created
+  Merchant.destroy_all
+  Customer.destroy_all
   create_factories
 
   describe 'object creation for tests' do

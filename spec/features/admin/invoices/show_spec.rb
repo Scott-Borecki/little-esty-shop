@@ -1,9 +1,11 @@
 require 'rails_helper'
-require_relative '../../../spec_data.rb'
+require_relative '../../../create_test_objects.rb'
 
 RSpec.describe 'Admin invoice Show page' do
   before(:each) do
-    TestData.invoice_items
+    Merchant.destroy_all
+    Customer.destroy_all
+    TestData.create_all_data
     @invoice = Invoice.first
     visit "/admin/invoices/#{@invoice.id}"
   end

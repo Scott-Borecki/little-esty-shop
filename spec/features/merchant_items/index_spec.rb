@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Merchant Items Index Page' do
   before :each do
+    Merchant.destroy_all
+    Customer.destroy_all
     @merchant1 = create(:merchant)
     @merchant2 = create(:merchant)
 

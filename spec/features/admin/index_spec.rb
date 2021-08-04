@@ -94,6 +94,8 @@ RSpec.describe 'admin dashboard (/admin)' do
         # And I see the date formatted like "Monday, July 18, 2019"
         # And I see that the list is ordered from oldest to newest
         it 'has the date that each incomplete invoice was created, sorted oldest first' do
+          Merchant.destroy_all
+          Customer.destroy_all
           binding.pry
           TestData.create_all_data
         end
