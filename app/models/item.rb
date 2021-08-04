@@ -20,13 +20,14 @@ class Item < ApplicationRecord
   end
 
   def self.top_five_items_by_revenue
-    select("items.*, SUM(invoice_items.quantity * invoice_items.unit_price) as revenue")
-    .joins(:invoice_items)
-    .joins(:invoices)
-    .joins(:transactions)
-    .where(transactions: {result: 1})
-    .group(:id)
-    .order(revenue: :desc)
-    .limit(5)
+    select('items.*,
+            SUM(invoice_items.quantity * invoice_items.unit_price) as revenue')
+      .joins(:invoice_items)
+      .joins(:invoices)
+      .joins(:transactions)
+      .where(transactions: { result: 1 })
+      .group(:id)
+      .order(revenue: :desc)
+      .limit(5)
   end
 end

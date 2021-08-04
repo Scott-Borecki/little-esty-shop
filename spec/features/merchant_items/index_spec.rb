@@ -139,7 +139,7 @@ RSpec.describe 'Merchant Items Index Page' do
       # Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
       # Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
 
-      within "#top-5-items-by-revenue" do
+      within '#top-5-items-by-revenue' do
         expect(page).to have_content('Top 5 Most Popular Items')
         # item6 842_160
         # item7 750_090
@@ -161,12 +161,10 @@ RSpec.describe 'Merchant Items Index Page' do
       # And I see that each item name links to my merchant item show page for that item
       # And I see the total revenue generated next to each item name
       within "#top-item-#{@item7.name}" do
-
-        click_on "#{@item7.name}"
+        click_on @item7.name.to_s
 
         expect(current_path).to eq(merchant_item_path(@merchant1.id, @item7.id))
       end
-
     end
   end
 end
