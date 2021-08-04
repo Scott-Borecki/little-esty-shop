@@ -114,5 +114,30 @@ RSpec.describe 'merchant dashboard index page' do
         expect(current_path).to eq(merchant_invoice_path(merchant1.id, invoice4.id))
       end
     end
+
+    it 'displays the invoice created at date for each item' do
+      visit("/merchants/#{merchant1.id}/dashboard")
+
+      within "#ii-ready-to-ship-#{invoice_item6a.id}" do
+        expect(page).to have_content(invoice6.formatted_time)
+      end
+    end
+
+    it 'display the invoice items from oldest to newest' do
+      visit("/merchants/#{merchant1.id}/dashboard")
+
+      within "#ii-ready-to-ship" do
+        expect(invoice_item11a.item.name).to appear_before(invoice_item10b.item.name)
+      end
+    end
+
+      # Merchant Dashboard Invoices sorted by least recent
+      #
+      # As a merchant
+      # When I visit my merchant dashboard
+      # In the section for "Items Ready to Ship",
+      # Next to each Item name I see the date that the invoice was created
+      # And I see the date formatted like "Monday, July 18, 2019"
+      # And I see that the list is ordered from oldest to newest
   end
 end
