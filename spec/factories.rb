@@ -26,7 +26,7 @@ FactoryBot.define do
   end
 
   factory :merchant do
-    name { Faker::Movies::HarryPotter.character }
+    name { Faker::Name.name }
 
     factory :enabled_merchant do
       enabled { true }
