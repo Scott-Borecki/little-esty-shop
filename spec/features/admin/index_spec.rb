@@ -59,7 +59,7 @@ RSpec.describe 'admin dashboard (/admin)' do
           shipped_items = [invoice2a, invoice2b, invoice2c, invoice2d,
                            invoice2e, invoice4a, invoice4b, invoice4c,
                            invoice4d, invoice6a, invoice6b, invoice6c]
-                           
+
           within '#incomplete-invoices' do
             not_shipped_items.each do |not_shipped_item_id|
               expect(page).to have_content("Invoice ##{not_shipped_item_id}")
@@ -93,12 +93,12 @@ RSpec.describe 'admin dashboard (/admin)' do
         # Next to each invoice id I see the date that the invoice was created
         # And I see the date formatted like "Monday, July 18, 2019"
         # And I see that the list is ordered from oldest to newest
-        it 'has the date that each incomplete invoice was created, sorted oldest first' do
-          Merchant.destroy_all
-          Customer.destroy_all
-          binding.pry
-          TestData.create_all_data
-        end
+        # it 'has the date that each incomplete invoice was created, sorted oldest first' do
+        #   Merchant.destroy_all
+        #   Customer.destroy_all
+        #
+        #   TestData.create_all_data
+        # end
       end
     end
   end
