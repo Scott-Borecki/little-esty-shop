@@ -18,18 +18,16 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'class methods' do
-    describe '.incomplete_invoices' do
-      # See /spec/factories.rb for more info on factories created
-      Merchant.destroy_all
-      Customer.destroy_all
-      create_factories
+    # See /spec/factories.rb for more info on factories created
+    create_factories
 
+    describe '.incomplete_invoices' do
       context 'when the items have been shipped' do
         it 'returns the invoice id' do
           shipped_items = [invoice1.id, invoice3.id, invoice5a.id, invoice5b.id]
-          binding.pry
+
           shipped_items.each do |shipped_item_id|
-            expect(Invoice.incomplete_invoices[0].id).to include(shipped_item_id)
+            expect(Invoice.incomplete_invoices.ids).to include(shipped_item_id)
           end
         end
       end
