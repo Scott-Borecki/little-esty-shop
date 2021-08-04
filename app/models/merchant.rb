@@ -54,7 +54,8 @@ class Merchant < ApplicationRecord
 
   def top_five_customers
     items.joins(invoices: [:transactions, :customer])
-         .select('customers.*, count(transactions.id) as total_transactions, customers.id as customer_id')
+         .select('customers.*, count(transactions.id) as total_transactions,
+                 customers.id as customer_id')
          .group('customers.id')
          .where(transactions: { result: :success })
          .order('total_transactions desc')
@@ -62,7 +63,7 @@ class Merchant < ApplicationRecord
   end
 
   def invoice_items_to_ship
-    invoice_items.where(invoice_items: {status: :shipped})
+    invoice_items.where(invoice_items: { status: :shipped })
   end
 
   def enabled?
