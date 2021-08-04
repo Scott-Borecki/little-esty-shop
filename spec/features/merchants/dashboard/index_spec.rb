@@ -4,25 +4,12 @@ RSpec.describe 'merchant dashboard index page' do
   create_factories_merchant_dashboard
 
   it 'displays the merchant name' do
-    # Merchant Dashboard
-    #
-    # As a merchant,
-    # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
-    # Then I see the name of my merchant
-
     visit("/merchants/#{merchant1.id}/dashboard")
 
     expect(page).to have_content(merchant1.name)
   end
 
   it 'has a link to merchants items index' do
-    # Merchant Dashboard Links
-    #
-    # As a merchant,
-    # When I visit my merchant dashboard
-    # Then I see link to my merchant items index (/merchants/merchant_id/items)
-    # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
-
     visit("/merchants/#{merchant1.id}/dashboard")
 
     expect(page).to have_link('My Items')
@@ -43,15 +30,6 @@ RSpec.describe 'merchant dashboard index page' do
   end
 
   it 'displays the top 5 customers' do
-    # Merchant Dashboard Statistics - Favorite Customers
-    #
-    # As a merchant,
-    # When I visit my merchant dashboard
-    # Then I see the names of the top 5 customers
-    # who have conducted the largest number of successful transactions with my merchant
-    # And next to each customer name I see the number of successful transactions they have
-    # conducted with my merchant
-
     visit("/merchants/#{merchant1.id}/dashboard")
 
     expect(page).to have_content(customer3.first_name)
@@ -67,7 +45,7 @@ RSpec.describe 'merchant dashboard index page' do
   end
 
   it 'displays the number of successful transactions next to each top customer' do
-
+    expect(page).to have_content()
   end
 
   describe 'Merchant Dashboard Items Ready to Ship' do

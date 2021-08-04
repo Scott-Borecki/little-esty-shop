@@ -4,21 +4,23 @@
 
 <%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
 
-<% @merchant.top_five_customers.each do |customer| %>
-  <%= customer.first_name + ' ' + customer.last_name %>
-  <br>
-<% end %>
+<div class="col-6">
+  <h3>Top 5 Customers</h3>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <%= customer.first_name + ' ' + customer.last_name %>
+    <%= customer.total_transactions %><br>
+    <% end %>
+</div>
 
-<h3>Items Ready to Ship</h3>
-
-<div id="invoice-items-ready-to-ship">
-  <% @merchant.invoice_items_to_ship.oldest_to_newest.each do |ii| %>
-    <div id="ii-ready-to-ship-<%= ii.id %>">
-      <%= ii.find_item_name %><br>
-      <%= link_to "#{ii.invoice_id}", merchant_invoice_path(@merchant, ii.invoice_id) %>
-
-      <%= ii.invoice.formatted_time %><br>
-
+<div class="col-6">
+  <h3>Items Ready to Ship</h3>
+  <div id="invoice-items-ready-to-ship">
+    <% @merchant.invoice_items_to_ship.oldest_to_newest.each do |ii| %>
+      <div id="ii-ready-to-ship-<%= ii.id %>">
+        <%= ii.find_item_name %>
+        <p>Invoice#<%= link_to "#{ii.invoice_id}", merchant_invoice_path(@merchant, ii.invoice_id) %></p>
+        <p>Date:<%= ii.invoice.formatted_time %></p>
+      </div>
+      <% end %>
     </div>
-  <% end %>
 </div>
