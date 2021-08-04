@@ -26,8 +26,8 @@ RSpec.describe Invoice, type: :model do
 
       context 'when the items have been shipped' do
         it 'returns the invoice id' do
-          shipped_items = [invoice1.id, invoice3.id, invoice5a.id, invoice5b.id]
           binding.pry
+          shipped_items = [invoice1.id, invoice3.id, invoice5a.id, invoice5b.id]
           shipped_items.each do |shipped_item_id|
             expect(Invoice.incomplete_invoices[0].id).to include(shipped_item_id)
           end

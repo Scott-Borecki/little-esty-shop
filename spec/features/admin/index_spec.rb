@@ -21,6 +21,7 @@ RSpec.describe 'admin dashboard (/admin)' do
       specify { expect(current_path).to eq(admin_index_path) }
 
       it 'displays a header indicating that I am on the admin dashboard' do
+        visit '/admin'
         expect(page).to have_content('Admin Dashboard')
       end
 
@@ -96,8 +97,24 @@ RSpec.describe 'admin dashboard (/admin)' do
         it 'has the date that each incomplete invoice was created, sorted oldest first' do
           Merchant.destroy_all
           Customer.destroy_all
-          binding.pry
-          TestData.create_all_data
+          customer = Customer.create(first_name: 'Ali', last_name:'baba')
+          invoice1 = customer.invoices.create(status: 0, created_at: "2012-03-27 14:53:59")
+          invoice2 = customer.invoices.create(status: 0, created_at: "2014-03-27 14:53:59")
+          invoice3 = customer.invoices.create(status: 0, created_at: "2010-03-27 14:53:59")
+          invoice4 = customer.invoices.create(status: 0, created_at: "2011-03-27 14:53:59")
+          invoice5 = customer.invoices.create(status: 0, created_at: "2011-03-27 14:53:59")
+          TestData.create_merchants
+          TestData.create_items
+          inv_item1 = invoice1.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 0, unit_price:1)
+          inv_item2 = invoice2.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 1, unit_price:1)
+          inv_item3 = invoice5.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 2, unit_price:1)
+          inv_item4 = invoice4.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 0, unit_price:1)
+          inv_item5 = invoice3.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 0, unit_price:1)
+          visit '/admin'
+          expect("#{invoice3.id}").to appear_before("#{invoice4.id}")
+          expect("#{invoice4.id}").to appear_before("#{invoice1.id}")
+          expect("#{invoice1.id}").to appear_before("#{invoice2.id}")
+          expect(page).to_not have_content("#{invoice5.id}")
         end
       end
     end
