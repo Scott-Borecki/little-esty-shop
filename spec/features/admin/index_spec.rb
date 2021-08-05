@@ -93,11 +93,11 @@ RSpec.describe 'admin dashboard (/admin)' do
           Merchant.destroy_all
           Customer.destroy_all
           customer = Customer.create(first_name: 'Ali', last_name:'baba')
-          invoice1 = customer.invoices.create(status: 0, created_at: "2012-03-27 14:53:59")
-          invoice2 = customer.invoices.create(status: 0, created_at: "2014-03-27 14:53:59")
-          invoice3 = customer.invoices.create(status: 0, created_at: "2010-03-27 14:53:59")
-          invoice4 = customer.invoices.create(status: 0, created_at: "2011-03-27 14:53:59")
-          invoice5 = customer.invoices.create(status: 0, created_at: "2011-03-27 14:53:59")
+          invoice1 = customer.invoices.create(status: 0, created_at: '2012-03-27 14:53:59')
+          invoice2 = customer.invoices.create(status: 0, created_at: '2014-03-27 14:53:59')
+          invoice3 = customer.invoices.create(status: 0, created_at: '2010-03-27 14:53:59')
+          invoice4 = customer.invoices.create(status: 0, created_at: '2011-03-27 14:53:59')
+          invoice5 = customer.invoices.create(status: 0, created_at: '2011-03-27 14:53:59')
           TestData.create_merchants
           TestData.create_items
           inv_item1 = invoice1.invoice_items.create(item_id: Item.first.id, quantity: 1, status: 0, unit_price:1)
