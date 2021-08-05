@@ -8,13 +8,6 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
   validates :enabled, inclusion: { in: [true, false] }
 
-  def self.any_successful_transactions?(merchant)
-    joins(:transactions)
-      .where(transactions: { result: :success }, merchants: { id: merchant.id })
-      .count
-      .positive?
-  end
-
   def self.disabled_merchants
     where(enabled: false)
   end
@@ -28,28 +21,9 @@ class Merchant < ApplicationRecord
            'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
       .joins(:transactions)
       .where(transactions: { result: :success })
-      .group('merchants.id')
+      .group(:id)
       .order('revenue desc')
       .limit(5)
-  end
-
-  def self.total_revenue_generated_by_merchant(merchant)
-    if any_successful_transactions?(merchant)
-      select(
-        'merchants.*',
-        'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue'
-      )
-        .joins(:transactions)
-        .where(
-          transactions: { result: :success },
-          merchants: { id: merchant.id }
-        )
-        .group('merchants.id')
-        .first
-        .revenue
-    else
-      0
-    end
   end
 
   def top_five_customers
@@ -73,18 +47,18 @@ class Merchant < ApplicationRecord
     enabled
   end
 
-  # HACK: (Scott Borecki) Figure out another way to do this
-  def total_revenue
-    Merchant.total_revenue_generated_by_merchant(self)
-  end
-
-  # TODO: (Scott Borecki) Method not complete.
-  def top_day
-    invoice_items.select('invoice.created_at', 'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-                 .joins(:transactions)
-                 .where(transactions: { result: :success })
-                 .group('invoice.created_at')
-                 .order('DATE(invoice.created_at), revenue desc')
+  def top_revenue_day
+    invoices
+      .select(
+        'invoices.created_at',
+        'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue'
+      )
+      .joins(:transactions)
+      .where(transactions: { result: :success })
+      .group(:id)
+      .order('revenue desc', 'created_at desc')
+      .first
+      .formatted_time
   end
 
   def unique_invoices

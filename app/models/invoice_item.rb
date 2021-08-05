@@ -12,11 +12,7 @@ class InvoiceItem < ApplicationRecord
     order(created_at: :desc)
   end
 
-  def find_item_name
-    Item.where(id: item_id).first.name
-  end
-
-  def find_invoice_id
-    Invoice.where(id: invoice_id).first.id
+  def item_name
+    item.name
   end
 end

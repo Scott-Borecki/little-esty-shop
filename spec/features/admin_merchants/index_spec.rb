@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index (/admin/merchants/)' do
   # See /spec/factories.rb for more info on factories created
+  Merchant.destroy_all
+  Customer.destroy_all
   create_factories
 
   describe 'object creation for tests' do
@@ -105,16 +107,20 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
         end
 
         it 'displays the total revenue generated next to each top 5 merchants' do
-          top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
-
-          top_five_merchants.each do |merchant|
+          Merchant.top_five_merchants_by_revenue.each do |merchant|
             within("#top-merchant-#{merchant.id}") do
-              expect(page).to have_content(merchant.total_revenue / 100.00)
+              expect(page).to have_content(merchant.revenue / 100.00)
             end
           end
         end
 
-        it 'displays the merchants best day'
+        it 'displays the merchants best day' do
+          Merchant.top_five_merchants_by_revenue.each do |merchant|
+            within("#top-merchant-#{merchant.id}") do
+              expect(page).to have_content("Top selling date for #{merchant.name} was #{merchant.top_revenue_day}")
+            end
+          end
+        end
       end
 
       describe 'when I click on the name of a merchant' do

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../../../spec_data.rb'
+require_relative '../../../create_test_objects.rb'
 
 RSpec.describe 'Admin invoice Index page' do
   # As an admin,
@@ -7,7 +7,9 @@ RSpec.describe 'Admin invoice Index page' do
   # Then I see a list of all Invoice ids in the system
   # Each id links to the admin invoice show page
   before(:each) do
-    TestData.invoices
+    Merchant.destroy_all
+    Customer.destroy_all
+    TestData.create_all_data
     visit '/admin/invoices'
   end
 
