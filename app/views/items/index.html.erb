@@ -1,0 +1,45 @@
+<h1><%= @merchant.name %>'s Items</h1>
+<br>
+<p><%= link_to "Create a New Item", new_merchant_item_path %></p>
+
+<% flash.each do |type, msg| %>
+  <div class='alert alert-success'>
+    <%= msg %>
+  </div>
+<% end %>
+
+<p>- - - - - - - - - -</p>
+<div id="top-5-items-by-revenue">
+  <h3>Top 5 Most Popular Items</h3>
+  <% count = 1 %>
+  <% @merchant.items.top_five_items_by_revenue.each do |item| %>
+    <div id="top-item-<%= item.name %>">
+      <%= count %>. <%= item.name %><br>
+
+      <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+
+      <% count +=1 %>
+    </div>
+  <% end %>
+</div>
+<p>- - - - - - - - - -</p>
+
+<div id="all-enabled">
+  <h3>Enabled Items</h3>
+    <% @merchant.items.all_enabled.each do |item| %>
+        <div id="item-<%= item.id %>">
+          <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+          <%= button_to "Disable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': false }, method: :patch %>
+        </div>
+    <% end %>
+  </div>
+<br>
+<div id="all-disabled">
+  <h3>Disabled Items</h3>
+    <% @merchant.items.all_disabled.each do |item| %>
+        <div id="item-<%= item.id%>">
+          <%= link_to "#{item.name}", merchant_item_path(@merchant.id, item.id) %>
+          <%= button_to "Enable", merchant_item_path(@merchant.id, item.id), params: { 'item[enabled]': true }, method: :patch %>
+        </div>
+    <% end %>
+  </div>

@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
+  describe 'object creation for tests' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
+    specify { expect(Customer.all.count).to be_positive }
+    specify { expect(Merchant.all.count).to be_positive }
+    specify { expect(Item.all.count).to be_positive }
+    specify { expect(Invoice.all.count).to be_positive }
+    specify { expect(Transaction.all.count).to be_positive }
+    specify { expect(InvoiceItem.all.count).to be_positive }
+  end
+
   describe 'relationships' do
     it { should belong_to(:invoice) }
   end
@@ -13,18 +25,4 @@ RSpec.describe Transaction, type: :model do
     it { should validate_length_of(:credit_card_number).is_at_least(15).is_at_most(16) }
     it { should validate_presence_of(:result) }
   end
-
-  # before :each do
-  #
-  # end
-  #
-  # describe 'class methods' do
-  #   describe '.' do
-  #   end
-  # end
-  #
-  # describe 'instance methods' do
-  #   describe '#' do
-  #   end
-  # end
 end

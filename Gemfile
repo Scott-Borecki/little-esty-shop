@@ -43,10 +43,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'launchy'
+  gem 'orderly'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
+  gem 'webdrivers'
 end
 
 group :development do

@@ -1,5 +1,5 @@
 current directory: /Users/alexmac/Documents/turing/mod_2/projects/etsy/vendor/bundle/ruby/2.7.0/gems/pg-1.2.3/ext
-/Users/alexmac/.rbenv/versions/2.7.2/bin/ruby -I /Users/alexmac/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210727-88176-ifyu63.rb extconf.rb
+/Users/alexmac/.rbenv/versions/2.7.2/bin/ruby -I /Users/alexmac/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210728-59268-14273dm.rb extconf.rb
 checking for pg_config... yes
 Using config values from /Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
 checking for libpq-fe.h... yes
@@ -150,4 +150,4 @@ linking shared-object pg_ext.bundle
 
 current directory: /Users/alexmac/Documents/turing/mod_2/projects/etsy/vendor/bundle/ruby/2.7.0/gems/pg-1.2.3/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20210727-88176-k12ujj
+/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20210728-59268-84onwz

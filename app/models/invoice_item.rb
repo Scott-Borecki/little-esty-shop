@@ -7,4 +7,12 @@ class InvoiceItem < ApplicationRecord
   validates :quantity, presence: true, numericality: true
   validates :unit_price, presence: true, numericality: true
   validates :status, presence: true
+
+  def self.oldest_to_newest
+    order(created_at: :desc)
+  end
+
+  def item_name
+    item.name
+  end
 end
