@@ -1,7 +1,7 @@
 class Admin::MerchantsController < ApplicationController
-  before_action :fetch_current_merchant, only: [:edit, :show, :update]
-  before_action :fetch_merchant_collection, only: [:index]
-  before_action :fetch_new_merchant, only: [:new]
+  before_action :fetch_current_merchant, only: [:edit, :show]
+  before_action :fetch_merchant_collection, only: :index
+  before_action :fetch_new_merchant, only: :new
 
   def index
   end
@@ -13,7 +13,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create
-    # TODO: (Scott Borecki) Add sad path if creation fails
     Merchant.create!(merchant_params)
     redirect_to admin_merchants_path
   end
@@ -22,12 +21,12 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def update
-    # TODO: (Scott Borecki) Add sad path if update fails
-    @merchant.update!(merchant_params)
+    merchant = Merchant.find(params[:id])
+    merchant.update!(merchant_params)
     if merchant_params[:enabled]
       redirect_to admin_merchants_path
     else
-      redirect_to admin_merchant_path(@merchant)
+      redirect_to admin_merchant_path(merchant)
       flash[:notice] = 'Update successful!'
     end
   end
