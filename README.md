@@ -30,6 +30,8 @@ This project requires Ruby 2.7.2.
 * Run the test suite with `bundle exec rspec`.
 * Run your development server with `rails s` to see the app in action.
 
+## Database Schema
+
 ![database_planning](https://user-images.githubusercontent.com/80797707/128401167-3617bc26-571f-4e13-8404-233e8639df8a.png)
 
 ## Phases
