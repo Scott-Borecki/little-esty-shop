@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'admin merchants index (/admin/merchants/)' do
   # See /spec/factories.rb for more info on factories created
-  Merchant.destroy_all
-  Customer.destroy_all
   create_factories
 
   describe 'object creation for tests' do
@@ -169,6 +167,10 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
           merchant4.reload
 
           expect(merchant4.enabled?).to be true
+
+          within '#enabled-merchants' do
+            expect(page).to have_content(merchant4.name)
+          end
         end
       end
 
@@ -187,6 +189,10 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
           merchant1.reload
 
           expect(merchant1.enabled?).to be false
+
+          within '#disabled-merchants' do
+            expect(page).to have_content(merchant1.name)
+          end
         end
       end
 
