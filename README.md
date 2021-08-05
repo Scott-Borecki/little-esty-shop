@@ -4,6 +4,12 @@
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
+## Collaborators
+- [Kim Abcouwer](https://github.com/kabcouwer)
+- [Scott Borecki](https://github.com/Scott-Borecki)
+- [Caroline Tan](https://github.com/carolinectan/carolinectan)
+- [Alex Click](https://github.com/AlexKlick)
+
 ## Learning Goals
 - Practice designing a normalized database schema and defining model relationships
 - Utilize advanced routing techniques including namespacing to organize and group like functionality together.
