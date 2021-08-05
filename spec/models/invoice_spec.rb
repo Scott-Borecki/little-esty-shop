@@ -66,21 +66,17 @@ RSpec.describe Invoice, type: :model do
         @merchant1 = Merchant.create!(name: 'Dandy')
         @merchant2 = Merchant.create!(name: 'Randy')
 
-        # items
         @item1 = @merchant1.items.create!(name: 'Pogo stick', description: 'Jumpin  Stick', unit_price: 100, enabled: true)
         @item2 = @merchant1.items.create!(name: 'Yo - Yo', description: 'Goes and yos',   unit_price: 100, enabled: true)
         @item3 = @merchant1.items.create!(name: 'Rollerskates', description: 'Lets roll',   unit_price: 100, enabled: true)
         @item4 = @merchant2.items.create!(name: 'Fun Dip', description: 'Dip the fun',  unit_price: 100, enabled: true)
 
-        # customers
         @customer1 = Customer.create!(first_name: 'Super', last_name: 'Mario')
         @customer2 = Customer.create!(first_name: 'Donkey', last_name: 'Kong')
 
-        # invoices
         @invoice1 = @customer1.invoices.create!(status: 0)
         @invoice2 = @customer2.invoices.create!(status: 0)
 
-        # invoice_items
         @invoice_item1 = InvoiceItem.create!(item_id: @item1.id, invoice_id:  @invoice1.id, quantity: 10, unit_price: 100, status: 0)
         @invoice_item2 = InvoiceItem.create!(item_id: @item2.id, invoice_id:  @invoice1.id, quantity: 10, unit_price: 200, status: 1)
         @invoice_item3 = InvoiceItem.create!(item_id: @item4.id, invoice_id:  @invoice2.id, quantity: 10, unit_price: 100, status: 1)
