@@ -1,5 +1,4 @@
-class GithubData 
-
+class GithubData
   def self.repo_name
     repo = GithubServices.get_repo_name
     JSON.parse(repo)['name']
