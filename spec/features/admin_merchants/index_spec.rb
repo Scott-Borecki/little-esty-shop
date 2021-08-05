@@ -96,7 +96,6 @@ RSpec.describe 'admin merchants index (/admin/merchants/)' do
 
         it 'links the names of the top 5 merchants to their admin merchant show page' do
           top_five_merchants = [merchant6, merchant5, merchant2, merchant4, merchant3]
-
           within('#top-five-merchants') do
             top_five_merchants.each do |merchant|
               expect(page).to have_link(merchant.name)
