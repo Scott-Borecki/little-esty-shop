@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'create merchant item page' do
+RSpec.describe 'Merchant Item New Page' do
   before :each do
     @merchant1 = create(:merchant)
   end

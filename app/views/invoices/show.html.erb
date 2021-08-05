@@ -15,7 +15,7 @@
 <p>Items on this Invoice:</p>
 <% @merchant.invoice_items_for_invoice(@invoice.id).each do |invoice_item| %>
   <div id="invoice_item_<%=invoice_item.id%>">
-    <p>Name: <%= invoice_item.find_item_name %></p>
+    <p>Name: <%= invoice_item.item_name %></p>
     <p>Quantity: <%= invoice_item.quantity %></p>
     <p>Price: <%= number_to_currency(invoice_item.unit_price / 100.00) %></p>
     <%= form_with model: [@merchant, invoice_item], method: :patch, local: true do |form| %>

@@ -9,17 +9,12 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
-  scope :sort_oldest, -> {order('created_at asc')}
+  scope :sort_oldest, -> { order('created_at asc') }
 
   def self.incomplete_invoices
     joins(:invoice_items)
       .where.not(invoice_items: { status: :shipped })
       .distinct
-  end
-
-  def items_belonging_to
-    invoice_items.joins(:item)
-                 .select('invoice_items.status, invoice_items.quantity, invoice_items.id as invoice_item_id, items.*')
   end
 
   def total_revenue

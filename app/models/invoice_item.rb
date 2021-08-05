@@ -8,7 +8,11 @@ class InvoiceItem < ApplicationRecord
   validates :unit_price, presence: true, numericality: true
   validates :status, presence: true
 
-  def find_item_name
-    Item.where(id: item_id).first.name
+  def self.oldest_to_newest
+    order(created_at: :desc)
+  end
+
+  def item_name
+    item.name
   end
 end
