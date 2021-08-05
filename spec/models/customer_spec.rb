@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-  # See /spec/factories.rb for more info on factories created
-  Merchant.destroy_all
-  Customer.destroy_all
-  create_factories
-
   describe 'object creation for tests' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
     specify { expect(Item.all.count).to be_positive }
@@ -15,10 +13,10 @@ RSpec.describe Customer, type: :model do
     specify { expect(InvoiceItem.all.count).to be_positive }
 
     it 'can build a customer' do
-      customer_1 = create(:customer)
+      new_customer = create(:customer)
 
-      expect(customer_1.first_name).to be_a(String)
-      expect(customer_1.last_name).to be_a(String)
+      expect(new_customer.first_name).to be_a(String)
+      expect(new_customer.last_name).to be_a(String)
     end
   end
 
@@ -38,6 +36,9 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'class methods' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+    
     describe '.top_five_by_successful_transactions' do
       it 'returns the customers with the most successful transactions' do
         expected = [customer2, customer4, customer6, customer5, customer3]

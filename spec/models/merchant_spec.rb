@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  # See /spec/factories.rb for more info on factories created
-  Merchant.destroy_all
-  Customer.destroy_all
-  create_factories
-
   describe 'object creation for tests' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
     specify { expect(Item.all.count).to be_positive }
@@ -36,6 +34,9 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'class methods' do
+    # See /spec/factories.rb for more info on factories created
+    create_factories
+
     describe '.disabled_merchants' do
       it 'returns all the disabled merchants' do
         enabled_merchants = [merchant1, merchant2, merchant3, merchant6]
@@ -74,6 +75,9 @@ RSpec.describe Merchant, type: :model do
 
   describe 'instance methods' do
     describe '#enabled?' do
+      # See /spec/factories.rb for more info on factories created
+      create_factories
+
       context 'when merchant is enabled' do
         specify { expect(merchant1).to be_enabled }
       end
@@ -84,12 +88,38 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#top_revenue_day' do
+      # See /spec/factories.rb for more info on factories created
+      create_factories
+
       it 'returns the top revenue day for the merchant' do
         expect(merchant6.top_revenue_day).to eq("Tuesday, July 27, 2021")
       end
     end
 
+    describe '#top_five_customers' do
+      create_factories_merchant_dashboard
+      it 'returns the top five customers for a merchant' do
+        expect(merchant1.top_five_customers.first.first_name).to eq(customer3.first_name)
+        expect(merchant1.top_five_customers.last.first_name).to eq(customer8.first_name)
+        expect(merchant1.top_five_customers.first.customer_id).to eq(customer3.id)
+      end
+    end
+
+    describe '#invoice_items_to_ship' do
+      create_factories_merchant_dashboard
+      it 'returns all invoice items that have been shipped' do
+        expect(merchant1.invoice_items_to_ship.first).to eq(invoice_item4a)
+        expect(merchant1.invoice_items_to_ship.second).to eq(invoice_item4b)
+        expect(merchant1.invoice_items_to_ship.third).to eq(invoice_item5a)
+        expect(merchant1.invoice_items_to_ship.fourth).to eq(invoice_item5b)
+        expect(merchant1.invoice_items_to_ship.last).to eq(invoice_item11a)
+      end
+    end
+
     describe '#unique_invoices' do
+      # See /spec/factories.rb for more info on factories created
+      create_factories
+
       it 'finds unique invoices for a merchant' do
         expect(merchant1.unique_invoices).to eq([invoice1])
         expect(merchant2.unique_invoices).to eq([invoice2a, invoice2b,
@@ -99,6 +129,9 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe '#invoice_items_for_merchant' do
+      # See /spec/factories.rb for more info on factories created
+      create_factories
+
       it 'finds merchant1 invoice items for invoice1' do
         expect(merchant1.invoice_items_for_invoice(invoice1.id))
           .to eq([invoice_item1a, invoice_item1b])

@@ -46,9 +46,9 @@ group :development, :test do
   gem 'orderly'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
-  gem 'selenium-webdriver'
   gem 'webdrivers'
   gem "webmock"
 end

@@ -1,0 +1,28 @@
+<h1><%= @merchant.name %></h1>
+
+<%= link_to 'My Items', merchant_items_path(@merchant) %>
+
+<%= link_to 'My Invoices', merchant_invoices_path(@merchant) %>
+
+<div class="col-6">
+  <h3>Top 5 Customers</h3>
+  <% @merchant.top_five_customers.each do |customer| %>
+    <div id="customer-<%=customer.customer_id%>">
+      <%= customer.first_name + ' ' + customer.last_name %>
+      <%= customer.total_transactions %><br>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-6">
+  <h3>Items Ready to Ship</h3>
+  <div id="invoice-items-ready-to-ship">
+    <% @merchant.invoice_items_to_ship.oldest_to_newest.each do |ii| %>
+      <div id="ii-ready-to-ship-<%= ii.id %>">
+        <%= ii.item_name %>
+        <p>Invoice#<%= link_to "#{ii.invoice_id}", merchant_invoice_path(@merchant, ii.invoice_id) %></p>
+        <p>Date:<%= ii.invoice.formatted_time %></p>
+      </div>
+      <% end %>
+    </div>
+</div>
