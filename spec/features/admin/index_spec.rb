@@ -79,11 +79,11 @@ RSpec.describe 'admin dashboard (/admin)' do
 
           within '#incomplete-invoices' do
             not_shipped_items.each do |not_shipped_item_id|
-              expect(page).to have_link("#{not_shipped_item_id}")
+              expect(page).to have_link(not_shipped_item_id.to_s)
             end
 
             shipped_items.each do |shipped_item_id|
-              expect(page).to have_no_link("#{shipped_item_id}")
+              expect(page).to have_no_link(shipped_item_id.to_s)
             end
           end
         end
