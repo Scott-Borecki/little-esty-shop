@@ -10,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :item do
-    name { Faker::Movies::HarryPotter.location }
+    name { Faker::Name.name }
     description { Faker::Movies::LordOfTheRings.location }
     unit_price { Faker::Number.binary(digits: 5) }
     enabled { Faker::Boolean.boolean }
