@@ -10,6 +10,7 @@ RSpec.describe 'Admin invoice Index page' do
     Merchant.destroy_all
     Customer.destroy_all
     TestData.create_all_data
+    binding.pry
     visit '/admin/invoices'
   end
 

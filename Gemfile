@@ -50,6 +50,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem "webmock"
 end
 
 group :development do

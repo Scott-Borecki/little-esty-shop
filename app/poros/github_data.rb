@@ -9,14 +9,13 @@ class GithubData
     contributors = GithubServices.get_contributors.map do |contributor|
       user_ids = [80797707, 81220681, 79381792, 60951642]
       if user_ids.include?(contributor['id'])
-        contributor['login']
+        contributor
       end
     end
-    binding.pry
     contributors.compact()
   end
 
-  def self.repo_commits
+  def self.repo_commits_and_link
     commits = GithubServices.get_commits
     contributors = repo_contributors
     hash = {}
@@ -25,7 +24,7 @@ class GithubData
       count = JSON.parse(commits).count do |commit|
         commit['author']['id'] == user_id
       end
-      hash[contributors[i]] = count
+      hash[contributors[i]['login']] = [count, contributors[i]['html_url']]
     end
     hash
   end
@@ -38,7 +37,7 @@ class GithubData
   def self.repo_hashed_data
     hash = {}
     hash[:repo_name] = repo_name
-    hash[:contributors_commits] = repo_commits
+    hash[:contributors_commits_and_link] = repo_commits_and_link
     hash[:repo_pr_count] = repo_pr_count
     hash
   end
