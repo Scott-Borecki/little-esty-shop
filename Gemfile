@@ -50,7 +50,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
   gem 'webdrivers'
-  gem "webmock"
+  gem 'webmock'
 end
 
 group :development do
