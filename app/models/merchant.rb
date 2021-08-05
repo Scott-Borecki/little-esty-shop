@@ -26,6 +26,42 @@ class Merchant < ApplicationRecord
       .limit(5)
   end
 
+#   def self.total_revenue_generated_by_merchant(merchant)
+#     if any_successful_transactions?(merchant)
+#       select(
+#         'merchants.*',
+#         'SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue'
+#       )
+#         .joins(:transactions)
+#         .where(
+#           transactions: { result: :success },
+#           merchants: { id: merchant.id }
+#         )
+#         .group('merchants.id')
+#         .first
+#         .revenue
+#     else
+#       0
+#     end
+#   end
+
+  def top_five_customers
+    items.joins(invoices: [:transactions, :customer])
+         .select(
+           'customers.*',
+           'count(transactions.id) as total_transactions',
+           'customers.id as customer_id'
+         )
+         .group('customers.id')
+         .where(transactions: { result: :success })
+         .order('total_transactions desc')
+         .limit(5)
+  end
+
+  def invoice_items_to_ship
+    invoice_items.where(invoice_items: { status: :shipped })
+  end
+
   def enabled?
     enabled
   end
