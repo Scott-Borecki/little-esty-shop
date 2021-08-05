@@ -29,27 +29,27 @@ RSpec.describe 'Admin invoice Show page' do
   # - The quantity of the item ordered
   # - The price the Item sold for
   # - The Invoice Item status
-  it 'has the attrs for all of the items on the invoice and the invocie items status' do
+  it 'has the attrs for all of the items on the invoice and the invoice items status' do
     within("table#items") do
-      within("tr##{@invoice.items_belonging_to[0].id}") do
-        expect(page).to have_content(@invoice.items_belonging_to[0].name)
-        expect(page).to have_content(@invoice.items_belonging_to[0].quantity)
-        expect(page).to have_content(@invoice.items_belonging_to[0].unit_price.to_f / 100)
-        expect(page).to have_content(@invoice.items_belonging_to[0].status)
+      within("tr##{@invoice.invoice_items[0].id}") do
+        expect(page).to have_content(@invoice.invoice_items[0].item_name)
+        expect(page).to have_content(@invoice.invoice_items[0].quantity)
+        expect(page).to have_content(@invoice.invoice_items[0].unit_price.to_f / 100)
+        expect(page).to have_content(@invoice.invoice_items[0].status)
       end
 
-      within("tr##{@invoice.items_belonging_to[1].id}") do
-        expect(page).to have_content(@invoice.items_belonging_to[1].name)
-        expect(page).to have_content(@invoice.items_belonging_to[1].quantity)
-        expect(page).to have_content(@invoice.items_belonging_to[1].unit_price.to_f / 100)
-        expect(page).to have_content(@invoice.items_belonging_to[1].status)
+      within("tr##{@invoice.invoice_items[1].id}") do
+        expect(page).to have_content(@invoice.invoice_items[1].item_name)
+        expect(page).to have_content(@invoice.invoice_items[1].quantity)
+        expect(page).to have_content(@invoice.invoice_items[1].unit_price.to_f / 100)
+        expect(page).to have_content(@invoice.invoice_items[1].status)
       end
 
-      within("tr##{@invoice.items_belonging_to[2].id}") do
-        expect(page).to have_content(@invoice.items_belonging_to[2].name)
-        expect(page).to have_content(@invoice.items_belonging_to[2].quantity)
-        expect(page).to have_content(@invoice.items_belonging_to[2].unit_price.to_f / 100)
-        expect(page).to have_content(@invoice.items_belonging_to[2].status)
+      within("tr##{@invoice.invoice_items[2].id}") do
+        expect(page).to have_content(@invoice.invoice_items[2].item_name)
+        expect(page).to have_content(@invoice.invoice_items[2].quantity)
+        expect(page).to have_content(@invoice.invoice_items[2].unit_price.to_f / 100)
+        expect(page).to have_content(@invoice.invoice_items[2].status)
       end
     end
   end

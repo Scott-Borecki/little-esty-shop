@@ -4,7 +4,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'object creation for tests' do
     # See /spec/factories.rb for more info on factories created
     create_factories
-    
+
     specify { expect(Customer.all.count).to be_positive }
     specify { expect(Merchant.all.count).to be_positive }
     specify { expect(Item.all.count).to be_positive }
@@ -82,15 +82,9 @@ RSpec.describe InvoiceItem, type: :model do
       @invoice_item4 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 10, unit_price: 1111, status: 0, created_at: "2021-08-04 00:21:46")
     end
 
-    describe '#find_item_name' do
+    describe '#item_name' do
       it 'can find the item name' do
-        expect(@invoice_item1.find_item_name).to eq(@item4.name)
-      end
-    end
-
-    describe '#find_invoice_id' do
-      it 'can find the invoice id' do
-        expect(@invoice_item1.find_invoice_id).to eq(@invoice4.id)
+        expect(@invoice_item1.item_name).to eq(@item4.name)
       end
     end
   end

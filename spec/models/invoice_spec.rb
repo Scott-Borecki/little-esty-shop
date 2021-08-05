@@ -47,23 +47,17 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'instance methods' do
-    describe '#items_belonging_to' do
-      xit 'returns the invoice item status as well as all item attributes for an invoice' do
-        TestData.invoice_items
-        expect(Invoice.first.items_belonging_to[0].name).to eq("Madam Rosmerta")
-        expect(Invoice.first.items_belonging_to[0].unit_price).to eq(8363)
-        expect(Invoice.first.items_belonging_to[0].quantity).to eq(11)
-        expect(Invoice.first.items_belonging_to[0].status).to eq("packaged")
+    describe '#total_revenue' do
+      it 'shows the total revenue for the invoice' do
+        Merchant.destroy_all
+        Customer.destroy_all
 
-        expect(Invoice.first.items_belonging_to[1].name).to eq("Mary Cattermole")
-        expect(Invoice.first.items_belonging_to[1].unit_price).to eq(1177)
-        expect(Invoice.first.items_belonging_to[1].quantity).to eq(9)
-        expect(Invoice.first.items_belonging_to[1].status).to eq("shipped")
+        TestData.create_all_data
+        
+        invoice = Invoice.first
+        revenue = (8363 * 11 + 1177 * 9 + 4960 * 15)
 
-        expect(Invoice.first.items_belonging_to[2].name).to eq("Sirius Black")
-        expect(Invoice.first.items_belonging_to[2].unit_price).to eq(4960)
-        expect(Invoice.first.items_belonging_to[2].quantity).to eq(15)
-        expect(Invoice.first.items_belonging_to[2].status).to eq("pending")
+        expect(invoice.total_revenue).to eq(revenue)
       end
     end
 

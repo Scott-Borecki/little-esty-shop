@@ -26,24 +26,24 @@
           <th>status</th>
           <th></th>
         </tr>
-        <% @invoice.items_belonging_to.each_with_index do |item, index| %>
-          <tr id="<%=item.id%>">
+        <% @invoice.invoice_items.each_with_index do |invoice_item, index| %>
+          <tr id="<%=invoice_item.id%>">
             <th scope="row"><%=index + 1%></th>
-            <td><%= item.name %></td>
-            <td><%= item.quantity %></td>
-            <td class="status">       
+            <td><%= invoice_item.item_name %></td>
+            <td><%= invoice_item.quantity %></td>
+            <td class="status">
               <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="f<%=item.id%>">
-                  <%= item.status %>
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="f<%=invoice_item.id%>">
+                  <%= invoice_item.status %>
                 <span class="caret"></span></button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <% @invoice.invoice_items.statuses.keys().each do |status| %>
-                    <%= link_to status, admin_invoice_item_path(item.invoice_item_id, invoice_item: {status: status}, invoice_id: @invoice.id), method: :patch, :class=>"dropdown-item"%>
+                    <%= link_to status, admin_invoice_item_path(invoice_item.id, invoice_item: {status: status}, invoice_id: @invoice.id), method: :patch, :class=>"dropdown-item"%>
                   <% end %>
                 </div>
               </div>
             </td>
-            <td>$<%= item.unit_price.to_f / 100 %></td>
+            <td>$<%= invoice_item.unit_price.to_f / 100 %></td>
           </tr>
         <% end %>
       </table>
